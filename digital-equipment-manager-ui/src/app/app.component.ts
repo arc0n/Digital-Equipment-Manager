@@ -12,9 +12,8 @@ export class AppComponent {
   }
 
   public appPages = [
-    {title: 'Tab 1', url: '/tabs/tab1', icon: 'mail'},
-    {title: 'Tab 2', url: '/tabs/tab2', icon: 'paper-plane'},
-    {title: 'Tab 3', url: '/tabs/tab3', icon: 'heart'},
+    {title: 'Ausrüstung', url: '/tabs/equipment', icon: 'pricetags'},
+    {title: 'Einstellungen', url: '/tabs/settings', icon: 'settings'},
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 

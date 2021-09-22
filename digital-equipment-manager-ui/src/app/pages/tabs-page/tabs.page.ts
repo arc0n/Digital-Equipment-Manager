@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CommonStateService} from "../services/common-state.service";
+import {CommonStateService} from "../../services/common-state.service";
 import {Subject, Subscription} from "rxjs";
 
 @Component({

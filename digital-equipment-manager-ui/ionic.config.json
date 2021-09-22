@@ -1,0 +1,7 @@
+{
+  "name": "digital-equipment-manager-ui",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

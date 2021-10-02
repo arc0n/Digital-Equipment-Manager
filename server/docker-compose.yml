@@ -9,9 +9,17 @@ services:
     ports:
       - "3307:3306"
     volumes:
-      - $HOME/Desktop/MySQL-Snippets/school.sql:/school.sql
+      - $MYSQLPATH
   server:
-    image: node-docker
+    depends_on:
+      - db
+    environment:
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+    image: node_docker
     restart: always
     ports:
       - "3000:3000"
+    links:
+      - "db:database"
+

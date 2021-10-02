@@ -2,10 +2,10 @@ const mysql = require("mysql");
 
 // Create a connection to the database
 const connection = mysql.createConnection({
-  host: '',
-  user:'',
-  password: '',
-  database:''
+  host: 'http://127.0.0.1:3307/',
+  user:'root',
+  password: 'root',
+  database:'equipment_manager'
 });
 
 // open the MySQL connection

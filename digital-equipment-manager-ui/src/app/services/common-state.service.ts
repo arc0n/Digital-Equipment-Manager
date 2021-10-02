@@ -21,4 +21,8 @@ export class CommonStateService {
   getSplitPaneVisible(): Observable<boolean> {
     return this.splitPaneVisible$.asObservable();
   }
+
+
+
+
 }

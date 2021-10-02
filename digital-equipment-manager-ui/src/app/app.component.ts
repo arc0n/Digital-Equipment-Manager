@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {CommonStateService} from "./services/common-state.service";
+import {AuthenticationService} from "./services/authentication.service";
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,10 @@ import {CommonStateService} from "./services/common-state.service";
 })
 export class AppComponent {
 
-  constructor(private commonStateService: CommonStateService) {
+  constructor(
+    private commonStateService: CommonStateService,
+    private authService: AuthenticationService,
+    ) {
   }
 
   public appPages = [
@@ -19,5 +23,9 @@ export class AppComponent {
 
   onSplitPaneChange(event: CustomEvent) {
     this.commonStateService.setSplitPaneVisible(!!event?.detail?.visible)
+  }
+
+  logoutUser() {
+    this.authService.logout();
   }
 }

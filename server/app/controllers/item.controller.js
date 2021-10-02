@@ -19,7 +19,7 @@ exports.create = (req, res) => {
     });
   
     // Save Item in the database
-    Item.create(item, (err, data) => {
+    item.create((err, data) => {
       if (err)
         res.status(500).send({
           message:

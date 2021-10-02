@@ -2,8 +2,12 @@ const sql = require("./db.js");
 
  class Item {
 
-  constructor() {
-    
+  constructor(item) {
+    this.serial_number= item.serial_number;
+    this.photo = item.photo;
+    this.description = item.description;
+    this.status = item.status;
+    this.item_model_id = item.item_model_id;
   }
 
   /**
@@ -12,19 +16,19 @@ const sql = require("./db.js");
    * @param {Function} result Callback
    * @returns {Undefined} Undefined
    */
-  create(item, result) {
-    sql.query("INSERT INTO item SET ?", item, (err, res) => {
+  create(result) {
+    sql.query("INSERT INTO item SET ?", this, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err, null);
         return;
       }
   
-      console.log("Created item: ", { id: res.insertId, ...item });
-      result(null, { id: res.insertId, ...item });
+      console.log("Created item: ", { id: res.insertId, ...this });
+      result(null, { id: res.insertId, ...this });
     });
   };
 };
 
 
-module.exports.Item = Item;
+module.exports = Item;

@@ -1,0 +1,12 @@
+<div>
+  <video #video [hidden]="!scanActive" width="100%"></video>
+
+  <p>{{scanResult}}</p>
+  <div style="display: flex">
+  <ion-button (click)="stopScan()" >stop</ion-button>
+  <ion-button (click)="startScan()" >start</ion-button>
+  </div>
+
+
+</div>
+

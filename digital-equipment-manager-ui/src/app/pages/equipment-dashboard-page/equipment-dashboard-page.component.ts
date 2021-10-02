@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
+import {ModalController} from "@ionic/angular";
+import {QrScanComponent} from "../../components/qr-scan/qr-scan.component";
 
 @Component({
   selector: 'app-tab1',
@@ -8,11 +10,18 @@ import {Router} from "@angular/router";
 })
 export class EquipmentDashboardPage {
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private modalController: ModalController) {
   }
 
   onScanClicked(event: any) {
-    this.navigateToEquipmentPage()
+     this.presentModal();
+  }
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: QrScanComponent,
+    });
+    return await modal.present();
   }
 
   onContinueBtnClick(event: string) {

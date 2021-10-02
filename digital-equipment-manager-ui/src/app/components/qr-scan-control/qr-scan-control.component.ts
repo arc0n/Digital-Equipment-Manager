@@ -5,7 +5,7 @@ import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
   templateUrl: './qr-scan-control.component.html',
   styleUrls: ['./qr-scan-control.component.scss'],
 })
-export class QrScanControl implements OnInit {
+export class QrScanControlComponent implements OnInit {
   @Input() placeholder: string;
 
   @Output() onQrClick: EventEmitter<MouseEvent> = new EventEmitter();

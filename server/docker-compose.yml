@@ -1,0 +1,25 @@
+version: '3.1'
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: equipment_manager
+    ports:
+      - "3307:3306"
+    volumes:
+      - $MYSQLPATH
+  server:
+    depends_on:
+      - db
+    environment:
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+    image: node_docker
+    restart: always
+    ports:
+      - "3000:3000"
+    links:
+      - "db:database"
+

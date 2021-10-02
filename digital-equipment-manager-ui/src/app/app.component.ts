@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {CommonStateService} from "./services/common-state.service";
 import {AuthenticationService} from "./services/authentication.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ export class AppComponent {
   constructor(
     private commonStateService: CommonStateService,
     private authService: AuthenticationService,
+    private router: Router,
     ) {
   }
 
@@ -26,6 +28,8 @@ export class AppComponent {
   }
 
   logoutUser() {
-    this.authService.logout();
+    this.authService.logout().subscribe(()=> {
+      this.router.navigate(['/login']);
+    });
   }
 }

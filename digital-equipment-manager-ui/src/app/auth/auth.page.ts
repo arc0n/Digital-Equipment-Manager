@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from "../services/authentication.service";
 import {MenuController} from "@ionic/angular";
+import {Router} from "@angular/router";
+import {subscribeOn} from "rxjs/operators";
 
 @Component({
   selector: 'app-auth',
@@ -12,15 +14,15 @@ export class AuthPage implements OnInit {
   constructor(
     private authService: AuthenticationService,
     private menu: MenuController,
-  ) {
-    this.menu.enable(false, 'main-menu-id')
-  }
+    private router: Router,
+  ) {  }
 
   ngOnInit() {
   }
 
   loginUser() {
-    this.authService.login();
-    this.menu.enable(true, 'main-menu-id')
+    this.authService.login().subscribe(()=>{
+      this.router.navigate(['../']);
+    });
   }
 }

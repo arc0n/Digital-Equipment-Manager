@@ -6,10 +6,11 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthGuardService } from './services/auth-guard.service';
+import { AuthGuardService } from './auth/auth-guard.service';
 import { AuthenticationService } from "./services/authentication.service";
 import { IonicStorageModule } from "@ionic/storage-angular";
 import {SharedModule} from "./services/shared.module";
+import {NegAuthGuardService} from "./auth/neg-auth-guard.service";
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import {SharedModule} from "./services/shared.module";
   ],
   providers: [
     AuthGuardService,
+    NegAuthGuardService,
     AuthenticationService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

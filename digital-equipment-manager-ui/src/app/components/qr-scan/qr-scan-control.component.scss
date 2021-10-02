@@ -1,0 +1,22 @@
+.qr-scan-wrapper{
+  display: block;
+}
+.qr-scan-horizontal{
+  margin: .5rem .25rem 0 .25rem;
+  display: flex;
+  justify-content: center;
+}
+
+.qr-control{
+  flex-basis: 100px;
+  max-width: 300px;
+  border: 2px solid var(--ion-color-light);
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+.qr-control-button{
+  --border-radius: 0;
+  margin:0;
+  height: 41px;
+}
+

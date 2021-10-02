@@ -1,0 +1,41 @@
+.equipment-page-io-vertical{
+  display: flex;
+  flex-direction: column ;
+  padding-bottom: 1rem;
+  justify-content: center;
+}
+.h-100{
+  height: 100%;
+}
+
+.equipment-page-io-horizontal{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+}
+
+.equipment-page-io-header{
+  max-width: 400px;
+  padding: 1rem;
+
+}
+.equipment-page-content-wrapper{
+  margin: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1;
+  border: 3px solid var(--ion-color-light);
+  border-radius: 2px;
+  color: var(--ion-color-medium);
+}
+.equipment-back-button{
+  margin: 0 0 0 1rem;
+}
+
+
+.max-width-100{
+  max-width: 250px;
+}
+

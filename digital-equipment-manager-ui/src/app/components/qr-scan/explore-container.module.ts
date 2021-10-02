@@ -4,11 +4,11 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ExploreContainerComponent } from './explore-container.component';
+import { QrScanControl } from './qr-scan-control.component';
 
 @NgModule({
   imports: [ CommonModule, FormsModule, IonicModule],
-  declarations: [ExploreContainerComponent],
-  exports: [ExploreContainerComponent]
+  declarations: [QrScanControl],
+  exports: [QrScanControl]
 })
-export class ExploreContainerComponentModule {}
+export class QrScanComponentModule {}

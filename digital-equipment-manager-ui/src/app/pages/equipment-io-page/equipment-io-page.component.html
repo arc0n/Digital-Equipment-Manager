@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons
+      *ngIf="this.showMobileMenu"
+      slot="start" class="equipment-back-button" (click)="this.router.navigate(['/tabs/dashboard'])">
+      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title>Equipment 123</ion-title>
+    <ion-buttons slot="primary" *ngIf="this.showMobileMenu">
+      <ion-button color="primary" (click)="onMenuClicked()">
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="equipment-page-io-vertical h-100">
+    <div class="equipment-page-io-horizontal">
+      <p class="equipment-page-io-header">
+        Lorem ipsum dolor sit amet,
+        consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
+      </p>
+    </div>
+
+    <div class="equipment-page-content-wrapper">
+      Placeholder
+    </div>
+
+    <div class="equipment-page-io-horizontal">
+      <div class="equipment-page-io-vertical max-width-100">
+        <ion-button color="primary">
+          Aus/Eingabe
+        </ion-button>
+
+        <ion-button color="primary">
+          placeholder
+        </ion-button>
+      </div>
+    </div>
+
+
+  </div>
+
+
+</ion-content>

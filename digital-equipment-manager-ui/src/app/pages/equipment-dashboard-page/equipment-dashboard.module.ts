@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { EquipmentDashboardPage } from './equipment-dashboard-page.component';
 
 import { Tab1PageRoutingModule } from './equipment-dashboard-routing.module';
-import {AppModule} from "../../app.module";
 import {QrScanControlComponent} from "../../components/qr-scan-control/qr-scan-control.component";
+import {QrScanComponent} from "../../components/qr-scan/qr-scan.component";
 
 @NgModule({
   imports: [
@@ -15,6 +15,6 @@ import {QrScanControlComponent} from "../../components/qr-scan-control/qr-scan-c
     FormsModule,
     Tab1PageRoutingModule
   ],
-  declarations: [EquipmentDashboardPage, QrScanControlComponent]
+  declarations: [EquipmentDashboardPage, QrScanControlComponent, QrScanComponent]
 })
 export class EquipmentDashboardPageModule {}

@@ -20,6 +20,10 @@ export class EquipmentDashboardPage {
   async presentModal() {
     const modal = await this.modalController.create({
       component: QrScanComponent,
+      componentProps: {
+        "cancelClicked": ()=>modal.dismiss(),
+        "qrCodeRead": (value)=>{console.log("test qrRead", value); modal.dismiss()}
+      }
     });
     return await modal.present();
   }

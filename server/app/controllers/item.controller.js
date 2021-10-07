@@ -41,6 +41,18 @@ exports.getAll = (req, res) => {
   });
 };
 
+//Update Item by ID
+exports.updateById = (req, res) => {
+  Item.updateById((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while updating items."
+      });
+    else res.send(data);
+  });
+};
+
 //Get Item by Id
 exports.getById = (req, res) => {
   Item.getById(req.params.id, (err, data) => {

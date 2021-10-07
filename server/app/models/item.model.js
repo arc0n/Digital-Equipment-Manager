@@ -71,6 +71,36 @@ const sql = require("./db.js");
       });
     };
 
+
+  /**
+   * Updates item with a specific ID
+   * @param {Number} id ID of the item
+   * @param {Function} result Callback
+   * @returns {Undefined} Undefined
+   */
+    Item.updateById = (id, item, result) => {
+      sql.query(
+        "UPDATE item SET serial_number = ?, photo = ?, description = ?, status = ?, item_model_id = ? WHERE id = ?",
+        [item.serial_number, item.photo, item.description, item.status, item.item_model_id, id],
+        (err, res) => {
+          if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+          }
+    
+          if (res.affectedRows == 0) {
+            // not found Item with the id
+            result({ kind: "not_found" }, null);
+            return;
+          }
+    
+          console.log("updated item: ", { id: id, ...item });
+          result(null, { id: id, ...item });
+        }
+      );
+    };
+
   /**
    * Inserts a new item into db.
    * @param {Number} item Item to create

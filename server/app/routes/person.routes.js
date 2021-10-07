@@ -12,7 +12,7 @@ module.exports = app => {
 
     app.get("/person/:id", person.getById);
 
-    app.put("/item/:id", item.updateById);
+    app.put("/person/:id", person.updateById);
 
     app.delete("/person/:id", person.delete);
 };

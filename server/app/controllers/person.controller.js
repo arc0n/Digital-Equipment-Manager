@@ -44,7 +44,7 @@ exports.getAll = (req, res) => {
 
 //Update Person by ID
 exports.updateById = (req, res) => {
-  Person.updateById((err, data) => {
+  Person.updateById(req.params.id, new Person(req.body), (err, data) => {
     if (err)
       res.status(500).send({
         message:

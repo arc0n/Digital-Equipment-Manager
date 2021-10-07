@@ -43,7 +43,7 @@ exports.getAll = (req, res) => {
 
 //Update Item by ID
 exports.updateById = (req, res) => {
-  Item.updateById((err, data) => {
+  Item.updateById(req.params.id, new Item(req.body), (err, data) => {
     if (err)
       res.status(500).send({
         message:

@@ -1,8 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ActionSheetController} from "@ionic/angular";
 import {CommonStateService} from "../../services/common-state.service";
 import {Subscription} from "rxjs";
+import {mergeMap, switchMap} from "rxjs/operators";
+import {ItemResourceService} from "../../services/item-resource.service";
+import {Item} from "../../services/model";
 
 @Component({
   selector: 'app-equipment-io-page',
@@ -13,9 +16,15 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
   public showMobileMenu: boolean = true;
 
+  /** @internal  */
+  item: Item;
+
   constructor(public router: Router,
               public state: CommonStateService,
-              private actionSheetController: ActionSheetController) {
+              private actionSheetController: ActionSheetController,
+              private activeRoute: ActivatedRoute,
+              private itemService: ItemResourceService
+              ) {
   }
 
   ngOnInit() {
@@ -24,6 +33,12 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
         (isVisible) => this.showMobileMenu = !isVisible
       )
     )
+    this.activeRoute.queryParams.pipe(
+      mergeMap(params => this.itemService.getItemByCode(params.id))
+    ).subscribe(item =>{
+      this.item = item;
+      console.log("fetched item: ", item)
+    });
   }
 
   ngOnDestroy() {

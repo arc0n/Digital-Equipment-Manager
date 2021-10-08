@@ -2,6 +2,9 @@ import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {ModalController} from "@ionic/angular";
 import {QrScanComponent} from "../../components/qr-scan/qr-scan.component";
+import {ItemResourceService} from "../../services/item-resource.service";
+import {Item} from "../../services/model";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-tab1',
@@ -10,30 +13,50 @@ import {QrScanComponent} from "../../components/qr-scan/qr-scan.component";
 })
 export class EquipmentDashboardPage {
 
+  private modal: HTMLIonModalElement;
+
   constructor(private router: Router,
-              private modalController: ModalController) {
+              private modalController: ModalController,
+              private itemService: ItemResourceService) {
   }
 
   onScanClicked(event: any) {
-     this.presentModal();
+    this.presentModal();
   }
+
+
   async presentModal() {
-    const modal = await this.modalController.create({
+    this.modal = await this.modalController.create({
       component: QrScanComponent,
       componentProps: {
-        "cancelClicked": ()=>modal.dismiss(),
-        "qrCodeRead": (value)=>{console.log("test qrRead", value); modal.dismiss()}
+        "cancelClicked": () => this.modal.dismiss(),
+        "qrCodeRead": this.modalResult.bind(this)
       }
     });
-    return await modal.present();
+    return await this.modal.present();
   }
 
-  onContinueBtnClick(event: string) {
-    this.navigateToEquipmentPage()
+  modalResult(value: string) {
+
+    console.log("Modal result: ", value)
+    this.getItemByCode(value).subscribe((item) => {
+      this.modal.dismiss();
+      this.navigateToEquipmentPage(item);
+    })
   }
 
-  navigateToEquipmentPage() {
-    this.router.navigate(['equipment'])
+  onContinueBtnClick(inputValue: string) {
+    this.getItemByCode(inputValue).subscribe((item) => {
+      this.navigateToEquipmentPage(item);
+    })
+  }
+
+  navigateToEquipmentPage(item: Item) {
+    this.router.navigate(['equipment'], {queryParams: {id: item.id}});
+  }
+
+  getItemByCode(value: string): Observable<Item> {
+    return this.itemService.getItemByCode(value);
   }
 
 }

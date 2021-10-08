@@ -5,15 +5,15 @@ import {filter} from "rxjs/operators";
 import {EquipmentIoPage} from "./pages/equipment-io-page/equipment-io-page.component";
 
 const MAIN_PAGE_LINKS: EquipmentRouterLink[] = [
-  {title: 'Ausrüstung', url: '/tabs/dashboard', icon: 'pricetags', secondary: false},
-  {title: 'Einstellungen', url: '/tabs/settings', icon: 'settings', secondary: false},
+  {title: 'Home', url: '/tabs/dashboard', icon: 'pricetags', secondary: false},
+  {title: 'Einstellung 1', url: '/tabs/settings', icon: 'log-out', secondary: true},
+  {title: 'Einstellung 2', url: '/tabs/settings', icon: 'settings', secondary: true}
 ];
 
 const EQUIPMENT_PAGE_LINKS: EquipmentRouterLink[] = [
-  {title: 'Ausrüstung', url: '/tabs/dashboard', icon: 'pricetags', secondary: false},
+  {title: 'Home', url: '/tabs/dashboard', icon: 'pricetags', secondary: false},
   {title: 'Option 1', url: '/nix', icon: 'log-out', secondary: true},
-  {title: 'Option 2', url: '/nox', icon: 'settings', secondary: true},
-
+  {title: 'Option 2', url: '/nox', icon: 'settings', secondary: true}
 ];
 
 export interface EquipmentRouterLink {

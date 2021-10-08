@@ -1,20 +1,20 @@
 const Booking = require("../models/booking.model.js");
 
 // Create and Save a new Borrowed Item
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
     // Validate request
     if (!req.body) {
       res.status(400).send({
         message: "Content can not be empty!"
       });
     }
-  
+
     // Creates a new Item
     const item = new Booking({
       item_id: req.body.item_id,
       person_id: req.body.person_id,
       datetime_in: req.body.datetime_in,
-      datetime_out: req.body.datetime_out,
+      datetime_out: null,
       item_model_id: req.body.item_model_id
     });
   
@@ -40,9 +40,11 @@ exports.getAll = (req, res) => {
     else res.send(data);
   });
 
+};
+
 //Returns a borrowed item
 exports.return = (req, res) => {
-  Booking.return(req.params.dynamic_id, (err, data) => {
+  Booking.return(req.params.id, (err, data) => {
     if (err)
       res.status(500).send({
         message:
@@ -50,6 +52,4 @@ exports.return = (req, res) => {
       });
     else res.send(data);
   });
-};
-
 };

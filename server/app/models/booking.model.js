@@ -20,15 +20,38 @@ const sql = require("./db.js");
    * @returns {Undefined} Undefined
    */
    Booking.create = (item, result)=> {
-    sql.query("INSERT INTO borrowed_item SET ?", item, (err, res) => {
+     sql.query("SELECT id FROM person WHERE dynamic_id = ?", [item.person_id], (err, res)=> {
       if (err) {
         console.log("error: ", err);
         result(err, null);
         return;
       }
-  
-      console.log("Created borrowed_item: ", { id: res.insertId, ...item });
-      result(null, { id: res.insertId, ...item });
+        const person_id = res.id;
+
+        sql.query("SELECT id FROM item WHERE dynamic_id = ?", [item.item_id], (err, res)=> {
+          if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+          }
+
+          const item_id = res.id;
+
+          /* Replace Dynamic IDs with Primary Key ID */
+          item.person_id = person_id;
+          item.item_id = item_id;
+
+          sql.query("INSERT INTO borrowed_item SET ?", item, (err, res) => {
+            if (err) {
+              console.log("error: ", err);
+              result(err, null);
+              return;
+            }
+    
+            console.log("Created borrowed_item: ", { id: res.insertId, ...item });
+            result(null, { id: res.insertId, ...item });
+          });
+      });
     });
   };
 
@@ -39,7 +62,7 @@ const sql = require("./db.js");
    * @returns {Undefined} Undefined
    */
    Booking.getAll = (result) => {
-    sql.query("SELECT * FROM item", (err, res) => {
+    sql.query("SELECT * FROM borrowed_item", (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -52,18 +75,18 @@ const sql = require("./db.js");
 
     /**
      * Returns a borrowed item with a specific ID
-     * @param {Number} serial_number ID of the item that should be returned
+     * @param {Number} dynamic_id Dynamic ID of the item that should be returned
      * @param {Function} result Callback
      * @returns {Undefined} Undefined
      */
-    Booking.return = (serial_number, result) => {
+    Booking.return = (dynamic_id, result) => {
     sql.query(
         "UPDATE borrowed_item"                   +
         "INNER JOIN borrowed_item.id ON item.id" +
         "SET borrowed_item.datetime_in = ?"      +
-        "WHERE item.serial_number = ?"           +
+        "WHERE item.dynamic_id = ?"              +
         "ORDER BY borrowed_item.datetime_out DESC LIMIT 1",
-        [Date.now(), serial_number],
+        [Date.now(), dynamic_id],
         (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -77,8 +100,8 @@ const sql = require("./db.js");
             return;
         }
     
-        console.log("The item was returned: ", { "serial_number": serial_number });
-        result({"serial_number": serial_number });
+        console.log("The item was returned: ", { "serial_number": dynamic_id });
+        result({"serial_number": dynamic_id });
         }
     );
     };

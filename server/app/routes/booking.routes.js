@@ -8,7 +8,7 @@
   
     app.post("/booking", booking.create);
    
-    app.put("/booking/:dynamic_id", booking.return);
+    app.put("/booking/:id", booking.return);
 
     app.get("/booking", booking.getAll);
 

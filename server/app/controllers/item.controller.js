@@ -1,4 +1,5 @@
 const Item = require("../models/item.model.js");
+const randomGenerator = require("../dynamic_id_generator.js");
 
 // Create and Save a new Item
 exports.create = (req, res) => {
@@ -9,8 +10,8 @@ exports.create = (req, res) => {
       });
     }
   
-    //Generate Random dynamic ID: TODO, better solution required
-    const dynamic_id = Array.from(Array(15), () => Math.floor(Math.random() * 36).toString(36)).join('');
+    //Generate Random dynamic ID
+    const dynamic_id = randomGenerator.generateRandomDynamicId();
 
     // Creates a new Item from request parameters
     const item = new Item({

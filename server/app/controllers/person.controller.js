@@ -9,6 +9,9 @@ exports.create = (req, res) => {
       });
     }
   
+    //Generate Random dynamic ID
+    const dynamic_id = randomGenerator.generateRandomDynamicId();
+
     // Creates a new Person
     const item = new Person({
       firstname: req.body.firstname,
@@ -16,6 +19,7 @@ exports.create = (req, res) => {
       dateofbirth: req.body.dateofbirth,
       sex: req.body.sex,
       id_card: req.body.id_card,
+      dynamic_id: dynamic_id,
       address_id: req.body.address_id
     });
   

@@ -9,6 +9,7 @@ const sql = require("./db.js");
     this.serial_number= item.serial_number;
     this.photo = item.photo;
     this.description = item.description;
+    this.dynamic_id = item.dynamic_id;
     this.status = item.status;
     this.item_model_id = item.item_model_id;
   }
@@ -40,8 +41,8 @@ const sql = require("./db.js");
    */
   Item.getAll = (result) => {
     sql.query(
-      "SELECT * FROM item" +
-      "INNER JOIN item_model ON item_model.id = item.item_model_id" + 
+      "SELECT item.*, item_model.name AS model_name, item_type.name AS item_type, item_type.id AS item_type_id, item_type.description AS item_type_description FROM item " +
+      "INNER JOIN item_model ON item_model.id = item.item_model_id " + 
       "INNER JOIN item_type ON item_type.id = item_model.item_type_id", (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -62,10 +63,10 @@ const sql = require("./db.js");
    */
      Item.getById = (id, result) => {
       sql.query(
-      "SELECT * FROM item" +
+      "SELECT * FROM item " +
       "INNER JOIN item_model ON item.item_model_id = item_model.id " +
-      "INNER JOIN item_type ON item_type.id = item_model.item_type_id" +
-      "WHERE item.dynamic_id=" + id, (err, res) => {
+      "INNER JOIN item_type ON item_type.id = item_model.item_type_id " +
+      "WHERE item.dynamic_id= ?", [id], (err, res) => {
         if (err) {
           console.log("error: ", err);
           result(null, err);
@@ -86,7 +87,7 @@ const sql = require("./db.js");
    */
     Item.updateById = (id, item, result) => {
       sql.query(
-        "UPDATE item SET serial_number = ?, photo = ?, description = ?, status = ?, item_model_id = ?, item.dynamic_id = ? WHERE dymamic_id = ?",
+        "UPDATE item SET serial_number = ?, photo = ?, description = ?, status = ?, item_model_id = ?, dynamic_id = ? WHERE dynamic_id = ?",
         [item.serial_number, item.photo, item.description, item.status, item.item_model_id, item.dynamic_id, id],
         (err, res) => {
           if (err) {
@@ -101,8 +102,8 @@ const sql = require("./db.js");
             return;
           }
     
-          console.log("updated item: ", { id: id, ...item });
-          result(null, { id: id, ...item });
+          console.log("updated item: ", { ...item });
+          result(null, { ...item });
         }
       );
     };

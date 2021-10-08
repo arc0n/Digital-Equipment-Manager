@@ -8,10 +8,11 @@ const sql = require("./db.js");
   constructor(person) {
     this.firstname= person.firstname;
     this.lastname = person.lastname;
-    this.dateofbirth = person.dateofbirth;
+    this.birthdate = person.birthdate;
     this.sex = person.sex;
     this.id_card = person.id_card;
     this.address_id = person.address_id;
+    this.dynamic_id = person.dynamic_id;
   }
 };
 
@@ -42,7 +43,7 @@ const sql = require("./db.js");
    */
   Person.getAll = (result) => {
     sql.query(
-      "SELECT * FROM person" + 
+      "SELECT * FROM person " + 
       "INNER JOIN address ON person.address_id = address.id", (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -57,15 +58,15 @@ const sql = require("./db.js");
 
   /**
    * Returns person with a specific dynamic ID
-   * @param {Number} id ID of the person
+   * @param {Number} id Dynamic ID of the person
    * @param {Function} result Callback
    * @returns {Undefined} Undefined
    */
      Person.getById = (id, result) => {
       sql.query(
-        "SELECT * FROM person" +
-        "INNER JOIN address ON person.address_id = address.id" +
-        "WHERE person.dynamic_id=" + id, (err, res) => {
+        "SELECT * FROM person " +
+        "INNER JOIN address ON person.address_id = address.id " +
+        "WHERE person.dynamic_id= ?", [id], (err, res) => {
         if (err) {
           console.log("error: ", err);
           result(null, err);
@@ -86,8 +87,8 @@ const sql = require("./db.js");
    */
     Person.updateById = (id, person, result) => {
       sql.query(
-        "UPDATE person SET firstname = ?, lastname = ?, dateofbirth = ?, sex = ?, id_card = ?, dynamic_id = ?, address_id = ? WHERE dynamic_id = ?",
-        [person.firstname, person.lastname, person.dateofbirth, person.sex, person.id_card, person.dynamic_id, person.address_id, id],
+        "UPDATE person SET firstname = ?, lastname = ?, birthdate = ?, sex = ?, id_card = ?, dynamic_id = ?, address_id = ? WHERE dynamic_id = ?",
+        [person.firstname, person.lastname, person.birthdate, person.sex, person.id_card, person.dynamic_id, person.address_id, id],
         (err, res) => {
           if (err) {
             console.log("error: ", err);
@@ -101,8 +102,8 @@ const sql = require("./db.js");
             return;
           }
     
-          console.log("updated person: ", { id: id, ...person });
-          result(null, { id: id, ...person });
+          console.log("updated person: ", { ...person });
+          result(null, { ...person });
         }
       );
     };

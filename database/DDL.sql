@@ -26,12 +26,6 @@ CREATE TABLE item
 		item_model_id INTEGER NOT NULL
    );
 
-/*CREATE TABLE item_dynamic_id
- (
-    dynamic_id VARCHAR PRIMARY KEY,
-    item_id INTEGER NOT NULL
- )*/
-
 CREATE TABLE address 
    (    
       id INTEGER AUTO_INCREMENT PRIMARY KEY, 
@@ -46,21 +40,13 @@ CREATE TABLE person
       id INTEGER AUTO_INCREMENT PRIMARY KEY, 
       firstname VARCHAR(255) NOT NULL,
 		lastname VARCHAR(255) NOT NULL,
-		birthdate TIMESTAMP NOT NULL,
+		birthdate DATE NOT NULL,
 		sex INTEGER NOT NULL,
 		id_card VARCHAR(255) NOT NULL,
       dynamic_id VARCHAR(25) NOT NULL UNIQUE,
 		address_id INTEGER NOT NULL
    );
 
-
-/*CREATE TABLE person_dynamic_id
- (
-    dynamic_id VARCHAR PRIMARY KEY,
-    person_id INTEGER NOT NULL
- )*/
-
-   
 
 CREATE TABLE casuality_type 
    (  
@@ -84,8 +70,8 @@ CREATE TABLE casuality
 CREATE TABLE borrowed_item 
    (    
       id INTEGER AUTO_INCREMENT PRIMARY KEY, 
-      datetime_in DATETIME NOT NULL,
-		datetime_out DATETIME,
+      datetime_out DATETIME NOT NULL,
+      datetime_in DATETIME,
 		item_id INTEGER NOT NULL,
       person_id INTEGER NOT NULL
    );
@@ -105,8 +91,6 @@ alter table borrowed_item ADD FOREIGN KEY (person_id) references person (id) on 
 
 alter table person ADD FOREIGN KEY(address_id) references address (id) on delete cascade;
 
-alter table item_dynamic_id ADD FOREIGN KEY(item_id) references item (id) on delete cascade;
-alter table person_dynamic_id ADD FOREIGN KEY(person_id) references person (id) on delete cascade;
 
 INSERT INTO item_type (name, description) VALUES ("Schlagstock", "Ein langes zylindrisches Instrument.");
 INSERT INTO item_type (name, description) VALUES ("Taser", "Elektroschockpistole");
@@ -139,14 +123,31 @@ INSERT INTO address(street, zip, city) VALUES ("Steiner Landstraße 48", 3500, "
 INSERT INTO address(street, zip, city) VALUES ("Steiner Landstraße 52", 3500, "Stein");
 INSERT INTO address(street, zip, city) VALUES ("Doktor-Karl-Dorrek-Straße 87", 3500, "Stein");
 
-INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Friedrich", "Fellner", 24192000000, 1, "e789g50","68gngbkw875rc6x",1);
-INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Sonja", "Goebels", 655344000000, 0, "fdsgfd","bxe7toded6807gn", 2);
-INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Andreas", "Lang", 24192000000, 1, "6764587","pldpdfib2qy7stv",3);
-INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Sebastian", "Kogler", 24192000000, 1, "785287587","1f55e5pkyzatd5c",4);
-INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Alexander", "Wurst", 24192000000, 1, "7868787","cjz7282s5y9ro9d",1);
-INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Joachim", "Strauss", 181958400000, 1, "144717","yc48wg669irk369",2);
-INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Peter", "Bauer", 24192000000, 1, "1757886","518hf4o6lsnf27m",3);
-INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Roland", "Schmidt", 655344000000, 1, "7868767","m4bbclu89ef9x8r",4);
-INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Theresia", "Rosenbauer", 181958400000, 0, "1475758","iwgb3zkzbt1jaho",1);
-INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Maria", "Winkelbauer", 24192000000, 0, "248789","e4bcon7egqe0d9a",2);
+INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Friedrich", "Fellner", '1944-01-05', 1, "e789g50","68gngbkw875rc6x",1);
+INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Sonja", "Goebels", '1955-10-03', 0, "fdsgfd","bxe7toded6807gn", 2);
+INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Andreas", "Lang", '1981-01-04', 1, "6764587","pldpdfib2qy7stv",3);
+INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Sebastian", "Kogler", '1978-02-10', 1, "785287587","1f55e5pkyzatd5c",4);
+INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Alexander", "Wurst", '1972-03-15', 1, "7868787","cjz7282s5y9ro9d",1);
+INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Joachim", "Strauss", '1974-04-15', 1, "144717","yc48wg669irk369",2);
+INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Peter", "Bauer", '1969-06-18', 1, "1757886","518hf4o6lsnf27m",3);
+INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Roland", "Schmidt", '1966-08-15', 1, "7868767","m4bbclu89ef9x8r",4);
+INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Theresia", "Rosenbauer", '1977-11-05', 0, "1475758","iwgb3zkzbt1jaho",1);
+INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Maria", "Winkelbauer", '1970-01-05', 0, "248789","e4bcon7egqe0d9a",2);
 
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (14001,"rykrz5rmxd5opao", "/","", "aktiv",2);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (14002,"vi3qhwrsyk1ig0m", "/","", "aktiv",2);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (14003,"axa5npz97xt1gy9", "/","", "aktiv",2);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (14004,"m9y1zrj4ociygi8", "/","", "aktiv",2);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (14005,"615dx69zug3ckde", "/","", "aktiv",2);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (14006,"4xlm7ymb1a4l318", "/","", "aktiv",2);
+
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12007,"k1g7v55x3lo3vw3", "/","", "aktiv",3);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12008,"mlm5h4cw54fmwgp", "/","", "aktiv",3);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12009,"c7341j0vum6weq2", "/","", "aktiv",3);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12010,"pyar1ofbl2vulma", "/","", "aktiv",3);
+
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (11701,"2qxgkb8t1d1mka0", "/","", "aktiv",4);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (11702,"nzltwe0xlnv5lng", "/","", "aktiv",4);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (11703,"h3x4mtowsc2pf56", "/","", "aktiv",4);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (11704,"le25wyiivnfvy1k", "/","", "aktiv",4);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (11705,"d55wf8ervjqi65m", "/","", "aktiv",4);

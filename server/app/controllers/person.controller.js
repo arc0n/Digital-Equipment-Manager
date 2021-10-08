@@ -1,4 +1,5 @@
 const Person = require("../models/person.model.js");
+const randomGenerator = require("../dynamic_id_generator.js");
 
 // Create and Save a new Person
 exports.create = (req, res) => {
@@ -16,7 +17,7 @@ exports.create = (req, res) => {
     const item = new Person({
       firstname: req.body.firstname,
       lastname: req.body.lastname,
-      dateofbirth: req.body.dateofbirth,
+      birthdate: req.body.birthdate,
       sex: req.body.sex,
       id_card: req.body.id_card,
       dynamic_id: dynamic_id,

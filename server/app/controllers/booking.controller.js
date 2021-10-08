@@ -1,7 +1,7 @@
 const Booking = require("../models/booking.model.js");
 
 // Create and Save a new Borrowed Item
-exports.create = async (req, res) => {
+exports.create = (req, res) => {
     // Validate request
     if (!req.body) {
       res.status(400).send({
@@ -13,9 +13,6 @@ exports.create = async (req, res) => {
     const item = new Booking({
       item_id: req.body.item_id,
       person_id: req.body.person_id,
-      datetime_in: req.body.datetime_in,
-      datetime_out: null,
-      item_model_id: req.body.item_model_id
     });
   
     // Save Item in the database

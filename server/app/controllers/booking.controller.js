@@ -1,4 +1,4 @@
-const BorrowedItem = require("../models/borrowed_item.model.js");
+const Booking = require("../models/booking.model.js");
 
 // Create and Save a new Borrowed Item
 exports.create = (req, res) => {
@@ -10,7 +10,7 @@ exports.create = (req, res) => {
     }
   
     // Creates a new Item
-    const item = new BorrowedItem({
+    const item = new Booking({
       item_id: req.body.item_id,
       person_id: req.body.person_id,
       datetime_in: req.body.datetime_in,
@@ -19,7 +19,7 @@ exports.create = (req, res) => {
     });
   
     // Save Item in the database
-    BorrowedItem.create(item, (err, data) => {
+    Booking.create(item, (err, data) => {
       if (err)
         res.status(500).send({
           message:
@@ -31,7 +31,7 @@ exports.create = (req, res) => {
 
 //Get all Borrowed Items
 exports.getAll = (req, res) => {
-  BorrowedItem.getAll((err, data) => {
+  Booking.getAll((err, data) => {
     if (err)
       res.status(500).send({
         message:
@@ -42,7 +42,7 @@ exports.getAll = (req, res) => {
 
 //Returns a borrowed item
 exports.return = (req, res) => {
-  BorrowedItem.return(req.params.serial_number, (err, data) => {
+  Booking.return(req.params.dynamic_id, (err, data) => {
     if (err)
       res.status(500).send({
         message:

@@ -34,13 +34,15 @@ const sql = require("./db.js");
   };
 
   /**
-   * Returns all items.
-   * @param {Object} item Item to create
+   * Returns all items with their types and models.
    * @param {Function} result Callback
    * @returns {Undefined} Undefined
    */
   Item.getAll = (result) => {
-    sql.query("SELECT * FROM item", (err, res) => {
+    sql.query(
+      "SELECT * FROM item" +
+      "INNER JOIN item_model ON item_model.id = item.item_model_id" + 
+      "INNER JOIN item_type ON item_type.id = item_model.item_type_id", (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -53,13 +55,17 @@ const sql = require("./db.js");
   };
 
   /**
-   * Returns item with a specific ID
+   * Returns item with a specific dynamic ID
    * @param {Number} id ID of the item
    * @param {Function} result Callback
    * @returns {Undefined} Undefined
    */
      Item.getById = (id, result) => {
-      sql.query("SELECT * FROM item WHERE id=" + id, (err, res) => {
+      sql.query(
+      "SELECT * FROM item" +
+      "INNER JOIN item_model ON item.item_model_id = item_model.id " +
+      "INNER JOIN item_type ON item_type.id = item_model.item_type_id" +
+      "WHERE item.dynamic_id=" + id, (err, res) => {
         if (err) {
           console.log("error: ", err);
           result(null, err);
@@ -73,15 +79,15 @@ const sql = require("./db.js");
 
 
   /**
-   * Updates item with a specific ID
+   * Updates item with a specific dynamic ID
    * @param {Number} id ID of the item
    * @param {Function} result Callback
    * @returns {Undefined} Undefined
    */
     Item.updateById = (id, item, result) => {
       sql.query(
-        "UPDATE item SET serial_number = ?, photo = ?, description = ?, status = ?, item_model_id = ? WHERE id = ?",
-        [item.serial_number, item.photo, item.description, item.status, item.item_model_id, id],
+        "UPDATE item SET serial_number = ?, photo = ?, description = ?, status = ?, item_model_id = ?, item.dynamic_id = ? WHERE dymamic_id = ?",
+        [item.serial_number, item.photo, item.description, item.status, item.item_model_id, item.dynamic_id, id],
         (err, res) => {
           if (err) {
             console.log("error: ", err);
@@ -102,13 +108,13 @@ const sql = require("./db.js");
     };
 
   /**
-   * Inserts a new item into db.
-   * @param {Number} item Item to create
+   * Deletes an item from db. Will only be deleted if there are no bookings of this item.
+   * @param {Number} id Dynamic ID of the item to delete.
    * @param {Function} result Callback
    * @returns {Undefined} Undefined
    */
    Item.delete = (id, result) => {
-    sql.query("DELETE FROM item WHERE id= ?", id, (err, res) => {
+    sql.query("DELETE FROM item WHERE dynamic_id= ?", id, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err, null);

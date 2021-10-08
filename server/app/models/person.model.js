@@ -13,6 +13,20 @@ const sql = require("./db.js");
     this.id_card = person.id_card;
     this.address_id = person.address_id;
   }
+
+  personDTO(person, address, d_id) {
+    return {
+      firstname: person.firstname,
+      lastname : person.lastname,
+      dateofbirth : person.dateofbirth,
+      sex : person.sex,
+      id_card : person.id_card,
+      dynamic_id: d_id.dynamic_id,
+      address_street : address.street,
+      address_zip : address.zip,
+      address_city : address.city,
+    }
+  }
 };
 
   /**
@@ -54,13 +68,16 @@ const sql = require("./db.js");
   };
 
   /**
-   * Returns person with a specific ID
+   * Returns person with a specific dynamic ID
    * @param {Number} id ID of the person
    * @param {Function} result Callback
    * @returns {Undefined} Undefined
    */
      Person.getById = (id, result) => {
-      sql.query("SELECT * FROM person WHERE id=" + id, (err, res) => {
+      sql.query(
+        "SELECT * FROM person" +
+        "INNER JOIN address ON person.address_id = address.id" +
+        "WHERE person.dynamic_id=" + id, (err, res) => {
         if (err) {
           console.log("error: ", err);
           result(null, err);

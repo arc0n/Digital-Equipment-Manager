@@ -4,7 +4,7 @@ const sql = require("./db.js");
  * @class Item
  * @classdesc The Item object
  */
- class BorrowedItem {
+ class Booking {
   constructor(borrowed_item) {
     this.item_id= borrowed_item.item_id;
     this.person_id = borrowed_item.person_id;
@@ -19,7 +19,7 @@ const sql = require("./db.js");
    * @param {Function} result Callback
    * @returns {Undefined} Undefined
    */
-   BorrowedItem.create = (item, result)=> {
+   Booking.create = (item, result)=> {
     sql.query("INSERT INTO borrowed_item SET ?", item, (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -34,11 +34,11 @@ const sql = require("./db.js");
 
   /**
    * Returns all borrowed items.
-   * @param {Object} item BorrowedItem to create
+   * @param {Object} item Booking to create
    * @param {Function} result Callback
    * @returns {Undefined} Undefined
    */
-   BorrowedItem.getAll = (result) => {
+   Booking.getAll = (result) => {
     sql.query("SELECT * FROM item", (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -56,7 +56,7 @@ const sql = require("./db.js");
      * @param {Function} result Callback
      * @returns {Undefined} Undefined
      */
-    BorrowedItem.return = (serial_number, result) => {
+    Booking.return = (serial_number, result) => {
     sql.query(
         "UPDATE borrowed_item"                   +
         "INNER JOIN borrowed_item.id ON item.id" +
@@ -86,4 +86,4 @@ const sql = require("./db.js");
   };
 
 
-module.exports = BorrowedItem;
+module.exports = Booking;

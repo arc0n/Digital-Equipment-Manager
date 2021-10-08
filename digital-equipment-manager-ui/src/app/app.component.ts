@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonStateService} from "./services/common-state.service";
-import {ActivatedRoute, ResolveEnd, Router} from "@angular/router";
+import { ResolveEnd, Router} from "@angular/router";
 import {filter} from "rxjs/operators";
-import {EquipmentIoPage} from "./pages/equipment-io-page/equipment-io-page.component";
 
 const MAIN_PAGE_LINKS: EquipmentRouterLink[] = [
   {title: 'Home', url: '/tabs/dashboard', icon: 'pricetags', secondary: false},

@@ -34,7 +34,8 @@
     <div class="equipment-page-io-bottom-toolbar" [ngClass]="{
     'ion-justify-content-end': this.state.getSplitPaneVisible() | async
     }">
-        <ion-button class="max-width-100" color="primary">
+        <ion-button class="max-width-100" color="primary"
+        (click)="ioButtonClicked()">
           Aus/Eingabe
         </ion-button>
     </div>

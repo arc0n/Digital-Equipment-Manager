@@ -6,8 +6,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {QrScanControlComponent} from "./components/qr-scan-control/qr-scan-control.component";
-import {QrScanComponent} from "./components/qr-scan/qr-scan.component";
 
 @NgModule({
   declarations: [AppComponent],

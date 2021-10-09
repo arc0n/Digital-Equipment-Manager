@@ -14,10 +14,10 @@ const routes: Routes = [
     path: 'equipment-io-page/:id',
     loadChildren: () => import('./pages/equipment-io-page/equipment-io-page.module').then( m => m.EquipmentIoPagePageModule)
   },
-  /*{
-    path: 'employee-search-page',
-    loadChildren: () => import('./components/employee-search-page/employee-search-page.module').then(m => m.EmployeeSearchPagePageModule)
-  }*/
+  {
+    path: 'employee-dashboard',
+    loadChildren: () => import('./pages/employee-dashboard/employee-dashboard.module').then( m => m.EmployeeDashboardPageModule)
+  }
 
 
 ];

@@ -12,6 +12,7 @@ import { IonicStorageModule } from "@ionic/storage-angular";
 import {SharedModule} from "./services/shared.module";
 import {NegAuthGuardService} from "./auth/neg-auth-guard.service";
 
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +22,9 @@ import {NegAuthGuardService} from "./auth/neg-auth-guard.service";
     IonicModule.forRoot(),
     AppRoutingModule,
     IonicStorageModule.forRoot(),
-    SharedModule.forRoot()
+    SharedModule.forRoot(),
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [
     AuthGuardService,

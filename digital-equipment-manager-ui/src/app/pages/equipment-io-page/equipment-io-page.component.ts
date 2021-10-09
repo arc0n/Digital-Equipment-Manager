@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ActionSheetController} from "@ionic/angular";
 import {CommonStateService} from "../../services/common-state.service";
 import {Subscription} from "rxjs";
-import {mergeMap, switchMap} from "rxjs/operators";
+import {mergeMap} from "rxjs/operators";
 import {ItemResourceService} from "../../services/item-resource.service";
 import {Item} from "../../services/model";
 
@@ -14,7 +14,9 @@ import {Item} from "../../services/model";
 })
 export class EquipmentIoPage implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
-  public showMobileMenu: boolean = true;
+
+  /** @internal */
+  showMobileMenu = true;
 
   /** @internal  */
   item: Item;
@@ -99,5 +101,9 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
 
   ioButtonClicked() {
     this.router.navigate(['/employee-dashboard'])
+  }
+
+  backButtonClicked() {
+    this.router.navigate(['/'])
   }
 }

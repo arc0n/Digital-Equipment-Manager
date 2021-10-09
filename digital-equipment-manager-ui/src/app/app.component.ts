@@ -5,15 +5,16 @@ import {filter} from "rxjs/operators";
 import {AuthenticationService} from "./services/authentication.service";
 
 const MAIN_PAGE_LINKS: EquipmentRouterLink[] = [
-  {title: 'Home', url: '/tabs/dashboard', icon: 'pricetags', secondary: false},
-  {title: 'Einstellung 1', url: '/tabs/settings', icon: 'log-out', secondary: true},
-  {title: 'Einstellung 2', url: '/tabs/settings', icon: 'settings', secondary: true}
+  {title: 'Home', url: '/tabs/dashboard', icon: 'home', secondary: false},
+  {title: 'Mitarbeiter anlegen', url: '/ma-add-page', icon: 'person-add', secondary: true},
+  {title: 'Gegenstand anlegen', url: '/equipment-add-page', icon: 'duplicate', secondary: true},
+  {title: 'Geräteliste', url: '/nux1', icon: 'briefcase', secondary: true}
 ];
 
 const EQUIPMENT_PAGE_LINKS: EquipmentRouterLink[] = [
-  {title: 'Home', url: '/tabs/dashboard', icon: 'pricetags', secondary: false},
-  {title: 'Option 1', url: '/nix', icon: 'log-out', secondary: true},
-  {title: 'Option 2', url: '/nox', icon: 'settings', secondary: true}
+  {title: 'Home', url: '/tabs/dashboard', icon: 'home', secondary: false},
+  {title: 'Option 1', url: '/nix', icon: 'settings', secondary: true},
+  {title: 'Option 2', url: '/nox', icon: 'log-out', secondary: true}
 ];
 
 export interface EquipmentRouterLink {

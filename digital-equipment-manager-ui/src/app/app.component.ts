@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CommonStateService} from "./services/common-state.service";
 import { ResolveEnd, Router} from "@angular/router";
 import {filter} from "rxjs/operators";
+import {AuthenticationService} from "./services/authentication.service";
 
 const MAIN_PAGE_LINKS: EquipmentRouterLink[] = [
   {title: 'Home', url: '/tabs/dashboard', icon: 'pricetags', secondary: false},
@@ -32,7 +33,11 @@ export class AppComponent implements OnInit {
 
   public appPages: EquipmentRouterLink[] = MAIN_PAGE_LINKS
 
-  constructor(private commonStateService: CommonStateService, private router: Router) {
+  constructor(
+    private commonStateService: CommonStateService,
+    private authService: AuthenticationService,
+    private router: Router,
+    ) {
   }
 
   ngOnInit() {
@@ -47,5 +52,11 @@ export class AppComponent implements OnInit {
 
   onSplitPaneChange(event: CustomEvent) {
     this.commonStateService.setSplitPaneVisible(!!event?.detail?.visible)
+  }
+
+  logoutUser() {
+    this.authService.logout().subscribe(()=> {
+      this.router.navigate(['/login']);
+    });
   }
 }

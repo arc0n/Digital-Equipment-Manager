@@ -14,7 +14,9 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to dem application." });
 });
 
-require("./app/routes/equipment.routes.js")(app);
+require("./app/routes/item.routes.js")(app);
+require("./app/routes/person.routes.js")(app);
+require("./app/routes/booking.routes.js")(app);
 
 // set port, listen for requests
 app.listen(3000, () => {

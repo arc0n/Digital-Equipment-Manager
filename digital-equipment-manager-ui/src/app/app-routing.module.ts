@@ -17,20 +17,20 @@ const routes: Routes = [
   },
   {
     path: 'equipment',
-    loadChildren: () => import('./pages/equipment-io-page/equipment-io-page.module').then(m => m.EquipmentIoPagePageModule)
-    , canActivate: [AuthGuardService]
+    loadChildren: () => import('./pages/equipment-io-page/equipment-io-page.module').then(m => m.EquipmentIoPagePageModule),
+    canActivate: [AuthGuardService]
 
   },
   {
     path: 'equipment-io-page/:id',
-    loadChildren: () => import('./pages/equipment-io-page/equipment-io-page.module').then(m => m.EquipmentIoPagePageModule)
-    , canActivate: [AuthGuardService]
+    loadChildren: () => import('./pages/equipment-io-page/equipment-io-page.module').then(m => m.EquipmentIoPagePageModule),
+    canActivate: [AuthGuardService]
 
   },
   {
     path: 'employee-dashboard',
-    loadChildren: () => import('./pages/employee-dashboard/employee-dashboard.module').then(m => m.EmployeeDashboardPageModule)
-    , canActivate: [AuthGuardService]
+    loadChildren: () => import('./pages/employee-dashboard/employee-dashboard.module').then(m => m.EmployeeDashboardPageModule),
+    canActivate: [AuthGuardService]
 
   }
 

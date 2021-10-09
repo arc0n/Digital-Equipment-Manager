@@ -7,13 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { EmployeeDashboardPageRoutingModule } from './employee-dashboard-routing.module';
 
 import { EmployeeDashboardPage } from './employee-dashboard.page';
+import {EquipmentDashboardPageModule} from "../equipment-dashboard-page/equipment-dashboard.module";
+import {SharedModule} from "../../services/shared.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EmployeeDashboardPageRoutingModule
+    EmployeeDashboardPageRoutingModule,
+    EquipmentDashboardPageModule,
+    SharedModule
   ],
   declarations: [EmployeeDashboardPage]
 })

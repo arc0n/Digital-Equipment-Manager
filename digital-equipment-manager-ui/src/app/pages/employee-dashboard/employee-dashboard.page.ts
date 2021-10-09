@@ -12,4 +12,12 @@ export class EmployeeDashboardPage implements OnInit {
   ngOnInit() {
   }
 
+  onScanClicked(event: MouseEvent) {
+    console.log(event)
+
+  }
+
+  onValueChange(event: string) {
+    console.log(event)
+  }
 }

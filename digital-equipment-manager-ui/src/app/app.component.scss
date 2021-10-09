@@ -122,3 +122,15 @@ ion-item.selected {
   margin-left: 1rem;
   font-size: smaller;
 }
+
+
+.flex-grow{
+  flex-grow: 1;
+}
+.flex-column {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+

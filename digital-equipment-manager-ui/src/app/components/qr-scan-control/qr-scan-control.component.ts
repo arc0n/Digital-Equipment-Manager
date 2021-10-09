@@ -1,28 +1,53 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter, OnDestroy} from '@angular/core';
+import {FormControl, FormGroup} from "@angular/forms";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-qr-control',
   templateUrl: './qr-scan-control.component.html',
   styleUrls: ['./qr-scan-control.component.scss'],
 })
-export class QrScanControlComponent implements OnInit {
+export class QrScanControlComponent implements OnInit, OnDestroy {
+  /** input for qr text input control */
   @Input() placeholder: string;
 
+  /** shows or hides the continue button */
+  @Input() showContinueButton = true
+
+  /** emitted when the qr button was clicked*/
   @Output() onQrClick: EventEmitter<MouseEvent> = new EventEmitter();
+
+  /** emitted when input value changes / user make a input */
+  @Output() onValueInputChange: EventEmitter<string> = new EventEmitter();
+
+  /** emits the input value every time the continue button was pressed */
   @Output() onContinueBtnClick: EventEmitter<string> = new EventEmitter();
-  qrInputControlValue: string;
 
+  /** @internal */
+  qrInputForm = new FormGroup({
+    qrInputControl: new FormControl('')
+  })
 
-
+  private subscriptions: Subscription[] = []
   constructor() { }
 
-  ngOnInit() {}
+  ngOnDestroy(): void {
+        this.subscriptions.forEach(s => s.unsubscribe());
+    }
 
-  scanBtnClicked(event) {
+  ngOnInit(): void {
+    this.subscriptions.push(
+      this.qrInputForm.get('qrInputControl').valueChanges.subscribe(value =>{
+      this.onValueInputChange.emit(value);
+    }));
+  }
+
+  scanBtnClicked(event): void {
     this.onQrClick.emit(event)
   }
 
-  continueButtonPressed() {
-    this.onContinueBtnClick.emit(this.qrInputControlValue)
+  continueButtonPressed(): void {
+    this.onContinueBtnClick.emit(this.qrInputForm.get('qrInputControl').value)
   }
+
 }

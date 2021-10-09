@@ -1,4 +1,5 @@
 const Item = require("../models/item.model.js");
+const randomGenerator = require("../dynamic_id_generator.js");
 
 // Create and Save a new Item
 exports.create = (req, res) => {
@@ -9,16 +10,20 @@ exports.create = (req, res) => {
       });
     }
   
-    // Creates a new Item
+    //Generate Random dynamic ID
+    const dynamic_id = randomGenerator.generateRandomDynamicId();
+
+    // Creates a new Item from request parameters
     const item = new Item({
       serial_number: req.body.serial_number,
+      dynamic_id: dynamic_id,
       photo: req.body.photo,
       description: req.body.description,
       status: req.body.status,
-      item_model_id: req.body.item_model_id
+      item_model_id: req.body.item_model_id,
     });
   
-    // Save Item in the database
+    // Save Item in the database and sends response
     Item.create(item, (err, data) => {
       if (err)
         res.status(500).send({
@@ -36,6 +41,18 @@ exports.getAll = (req, res) => {
       res.status(500).send({
         message:
           err.message || "Some error occurred while retrieving items."
+      });
+    else res.send(data);
+  });
+};
+
+//Update Item by dynamic ID
+exports.updateById = (req, res) => {
+  Item.updateById(req.params.id, new Item(req.body), (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while updating items."
       });
     else res.send(data);
   });

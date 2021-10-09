@@ -1,0 +1,23 @@
+<div class="qr-scan-wrapper">
+    <div class="qr-scan-horizontal">
+      <ion-input
+        [(ngModel)]="qrInputControlValue"
+        class="qr-control"
+        [placeholder]="placeholder"></ion-input>
+      <ion-button
+        class="qr-control-button" color="primary"
+
+        (click)="scanBtnClicked($event)">
+        <ion-icon name="qr-code-sharp"></ion-icon>
+        <span style="padding-left: .5rem">Scan</span>
+      </ion-button>
+    </div>
+
+  <div class="qr-scan-horizontal">
+    <ion-button (click)="continueButtonPressed()">Weiter</ion-button>
+  </div>
+
+
+</div>
+
+

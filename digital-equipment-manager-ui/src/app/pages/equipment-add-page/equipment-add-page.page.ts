@@ -15,12 +15,10 @@ import {FormControl, FormGroup} from "@angular/forms";
 })
 export class EquipmentAddPagePage implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
+  private item: Item;
 
   /** @internal */
   showMobileMenu = true;
-
-  /** @internal  */
-  item: Item;
 
   /** @internal  */
   addItemForm = new FormGroup({

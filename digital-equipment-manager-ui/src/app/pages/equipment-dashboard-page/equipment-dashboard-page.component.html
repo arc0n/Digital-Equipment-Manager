@@ -16,12 +16,11 @@
   <div class="equipment-page-vertical">
     <div class="equipment-page-horizontal">
       <p class="equipment-page-qr-header">
-        Lorem ipsum dolor sit amet,
-        consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
+        Bitte ID-Code unterhalb eingeben oder mittels "SCAN" button scannen. Kamera für scan benötigt.
       </p>
     </div>
 
-    <app-qr-control placeholder="Qr code scannen oder eintippen"
+    <app-qr-control placeholder="QR ID or SCAN"
                     (onQrClick)="onScanClicked($event)"
                     (onContinueBtnClick)="onContinueBtnClick($event)"
                     [showContinueButton]="true"

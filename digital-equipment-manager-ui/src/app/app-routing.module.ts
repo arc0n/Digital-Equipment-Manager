@@ -32,7 +32,13 @@ const routes: Routes = [
     loadChildren: () => import('./pages/employee-dashboard/employee-dashboard.module').then(m => m.EmployeeDashboardPageModule),
     canActivate: [AuthGuardService]
 
+  },
+  {
+    path: 'equipment-add-page',
+    loadChildren: () => import('./pages/equipment-add-page/equipment-add-page.module').then( m => m.EquipmentAddPagePageModule),
+    canActivate: [AuthGuardService]
   }
+
 
 
 ];

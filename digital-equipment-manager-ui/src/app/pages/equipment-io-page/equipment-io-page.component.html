@@ -32,8 +32,14 @@
     </div>
 
     <div class="equipment-page-io-bottom-toolbar" [ngClass]="{
-    'ion-justify-content-end': this.state.getSplitPaneVisible() | async
+    'ion-justify-content-between': !showMobileMenu
     }">
+      <div *ngIf="!showMobileMenu">
+        <ion-button class="max-width-100" color="secondary"
+                    (click)="backButtonClicked()">
+          Zurück
+        </ion-button>
+      </div>
         <ion-button class="max-width-100" color="primary"
         (click)="ioButtonClicked()">
           Aus/Eingabe

@@ -1,0 +1,34 @@
+.equipment-add-form-wrapper{
+  display: flex;
+  justify-content: center;
+  height: auto;
+}
+
+.equipment-add-form{
+  margin: 2rem;
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  flex: 0 1 600px;
+  border: 3px solid var(--ion-color-light);
+  border-radius: 2px;
+  color: var(--ion-color-medium);
+  height: auto;
+}
+
+.equipment-add-form-item{
+  display: flex;
+}
+
+.equipment-add-bottom-collapsed {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.equipment-add-bottom-toolbar {
+  justify-content: center;
+  display: flex;
+  padding-right: 2rem;
+  padding-left: 2rem;
+}

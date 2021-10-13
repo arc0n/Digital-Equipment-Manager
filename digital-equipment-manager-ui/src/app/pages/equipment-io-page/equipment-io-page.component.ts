@@ -4,8 +4,8 @@ import {ActionSheetController} from "@ionic/angular";
 import {CommonStateService} from "../../services/common-state.service";
 import {Subscription} from "rxjs";
 import {mergeMap} from "rxjs/operators";
-import {ItemResourceService} from "../../services/item-resource.service";
 import {Item} from "../../services/model";
+import {ItemResourceService} from "../../services/api-services/item-resource.service";
 
 @Component({
   selector: 'app-equipment-io-page',
@@ -36,7 +36,9 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
       )
     )
     this.activeRoute.queryParams.pipe(
-      mergeMap(params => this.itemService.getItemByCode(params.id))
+      mergeMap(params => {
+        return this.itemService.getItemByCode(params.id)
+      })
     ).subscribe(item =>{
       this.item = item;
       console.log("fetched item: ", item)

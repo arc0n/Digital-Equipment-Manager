@@ -4,9 +4,9 @@ import {Item} from "../../services/model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CommonStateService} from "../../services/common-state.service";
 import {ActionSheetController} from "@ionic/angular";
-import {ItemResourceService} from "../../services/item-resource.service";
 import {mergeMap} from "rxjs/operators";
 import {FormControl, FormGroup} from "@angular/forms";
+import {ItemResourceService} from "../../services/api-services/item-resource.service";
 
 @Component({
   selector: 'app-equipment-add-page',

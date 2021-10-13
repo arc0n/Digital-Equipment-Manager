@@ -1,5 +1,12 @@
 export interface Item{
-  id: string;
-  model: string,
-
+  "dynamic_id": string,
+  "serial_number": string,
+  "photo": string,
+  "description": string,
+  "status": "aktiv",
+  "item_model_id": number,
+  "model_name": string,
+  "item_type": string,
+  "item_type_id": number,
+  "item_type_description": string
 }

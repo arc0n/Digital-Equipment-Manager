@@ -22,7 +22,6 @@ jobs:
       - name: install frontend
         working-directory: ./digital-equipment-manager-ui
         run: npm install
-      run:
       - name: Stop all containers
         working-directory: ./server
         run: docker-compose down

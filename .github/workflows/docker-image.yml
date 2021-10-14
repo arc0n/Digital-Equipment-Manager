@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build the Docker image
-        run: sudo ./startup.sh
+        run: sudo ./server/startup.sh
 #      - name: Run unit tests
 #        run: docker exec -i nest_container npm test
       - name: Stop all containers

@@ -17,7 +17,7 @@ jobs:
         run: sudo sh buildDocker.sh
       - name: start container
         working-directory: ./server/scripts
-        run: sudo sh startup.sh
+        run: sudo sh startupCI.sh
       - name: Stop all containers
         working-directory: ./server
         run: docker-compose down

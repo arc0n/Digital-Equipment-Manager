@@ -15,5 +15,8 @@ jobs:
       - name: Build the Docker image
         working-directory: ./server/scripts
         run: sudo sh buildDocker.sh
+      - name: start container
+        run: sudo sh startup.sh
       - name: Stop all containers
+        working-directory: ./server
         run: docker-compose down

@@ -12,9 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Change dir
+      run: cd server/scripts
       - name: Build the Docker image
-        run: sudo ./server/startup.sh
-#      - name: Run unit tests
-#        run: docker exec -i nest_container npm test
+      run: sudo ./redeploy.sh
+      #      - name: Run unit tests
+      #        run: docker exec -i nest_container npm test
       - name: Stop all containers
         run: docker-compose down

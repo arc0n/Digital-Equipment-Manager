@@ -13,6 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build the Docker image
-        run: cd server/scripts && sudo ./buildDocker.sh
+        working-directory: ./server/scripts
+        run: sudo ./buildDocker.sh
       - name: Stop all containers
         run: docker-compose down

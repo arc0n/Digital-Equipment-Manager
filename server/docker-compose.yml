@@ -9,8 +9,8 @@ services:
       MYSQL_DATABASE: equipment_manager
     ports:
       - "3307:3306"
-    volumes:
-      - $MYSQLPATH
+#    volumes:
+#      - $MYSQLPATH
     healthcheck:
         test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
         timeout: 20s

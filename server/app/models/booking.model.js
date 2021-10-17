@@ -23,7 +23,7 @@ const sql = require("./db.js");
      sql.query("SELECT id FROM person WHERE dynamic_id = ?", [item.person_id], (err, res)=> {
       if (err) {
         console.log("error: ", err);
-        result(err, null);
+        result(err);
         return;
       }
 
@@ -32,7 +32,7 @@ const sql = require("./db.js");
         sql.query("SELECT id FROM item WHERE dynamic_id = ?", [item.item_id], (err, res)=> {
           if (err) {
             console.log("error: ", err);
-            result(err, null);
+            result(err);
             return;
           }
 
@@ -45,12 +45,12 @@ const sql = require("./db.js");
           sql.query("INSERT INTO borrowed_item SET ?", item, (err, res) => {
             if (err) {
               console.log("error: ", err);
-              result(err, null);
+              result(err);
               return;
             }
     
             console.log("Created borrowed_item: ", { id: res.insertId, ...item });
-            result(null, { id: res.insertId, ...item });
+            result(null, { result: {...item}, message: 'Item borrowed successfully!' });
           });
       });
     });
@@ -63,10 +63,11 @@ const sql = require("./db.js");
    * @returns {Undefined} Undefined
    */
    Booking.getAll = (result) => {
+    //WORKS BUT WORK IN PROGRESS (CHECKS and other stuff)
     sql.query("SELECT * FROM borrowed_item", (err, res) => {
       if (err) {
         console.log("error: ", err);
-        result(null, err);
+        result(err);
         return;
       }
   
@@ -87,33 +88,34 @@ const sql = require("./db.js");
       sql.query("SELECT id FROM item WHERE dynamic_id = ?", [dynamic_id], (err, res)=> {
         if (err) {
           console.log("error: ", err);
-          result(err, null);
+          result(err);
           return;
         }
 
         const item_id = res[0].id;
-
+        console.log(item_id);
         sql.query(
             "UPDATE borrowed_item " +
             "SET datetime_in = ? "  +
-            "WHERE person_id = ? "         +
+            "WHERE item_id = ? "         +
             "ORDER BY datetime_out DESC LIMIT 1",
             [Booking.dateNow(), item_id],
             (err, res) => {
             if (err) {
                 console.log("error: ", err);
-                result(null, err);
+                result(err);
                 return;
             }
         
             if (res.affectedRows == 0) {
-                // not found Borrowed Item with the id
-                result({ kind: "not_found" }, null);
-                return;
+              // not found Booking with the id
+              result({message: 'NOT_FOUND'});
+              return;
             }
+  
         
             console.log("The item was returned: ", { "serial_number": dynamic_id });
-            result({"serial_number": dynamic_id });
+            result(null, {"result": dynamic_id, "message": 'Item returned successfully!' });
             }
         );
       });

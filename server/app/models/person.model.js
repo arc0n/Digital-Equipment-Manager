@@ -26,12 +26,12 @@ const sql = require("./db.js");
     sql.query("INSERT INTO person SET ?", person, (err, res) => {
       if (err) {
         console.log("error: ", err);
-        result(err, null);
+        result(err);
         return;
       }
   
       console.log("Created person: ", { id: res.insertId, ...person });
-      result(null, { id: res.insertId, ...person });
+      result(null, { result: {...person}, message: 'Person created successfully.' });
     });
   };
 
@@ -47,7 +47,7 @@ const sql = require("./db.js");
       "INNER JOIN address ON person.address_id = address.id", (err, res) => {
       if (err) {
         console.log("error: ", err);
-        result(null, err);
+        result(err);
         return;
       }
   
@@ -69,11 +69,14 @@ const sql = require("./db.js");
         "WHERE person.dynamic_id= ?", [id], (err, res) => {
         if (err) {
           console.log("error: ", err);
-          result(null, err);
+          result(err);
           return;
         }
-    
-        console.log("Person: ", res);
+        if(res.length === 0) {
+          result({message: 'NOT_FOUND'});
+          return;
+        }
+
         result(null, res);
       });
     };
@@ -92,18 +95,18 @@ const sql = require("./db.js");
         (err, res) => {
           if (err) {
             console.log("error: ", err);
-            result(null, err);
+            result(err);
             return;
           }
     
           if (res.affectedRows == 0) {
             // not found Person with the id
-            result({ kind: "not_found" }, null);
+            result({message: 'NOT_FOUND'});
             return;
           }
     
           console.log("updated person: ", { ...person });
-          result(null, { ...person });
+          result(null, { result: {...person }, message: 'Person updated successfully!' });
         }
       );
     };
@@ -118,12 +121,12 @@ const sql = require("./db.js");
     sql.query("DELETE FROM person WHERE dynamic_id= ?", dynamic_id, (err, res) => {
       if (err) {
         console.log("error: ", err);
-        result(err, null);
+        result(err);
         return;
       }
   
-      console.log("Deleted person: ", { id: res.insertId, ...dynamic_id });
-      result(null, { id: res.insertId, ...dynamic_id });
+      console.log("Deleted person: ", { id: dynamic_id });
+      result(null, { result: {...dynamic_id}, message: 'Person deleted successfully!' });
     });
   };
 

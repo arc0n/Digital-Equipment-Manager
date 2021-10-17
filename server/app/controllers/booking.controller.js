@@ -1,13 +1,14 @@
 const Booking = require("../models/booking.model.js");
+const apiResponse = require("../api_response.js");
 
 // Create and Save a new Borrowed Item
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body) {
-      res.status(400).send({
-        message: "Content can not be empty!"
-      });
+    if (!req.body || (!req.body.item_id || !req.body.person_id )) {
+      apiResponse.sendResponse(res, {message: 'INVALID_REQUEST'}, 'Missing body parameters');
+      return;
     }
+
 
     // Creates a new Item
     const item = new Booking({
@@ -17,24 +18,14 @@ exports.create = (req, res) => {
   
     // Save Item in the database
     Booking.create(item, (err, data) => {
-      if (err)
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating new Borrowed Item."
-        });
-      else res.send(data);
+      apiResponse.sendResponse(res, err, data);
     });
   };
 
 //Get all Borrowed Items
 exports.getAll = (req, res) => {
   Booking.getAll((err, data) => {
-    if (err)
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving items."
-      });
-    else res.send(data);
+    apiResponse.sendResponse(res, err, data);
   });
 
 };
@@ -42,11 +33,6 @@ exports.getAll = (req, res) => {
 //Returns a borrowed item
 exports.return = (req, res) => {
   Booking.return(req.params.id, (err, data) => {
-    if (err)
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while updating items."
-      });
-    else res.send(data);
+    apiResponse.sendResponse(res, err, data);
   });
 };

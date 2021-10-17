@@ -1,7 +1,7 @@
 const mysql = require("mysql2");
 
 const MY_SQL_HOST = process.env.MYSQL_HOST || 'localhost'
-const MY_SQL_PORT = process.env.MYSQL_PORT || '3306'
+const MY_SQL_PORT = process.env.MYSQL_PORT || '3307'
 // Create a connection to the database
 const connection =  mysql.createConnection({
   host: MY_SQL_HOST,

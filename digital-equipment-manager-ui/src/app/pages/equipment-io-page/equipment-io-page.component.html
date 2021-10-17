@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons
+      *ngIf="this.showMobileMenu"
+      slot="start" class="equipment-back-button" (click)="this.router.navigate(['/tabs/dashboard'])">
+      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title>Mocked Equipment 123</ion-title>
+    <ion-buttons slot="primary" *ngIf="this.showMobileMenu">
+      <ion-button color="primary" (click)="onMenuClicked()">
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="equipment-page-io-vertical h-100">
+
+    <div class="equipment-page-io-horizontal flex-wrap flex-grow">
+
+      <div class="equipment-page-picture-wrapper">
+        Placeholder Picture
+      </div>
+
+
+      <div class="equipment-page-io-vertical equipment-page-info-container">
+        <div class="ion-padding">{{this.item?.id}}</div>
+        <div class="ion-padding">{{this.item?.model}}</div>
+      </div>
+    </div>
+
+    <div class="equipment-page-io-bottom-toolbar" [ngClass]="{
+    'ion-justify-content-between': !showMobileMenu
+    }">
+      <div *ngIf="!showMobileMenu">
+        <ion-button class="max-width-100" color="secondary"
+                    (click)="backButtonClicked()">
+          Zurück
+        </ion-button>
+      </div>
+        <ion-button class="max-width-100" color="primary"
+        (click)="ioButtonClicked()">
+          Aus/Eingabe
+        </ion-button>
+    </div>
+
+
+  </div>
+
+
+</ion-content>

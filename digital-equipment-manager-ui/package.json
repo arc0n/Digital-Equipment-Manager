@@ -24,6 +24,8 @@
     "@capacitor/haptics": "1.0.3",
     "@capacitor/keyboard": "1.0.3",
     "@ionic/angular": "^5.8.1",
+    "@ionic/storage-angular": "^3.0.6",
+    "jsqr": "^1.4.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"

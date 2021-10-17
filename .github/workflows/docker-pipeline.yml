@@ -1,0 +1,23 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ '**' ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        working-directory: ./server/scripts
+        run: sudo sh buildDocker.sh
+      - name: start container
+        working-directory: ./server/scripts
+        run: sudo sh startupCI.sh
+      - name: Stop all containers
+        working-directory: ./server
+        run: docker-compose down

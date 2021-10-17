@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Equipment
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Ausrüstung</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="equipment-page-vertical">
+    <div class="equipment-page-horizontal">
+      <p class="equipment-page-qr-header">
+        Bitte ID-Code unterhalb eingeben oder mittels "SCAN" button scannen. Kamera für scan benötigt.
+      </p>
+    </div>
+
+    <app-qr-control placeholder="QR ID or SCAN"
+                    (onQrClick)="onScanClicked($event)"
+                    (onContinueBtnClick)="onContinueBtnClick($event)"
+                    [showContinueButton]="true"
+    ></app-qr-control>
+
+    <div class="equipment-page-content-wrapper">
+      Placeholder
+    </div>
+  </div>
+
+
+
+
+
+</ion-content>

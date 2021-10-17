@@ -1,0 +1,27 @@
+import {ModuleWithProviders, NgModule} from '@angular/core';
+import {StorageService} from "./storage.service";
+import {IonicStorageModule} from "@ionic/storage-angular";
+import {AuthenticationService} from "./authentication.service";
+import {QrScanComponent} from "../components/qr-scan/qr-scan.component";
+import {QrScanControlComponent} from "../components/qr-scan-control/qr-scan-control.component";
+import {IonicModule} from "@ionic/angular";
+import {CommonModule} from "@angular/common";
+import {ReactiveFormsModule} from "@angular/forms";
+
+
+@NgModule({
+  imports: [IonicStorageModule, IonicModule, CommonModule, ReactiveFormsModule],
+  declarations: [QrScanComponent, QrScanControlComponent],
+  exports: [
+    QrScanComponent,
+    QrScanControlComponent
+  ]
+})
+export class SharedModule {
+  static forRoot(): ModuleWithProviders<any> {
+    return {
+      ngModule: SharedModule,
+      providers: [StorageService, AuthenticationService]
+    };
+  }
+}

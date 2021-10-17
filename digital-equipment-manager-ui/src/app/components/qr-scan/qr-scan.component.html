@@ -1,0 +1,13 @@
+<div class="qr-scanner-wrapper">
+  <div class="qr-scanner-video-element-container" >
+    <video #video [hidden]="!scanActive" width="100%"></video>
+    <canvas style="border: 1px solid green" #canvas hidden></canvas>
+  </div>
+
+  <div class="qr-scanner-horizontal">
+  <ion-button (click)="cancelBtnClicked()" color="light">cancel</ion-button>
+  </div>
+
+
+</div>
+

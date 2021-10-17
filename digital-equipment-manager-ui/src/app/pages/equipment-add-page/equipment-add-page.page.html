@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons
+      *ngIf="this.showMobileMenu"
+      slot="start" class="equipment-back-button" (click)="this.router.navigate(['/tabs/settings'])">
+      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title>Gegenstand hinzufügen</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Formular -->
+  <div class="equipment-add-form-wrapper">
+    <form class="equipment-add-form" [formGroup]="addItemForm" (ngSubmit)="onSubmit($event)">
+      <ion-list>
+        <ion-item>
+          <ion-icon name="journal" class="ion-margin"></ion-icon>
+          <ion-label>Type</ion-label>
+          <ion-select formControlName="itemType" interface="popover" placeholder="Wähle Type">
+            <ion-select-option value="w">Waffe</ion-select-option>
+            <ion-select-option value="a">Ausrüstung</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="car" class="ion-margin"></ion-icon>
+          <ion-label>Modell</ion-label>
+          <ion-select formControlName="itemModel" interface="popover" placeholder="Wähle Modell">
+            <ion-select-option value="1">Dynamic Entry 1</ion-select-option>
+            <ion-select-option value="2">Dynamic Entry 2</ion-select-option>
+            <ion-select-option value="3">Dynamic Entry 3</ion-select-option>
+            <ion-select-option value="4">Dynamic Entry 4</ion-select-option>
+            <ion-select-option value="5">Dynamic Entry 5</ion-select-option>
+            <ion-select-option value="6">Dynamic Entry 6</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item class="equipment-add-form-item">
+          <ion-icon name="keypad" class="ion-margin"></ion-icon>
+          <ion-label>Seriennummer</ion-label>
+          <ion-input placeholder="Seriennummer"  formControlName="itemSN"></ion-input>
+        </ion-item>
+        <ion-item class="equipment-add-form-item">
+          <ion-icon name="chatbox-ellipses" class="ion-margin"></ion-icon>
+          <ion-label>Kommentar</ion-label>
+          <ion-input placeholder="Kommentar"  formControlName="itemComment"></ion-input>
+        </ion-item>
+      </ion-list>
+    </form>
+  </div>
+
+
+  <div class="equipment-add-bottom-toolbar" [ngClass]="{'ion-justify-content-between': !showMobileMenu}">
+    <div *ngIf="!showMobileMenu">
+      <ion-button class="max-width-100" color="secondary"
+                  (click)="backButtonClicked()">
+        Zurück
+      </ion-button>
+    </div>
+      <ion-button class="max-width-100" color="danger" (click)="resetForm()">
+        Reset Formular
+      </ion-button>
+      <ion-button class="max-width-100" color="primary" type="submit">
+        Weiter
+      </ion-button>
+  </div>
+</ion-content>

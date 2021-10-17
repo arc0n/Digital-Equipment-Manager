@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>employee-dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="equipment-page-vertical">
+    <div class="employee-page-horizontal">
+      <p class="employee-page-qr-header">
+        Lorem ipsum dolor sit amet,
+        consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
+      </p>
+    </div>
+
+    <app-qr-control placeholder="Qr code scannen oder eintippen"
+                    (onQrClick)="onScanClicked($event)"
+                    [showContinueButton]="false"
+                    (onValueInputChange)="onValueChange($event)"
+    ></app-qr-control>
+
+    <div class="employee-page-content-wrapper">
+      Placeholder for list of employees
+    </div>
+  </div>
+</ion-content>

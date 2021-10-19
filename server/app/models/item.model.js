@@ -25,12 +25,12 @@ const sql = require("./db.js");
     sql.query("INSERT INTO item SET ?", item, (err, res) => {
       if (err) {
         console.log("error: ", err);
-        result(err, null);
+        result(err);
         return;
       }
   
       console.log("Created item: ", { id: res.insertId, ...item });
-      result(null, { id: res.insertId, ...item });
+      result(null, { result: {...item}, message: 'Item created successfully.' });
     });
   };
 
@@ -46,7 +46,7 @@ const sql = require("./db.js");
       "INNER JOIN item_type ON item_type.id = item_model.item_type_id", (err, res) => {
       if (err) {
         console.log("error: ", err);
-        result(null, err);
+        result(err);
         return;
       }
   
@@ -69,10 +69,15 @@ const sql = require("./db.js");
       "WHERE item.dynamic_id= ?", [id], (err, res) => {
         if (err) {
           console.log("error: ", err);
-          result(null, err);
+          result(err);
           return;
         }
     
+        if(res.length === 0) {
+          result({message: 'NOT_FOUND'});
+          return;
+        }
+
         console.log("Item: ", res);
         result(null, res);
       });
@@ -92,18 +97,18 @@ const sql = require("./db.js");
         (err, res) => {
           if (err) {
             console.log("error: ", err);
-            result(null, err);
+            result(err);
             return;
           }
     
           if (res.affectedRows == 0) {
-            // not found Item with the id
-            result({ kind: "not_found" }, null);
+            // not found Person with the id
+            result({message: 'NOT_FOUND'});
             return;
           }
-    
+
           console.log("updated item: ", { ...item });
-          result(null, { ...item });
+          result(null, { result: {...item }, message: 'Item updated successfully!' });
         }
       );
     };
@@ -118,12 +123,18 @@ const sql = require("./db.js");
     sql.query("DELETE FROM item WHERE dynamic_id= ?", id, (err, res) => {
       if (err) {
         console.log("error: ", err);
-        result(err, null);
+        result(err);
+        return;
+      }
+
+      if (res.affectedRows == 0) {
+        // not found Person with the id
+        result({message: 'NOT_FOUND'});
         return;
       }
   
-      console.log("Deleted item: ", { id: res.insertId, ...id });
-      result(null, { id: res.insertId, ...id });
+      console.log("Deleted item: ", { id: id });
+      result(null, { result: id, message:'Item deleted successfully!' });
     });
   };
 

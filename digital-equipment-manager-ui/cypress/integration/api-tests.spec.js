@@ -8,7 +8,6 @@ describe('api-tests', () => {
       .then((response) => {
         expect(response).property('status').to.equal(200)
        //expect(response).property('body').to.have.property('length').and.be.gt(10)
-
         cy.wrap(response.body.result.length).should('be.greaterThan', 10)
       })
 

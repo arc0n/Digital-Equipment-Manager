@@ -20,8 +20,10 @@ jobs:
         run: sudo sh startupCI.sh
       - name: install UI packages
         run: cd digital-equipment-manager-ui && npm install
+      - name: install yarn
+        run: npm i yarn
       - name: run cy tests
-        run: cd digital-equipment-manager-ui && ./node_modules/.bin/cypress run --headless
+        run: cd digital-equipment-manager-ui && yarn concurrently "npm start" "yarn cypress run --headless"  -s -k
       - name: Stop all containers
         working-directory: ./server
         run: docker-compose down

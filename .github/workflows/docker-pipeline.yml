@@ -23,7 +23,7 @@ jobs:
       - name: install yarn
         run: npm i yarn
       - name: run cy tests
-        run: cd digital-equipment-manager-ui && yarn concurrently "npm start" "yarn cypress run --headless"  -s -k
+        run: cd digital-equipment-manager-ui && yarn concurrently "npm start" "wait-on http://localhost:4200 && yarn cypress run --headless"  -s -k
       - name: Stop all containers
         working-directory: ./server
         run: docker-compose down

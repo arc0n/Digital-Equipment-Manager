@@ -19,7 +19,7 @@ jobs:
         working-directory: ./server/scripts
         run: sudo sh startupCI.sh
       - name: execute ddl
-        run: cd server/scripts &&  ./executeSQLStatements.sh
+        run: cd server/scripts && sh executeSQLStatements.sh
       - name: install UI packages
         run: cd digital-equipment-manager-ui && npm install
       - name: install yarn

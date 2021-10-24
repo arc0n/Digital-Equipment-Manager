@@ -1,8 +1,8 @@
 /// <reference types="cypress" />
 
-describe('apitests', () => {
+describe('api-tests', () => {
 
-  it('displays two todo items by default', () => {
+  it('response result not empty', () => {
 
     cy.request('http://localhost:3000/item/')
       .then((response) => {

@@ -18,6 +18,10 @@ jobs:
       - name: start container
         working-directory: ./server/scripts
         run: sudo sh startupCI.sh
+      - name: install UI packages
+        run: cd digital-equipment-manager-ui && npm install
+      - name: run cy tests
+        run: cd digital-equipment-manager-ui && ./node_modules/.bin/cypress run --headless
       - name: Stop all containers
         working-directory: ./server
         run: docker-compose down

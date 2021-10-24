@@ -7,7 +7,7 @@ import {Item} from "../../services/model";
 import {Observable} from "rxjs";
 
 @Component({
-  selector: 'app-tab1',
+  selector: 'equipment-dashboard',
   templateUrl: 'equipment-dashboard-page.component.html',
   styleUrls: ['equipment-dashboard-page.component.scss']
 })

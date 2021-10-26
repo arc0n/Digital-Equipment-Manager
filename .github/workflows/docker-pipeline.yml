@@ -12,7 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build the Docker image
+      - uses: actions/setup-node@v2
+      - name: build Docker image
         working-directory: ./server/scripts
         run: sudo sh buildDocker.sh
       - name: start container

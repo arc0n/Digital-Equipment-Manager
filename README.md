@@ -7,13 +7,12 @@ Start the app with `$ npm start` within the same directory and navigate to http:
 
 ### Run and build server
 You have to use linux or git bash for this section!
-
 Create a folder "mysql" somewhere in your filesystem, e.g. at <yourUser>/AppData/mysql.
+Install Docker(for Windows you will need a WSL2 Linux kernel installed)
 
 #### Setting the env variables
 In your user home folder, create a .bash_profile with the env variable:
-`# digital-equipment-manager
-export MYSQLPATH=~/AppData/mysql` where the path must match your created folder.
+`export MYSQLPATH=~/AppData/mysql` where the path must match your created folder.
 If you use your IntelliJ integrated console, you should also put the env variable in the settings of IntelliJ.
 
 #### Building the image and start container

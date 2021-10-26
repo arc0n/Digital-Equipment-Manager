@@ -23,7 +23,6 @@ describe('api-tests', () => {
     cy.request('http://localhost:3000/item/4z8k9a6bqx7u7ad')
       .then((response) => {
         expect(response).property('status').to.equal(200)
-        cy.wrap(response.body.result.length).should('equal', 1)
        // cy.wrap(response.body.result.dynamic_id).should('equal', '4z8k9a6bqx7u7ad')
         expect(response.body.result.dynamic_id).to.equal('4z8k9a6bqx7u7ad')
       })
@@ -73,8 +72,7 @@ describe('api-tests', () => {
       cy.request('http://localhost:3000/item/' + id)
         .then((response) => {
           expect(response).property('status').to.equal(200)
-          cy.wrap(response.body.result.length).should('equal', 1)
-          cy.wrap(response.body.result[0].dynamic_id).should('equal', id)
+          cy.wrap(response.body.result.dynamic_id).should('equal', id)
         })
     })
   })

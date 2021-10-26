@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {ActionSheetController} from "@ionic/angular";
+import {ActionSheetController, ToastController} from "@ionic/angular";
 import {CommonStateService} from "../../services/common-state.service";
 import {Subscription} from "rxjs";
 import {mergeMap} from "rxjs/operators";
@@ -25,7 +25,8 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
               public state: CommonStateService,
               private actionSheetController: ActionSheetController,
               private activeRoute: ActivatedRoute,
-              private itemService: ItemResourceService
+              private itemService: ItemResourceService,
+              private toastController: ToastController
               ) {
   }
 
@@ -37,9 +38,21 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
     )
     this.activeRoute.queryParams.pipe(
       mergeMap(params => {
+        console.log(params)
         return this.itemService.getItemByCode(params.id)
       })
-    ).subscribe(item =>{
+    ).subscribe(async (item) =>{
+      if(!item) {
+        const toast = await this.toastController.create({
+          position: "bottom",
+          duration: 2000,
+          message: "Es wurde keine Gerät mit diesem Code gefunden",
+          color: "danger"
+        })
+        await this.router.navigate(['/tabs/dashboard']);
+        toast.present();
+        return
+      }
       this.item = item;
       console.log("fetched item: ", item)
     });

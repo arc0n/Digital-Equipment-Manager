@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
-import {ModalController} from "@ionic/angular";
+import {ModalController, ToastController} from "@ionic/angular";
 import {QrScanComponent} from "../../components/qr-scan/qr-scan.component";
 import {ItemResourceService} from "../../services/api-services/item-resource.service";
 import {Item} from "../../services/model";
@@ -18,7 +18,8 @@ export class EquipmentDashboardPage {
 
   constructor(private router: Router,
               private modalController: ModalController,
-              public itemService: ItemResourceService) {
+              public itemService: ItemResourceService,
+              private toastController: ToastController) {
   }
 
   onScanClicked(event: any) {
@@ -48,8 +49,18 @@ export class EquipmentDashboardPage {
 
   onContinueBtnClick(inputValue: string) {
     if(!inputValue) return;
-    return this.itemService.getItemByCode(inputValue).subscribe((item) => {
-      if(!item) return;
+    return this.itemService.getItemByCode(inputValue).subscribe(async(item) => {
+      console.log(item)
+      if(!item) {
+        const toast = await this.toastController.create({
+          position: "bottom",
+          duration: 2000,
+          message: "Es wurde keine Gerät mit diesem Code gefunden",
+          color: "danger"
+        })
+        toast.present();
+        return
+      }
       this.navigateToEquipmentPage(item);
     })
   }

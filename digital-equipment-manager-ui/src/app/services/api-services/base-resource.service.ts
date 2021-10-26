@@ -36,11 +36,7 @@ export class BaseResourceService<T> {
         return of(null);
       }),
       map(resp => {
-        if(resp === []) {
-          console.log("response was empty")
-          return null;
-        }
-        return resp as T
+        return resp.result as T
       })
     )
   }

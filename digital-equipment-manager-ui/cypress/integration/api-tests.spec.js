@@ -37,7 +37,7 @@ describe('api-tests', () => {
     })
       .then((response) => {
         expect(response).property('status').to.equal(404)
-        cy.wrap(response.body.message).should('equal', 'NOT_FOUND')
+        cy.wrap(response.body.result).should('equal', 'NOT_FOUND')
       })
 
   })
@@ -65,10 +65,10 @@ describe('api-tests', () => {
     })
       .then((response) => {
         expect(response).property('status').to.equal(200)
-        cy.wrap(response.body.message).should('equal', 'Item created successfully.')
+        cy.wrap(response.body.result).should('have.a.property', 'dynamic_id')
         resolveFn(response.body.result.dynamic_id)
       })
-    postOngoing.then((id)=>{
+    cy.wrap(postOngoing).then((id)=>{
       cy.request('http://localhost:3000/item/' + id)
         .then((response) => {
           expect(response).property('status').to.equal(200)

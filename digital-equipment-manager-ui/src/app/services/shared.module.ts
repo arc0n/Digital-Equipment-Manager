@@ -9,6 +9,7 @@ import {CommonModule} from "@angular/common";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ItemResourceService} from "./api-services/item-resource.service";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {PersonResourceService} from "./api-services/person-resource.service";
 
 
 @NgModule({
@@ -23,7 +24,7 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders<any> {
     return {
       ngModule: SharedModule,
-      providers: [StorageService, AuthenticationService, ItemResourceService]
+      providers: [StorageService, AuthenticationService, ItemResourceService, PersonResourceService]
     };
   }
 }

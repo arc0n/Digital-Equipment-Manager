@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable, of} from "rxjs";
-import {Item} from "../model";
+import {Item, Person} from "../model";
 import {BaseResourceService} from "./base-resource.service";
 import {HttpClient} from "@angular/common/http";
 
@@ -17,5 +17,8 @@ export class ItemResourceService extends BaseResourceService<Item>{
   }
   getAllItems(): Observable<Item[]> {
     return this.getList({});
+  }
+  postItem(item: Item): Observable<Item>{
+    return this.post(item, {})
   }
 }

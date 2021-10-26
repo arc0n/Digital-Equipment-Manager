@@ -39,11 +39,13 @@ export class EquipmentDashboardPage {
   }
 
   modalResult(value: string) {
-
     console.log("Modal result: ", value)
     this.itemService.getItemByCode(value).subscribe((item) => {
+      if(!!item){
       this.modal.dismiss();
       this.navigateToEquipmentPage(item);
+
+      }
     })
   }
 

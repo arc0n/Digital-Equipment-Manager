@@ -41,10 +41,11 @@ const sql = require("./db.js");
    * @param {Function} result Callback
    * @returns {Undefined} Undefined
    */
-  Person.getAll = (result) => {
+  Person.getAll = (params, result) => {
+    const conditions = Person._buildConditions(params);
     sql.query(
       "SELECT * FROM person " + 
-      "INNER JOIN address ON person.address_id = address.id", (err, res) => {
+      "INNER JOIN address ON person.address_id = address.id WHERE " + conditions.where, conditions.values, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err);
@@ -77,7 +78,7 @@ const sql = require("./db.js");
           return;
         }
 
-        result(null, res);
+        result(null, res[0]);
       });
     };
 
@@ -129,5 +130,37 @@ const sql = require("./db.js");
       result(null, { result: {...dynamic_id}, message: 'Person deleted successfully!' });
     });
   };
+
+
+  /**
+   * Builds Query conditions
+   * @private
+   * @param {Object} params Object with api request parameters
+   * @returns {Object} Object with condition and condition values.
+   */
+   Person._buildConditions = (params) => {
+    let conditions = [],
+        values = [];
+
+    if (params.firstname !== undefined) {
+      conditions.push("firstname LIKE ?");
+      values.push("%" + params.firstname + "%");
+    }
+
+    if (params.lastname !== undefined) {
+      conditions.push("lastname LIKE ?");
+      values.push("%" + params.lastname + "%");
+    }
+
+    if (params.sex !== undefined) {
+      conditions.push("sex = ?");
+      values.push(params.sex);
+    }
+
+    return {
+      where: conditions.length ? conditions.join(' AND ') : '1',
+      values: values
+    };
+  }
 
 module.exports = Person;

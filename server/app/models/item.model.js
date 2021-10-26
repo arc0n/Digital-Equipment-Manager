@@ -39,11 +39,12 @@ const sql = require("./db.js");
    * @param {Function} result Callback
    * @returns {Undefined} Undefined
    */
-  Item.getAll = (result) => {
+  Item.getAll = (params, result) => {
+    const conditions = Item._buildConditions(params);
     sql.query(
       "SELECT item.*, item_model.name AS model_name, item_type.name AS item_type, item_type.id AS item_type_id, item_type.description AS item_type_description FROM item " +
       "INNER JOIN item_model ON item_model.id = item.item_model_id " + 
-      "INNER JOIN item_type ON item_type.id = item_model.item_type_id", (err, res) => {
+      "INNER JOIN item_type ON item_type.id = item_model.item_type_id WHERE " + conditions.where, conditions.values, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err);
@@ -137,5 +138,36 @@ const sql = require("./db.js");
       result(null, { result: id, message:'Item deleted successfully!' });
     });
   };
+
+  /**
+   * Builds Query conditions
+   * @private
+   * @param {Object} params Object with api request parameters
+   * @returns {Object} Object with condition and condition values.
+   */
+  Item._buildConditions = (params) => {
+    let conditions = [],
+        values = [];
+
+    if (params.status !== undefined) {
+      conditions.push("status = ?");
+      values.push(params.status);
+    }
+
+    if (params.item_model_id !== undefined) {
+      conditions.push("item_model_id = ?");
+      values.push(parseInt(params.item_model_id));
+    }
+
+    if (params.item_type_id !== undefined) {
+      conditions.push("item_type_id = ?");
+      values.push(parseInt(params.item_type_id));
+    }
+
+    return {
+      where: conditions.length ? conditions.join(' AND ') : '1',
+      values: values
+    };
+  }
 
 module.exports = Item;

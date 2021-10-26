@@ -24,17 +24,20 @@ describe('api-tests', () => {
       .then((response) => {
         expect(response).property('status').to.equal(200)
         cy.wrap(response.body.result.length).should('equal', 1)
-        cy.wrap(response.body.result[0].dynamic_id).should('equal', '4z8k9a6bqx7u7ad')
-        expect(response.body.result[0].dynamic_id).to.equal('4z8k9a6bqx7u7ad')
+       // cy.wrap(response.body.result.dynamic_id).should('equal', '4z8k9a6bqx7u7ad')
+        expect(response.body.result.dynamic_id).to.equal('4z8k9a6bqx7u7ad')
       })
 
   })
 
   it('item by invalid id response NOT_FOUND', () => {
 
-    cy.request('http://localhost:3000/item/bullshit')
+    cy.request({
+      url: 'http://localhost:3000/item/bullshit',
+      failOnStatusCode: false
+    })
       .then((response) => {
-       // expect(response).property('status').to.equal(404)
+        expect(response).property('status').to.equal(404)
         cy.wrap(response.body.message).should('equal', 'NOT_FOUND')
       })
 
@@ -52,12 +55,12 @@ describe('api-tests', () => {
       body:{
         "serial_number": "12345",
         "photo": "/",
-        "description": "",
+        "description": "some desc",
         "status": "aktiv",
-        "item_model_id": 1,
+        "item_model_id": 1, // TODO should work without
         "model_name": "S-12",
         "item_type": "Schlagstock",
-        "item_type_id": 1,
+        "item_type_id": 1, // TODO should work without
         "item_type_description": "Ein langes zylindrisches Instrument."
       }
     })

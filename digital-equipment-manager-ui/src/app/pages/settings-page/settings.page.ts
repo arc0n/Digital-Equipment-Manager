@@ -39,4 +39,8 @@ export class SettingsPage implements OnInit, OnDestroy{
   onAddItemClicked() {
     this.router.navigate(['/equipment-add-page'])
   }
+
+  onAddEmployeeClicked() {
+    this.router.navigate(['/employee-add-page'])
+  }
 }

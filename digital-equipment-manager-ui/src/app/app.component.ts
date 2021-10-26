@@ -6,7 +6,7 @@ import {AuthenticationService} from "./services/authentication.service";
 
 const MAIN_PAGE_LINKS: EquipmentRouterLink[] = [
   {title: 'Home', url: '/tabs/dashboard', icon: 'home', secondary: false},
-  {title: 'Mitarbeiter anlegen', url: '/ma-add-page', icon: 'person-add', secondary: true},
+  {title: 'Mitarbeiter anlegen', url: '/employee-add-page', icon: 'person-add', secondary: true},
   {title: 'Gegenstand anlegen', url: '/equipment-add-page', icon: 'duplicate', secondary: true},
   {title: 'Geräteliste', url: '/nux1', icon: 'briefcase', secondary: true}
 ];

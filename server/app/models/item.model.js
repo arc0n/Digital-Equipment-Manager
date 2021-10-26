@@ -74,12 +74,12 @@ const sql = require("./db.js");
         }
     
         if(res.length === 0) {
-          result({message: 'NOT_FOUND'});
+          result({message: 'NOT_FOUND', code: 404});
           return;
         }
 
         console.log("Item: ", res);
-        result(null, res);
+        result(null, res[0]);
       });
     };
 
@@ -103,7 +103,7 @@ const sql = require("./db.js");
     
           if (res.affectedRows == 0) {
             // not found Person with the id
-            result({message: 'NOT_FOUND'});
+            result({message: 'NOT_FOUND', code: 404});
             return;
           }
 
@@ -129,7 +129,7 @@ const sql = require("./db.js");
 
       if (res.affectedRows == 0) {
         // not found Person with the id
-        result({message: 'NOT_FOUND'});
+        result({message: 'NOT_FOUND', code: 404});
         return;
       }
   

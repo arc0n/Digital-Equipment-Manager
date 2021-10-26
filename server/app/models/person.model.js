@@ -73,7 +73,7 @@ const sql = require("./db.js");
           return;
         }
         if(res.length === 0) {
-          result({message: 'NOT_FOUND'});
+          result({message: 'NOT_FOUND', code: 404});
           return;
         }
 
@@ -101,7 +101,7 @@ const sql = require("./db.js");
     
           if (res.affectedRows == 0) {
             // not found Person with the id
-            result({message: 'NOT_FOUND'});
+            result({message: 'NOT_FOUND', code: 404});
             return;
           }
     

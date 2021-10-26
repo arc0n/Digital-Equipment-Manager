@@ -3,17 +3,12 @@ exports.sendResponse = (res, error, result) => {
   const message = (result && result.message) ? result.message : null;
 
   if(error) {
-    res.send({
-      code: res.statusCode,
-      error: true,
-      message: (message) ? message : error.message || "Some error occurred.",
-      result: data
+    const errcode = (error.code) ? error.code : 500;
+    res.status(errcode).send({
+      result: (message) ? message : error.message || "UNKNOWN_ERROR",
     });
   } else {
-    res.send({
-      code: res.statusCode,
-      message: message,
-      error: false,
+    res.status(res.statusCode).send({
       result: data
     });
   }

@@ -109,7 +109,7 @@ const sql = require("./db.js");
         
             if (res.affectedRows == 0) {
               // not found Booking with the id
-              result({message: 'NOT_FOUND'});
+              result({message: 'NOT_FOUND', code: 404});
               return;
             }
   

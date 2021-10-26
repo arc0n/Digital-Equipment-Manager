@@ -31,7 +31,7 @@ exports.create = (req, res) => {
 
 //Get all Items
 exports.getAll = (req, res) => {
-  Item.getAll((err, data) => {
+  Item.getAll(req.query, (err, data) => {
     apiResponse.sendResponse(res, err, data);
   });
 };

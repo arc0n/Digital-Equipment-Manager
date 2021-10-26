@@ -8,7 +8,7 @@ import {Observable} from "rxjs";
 import {installTempPackage} from "@angular/cli/utilities/install-package";
 
 @Component({
-  selector: 'app-tab1',
+  selector: 'equipment-dashboard',
   templateUrl: 'equipment-dashboard-page.component.html',
   styleUrls: ['equipment-dashboard-page.component.scss']
 })

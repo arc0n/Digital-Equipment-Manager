@@ -24,7 +24,7 @@ exports.create = (req, res) => {
 
 //Get all Borrowed Items
 exports.getAll = (req, res) => {
-  Booking.getAll((err, data) => {
+  Booking.getAll(req.query, (err, data) => {
     apiResponse.sendResponse(res, err, data);
   });
 

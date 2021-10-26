@@ -57,14 +57,20 @@ const sql = require("./db.js");
   };
 
   /**
-   * Lists all borrowed items.
+   * Lists all bookings.
    * @param {Object} item Booking to create
    * @param {Function} result Callback
    * @returns {Undefined} Undefined
    */
-   Booking.getAll = (result) => {
-    //WORKS BUT WORK IN PROGRESS (CHECKS and other stuff)
-    sql.query("SELECT * FROM borrowed_item", (err, res) => {
+   Booking.getAll = (params, result) => {
+    const conditions = Booking._buildConditions(params);
+
+    sql.query("SELECT borrowed_item.id AS booking_id, datetime_out, datetime_in, p.dynamic_id as person_id, p.firstname, p.lastname, i.dynamic_id as item_id, " +
+    "im.id AS model_id, im.name AS model_name, it.id AS item_type_id, it.name AS item_type FROM borrowed_item " +
+    "INNER JOIN person p ON p.id = borrowed_item.person_id " +
+    "INNER JOIN item i ON i.id = borrowed_item.item_id " +
+    "INNER JOIN item_model im ON im.id = i.item_model_id " + 
+    "INNER JOIN item_type it ON it.id = im.item_type_id WHERE " + conditions.where, conditions.values, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err);
@@ -109,7 +115,7 @@ const sql = require("./db.js");
         
             if (res.affectedRows == 0) {
               // not found Booking with the id
-              result({message: 'NOT_FOUND'});
+              result({message: 'NOT_FOUND', code: 404});
               return;
             }
   
@@ -121,9 +127,41 @@ const sql = require("./db.js");
       });
     };
 
-Booking.dateNow = () => {
-  return new Date().toISOString().slice(0, 19).replace('T', ' ');
-}
+    Booking.dateNow = () => {
+      return new Date().toISOString().slice(0, 19).replace('T', ' ');
+    }
+
+  /**
+   * Builds Query conditions
+   * @private
+   * @param {Object} params Object with api request parameters
+   * @returns {Object} Object with condition and condition values.
+   */
+   Booking._buildConditions = (params) => {
+    let conditions = [],
+        values = [];
+
+   if (params.borrowed !== undefined && params.borrowed == 'true') {
+      conditions.push("datetime_in IS NULL");
+      values.push("");
+    }
+
+   if (params.item_id !== undefined) {
+      conditions.push("i.dynamic_id = ?");
+      values.push(params.item_id);
+    }
+
+    if (params.person_id !== undefined) {
+      conditions.push("p.dynamic_id = ?");
+      values.push(params.person_id);
+    }
+
+    return {
+      where: conditions.length ? conditions.join(' AND ') : '1',
+      values: values
+    };
+  }
+
 
 
 module.exports = Booking;

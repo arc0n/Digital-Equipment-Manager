@@ -32,7 +32,7 @@ exports.create = (req, res) => {
 
 //Get all Persons
 exports.getAll = (req, res) => {
-  Person.getAll((err, data) => {
+  Person.getAll(req.query, (err, data) => {
     apiResponse.sendResponse(res, err, data);
   });
 };

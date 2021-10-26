@@ -92,9 +92,12 @@ const sql = require("./db.js");
    * @returns {Undefined} Undefined
    */
     Item.updateById = (id, item, result) => {
+      const newValues = Item._buildConditions(item, ', ');
+      newValues.values.push(id);
+
       sql.query(
-        "UPDATE item SET serial_number = ?, photo = ?, description = ?, status = ?, item_model_id = ?, dynamic_id = ? WHERE dynamic_id = ?",
-        [item.serial_number, item.photo, item.description, item.status, item.item_model_id, item.dynamic_id, id],
+        "UPDATE item SET "+ newValues.where + " WHERE dynamic_id = ?",
+        newValues.values,
         (err, res) => {
           if (err) {
             console.log("error: ", err);
@@ -109,7 +112,7 @@ const sql = require("./db.js");
           }
 
           console.log("updated item: ", { ...item });
-          result(null, { result: {...item }, message: 'Item updated successfully!' });
+          result(null, { result: 'UPDATE_SUCCESSFUL', message: 'Item updated successfully!' });
         }
       );
     };
@@ -145,7 +148,7 @@ const sql = require("./db.js");
    * @param {Object} params Object with api request parameters
    * @returns {Object} Object with condition and condition values.
    */
-  Item._buildConditions = (params) => {
+  Item._buildConditions = (params, delimeter = ' AND ') => {
     let conditions = [],
         values = [];
 
@@ -164,8 +167,33 @@ const sql = require("./db.js");
       values.push(parseInt(params.item_type_id));
     }
 
+    if (params.serial_number !== undefined) {
+      conditions.push("serial_number = ?");
+      values.push(params.serial_number);
+    }
+
+    if (params.dynamic_id !== undefined) {
+      conditions.push("dynamic_id = ?");
+      values.push(params.dynamic_id);
+    }
+
+    if (params.description !== undefined) {
+      conditions.push("description = ?");
+      values.push(params.description);
+    }
+
+    if (params.photo !== undefined) {
+      conditions.push("photo = ?");
+      values.push(params.photo);
+    }
+
+    if (params.status !== undefined) {
+      conditions.push("status = ?");
+      values.push(params.status);
+    }
+
     return {
-      where: conditions.length ? conditions.join(' AND ') : '1',
+      where: conditions.length ? conditions.join(delimeter) : '1',
       values: values
     };
   }

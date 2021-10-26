@@ -3,7 +3,7 @@ export interface Item {
   "serial_number": string,
   "photo": string,
   "description": string,
-  "status": "aktiv",
+  "status": string,
   "item_model_id": number,
   "model_name": string,
   "item_type": string,
@@ -12,7 +12,6 @@ export interface Item {
 }
 
 export interface Person {
-  "id": 1,
   "firstname": string,
   "lastname": string,
   "birthdate": Date,

@@ -4,6 +4,8 @@ import { ResolveEnd, Router} from "@angular/router";
 import {filter} from "rxjs/operators";
 import {AuthenticationService} from "./services/authentication.service";
 
+
+
 const MAIN_PAGE_LINKS: EquipmentRouterLink[] = [
   {title: 'Home', url: '/tabs/dashboard', icon: 'home', secondary: false},
   {title: 'Mitarbeiter anlegen', url: '/employee-add-page', icon: 'person-add', secondary: true},
@@ -33,6 +35,8 @@ export interface EquipmentRouterLink {
 export class AppComponent implements OnInit {
 
   public appPages: EquipmentRouterLink[] = MAIN_PAGE_LINKS
+  public mytime: moment.MomentInput;
+  mydate: moment.MomentInput;
 
   constructor(
     private commonStateService: CommonStateService,
@@ -60,4 +64,5 @@ export class AppComponent implements OnInit {
       this.router.navigate(['/login']);
     });
   }
+
 }

@@ -11,7 +11,7 @@ const sql = require("./db.js");
     this.birthdate = person.birthdate;
     this.sex = person.sex;
     this.id_card = person.id_card;
-    this.address_id = person.address_id;
+    this.address_id = null;
     this.dynamic_id = person.dynamic_id;
   }
 };
@@ -22,16 +22,26 @@ const sql = require("./db.js");
    * @param {Function} result Callback
    * @returns {Undefined} Undefined
    */
-   Person.create = (person, result)=> {
-    sql.query("INSERT INTO person SET ?", person, (err, res) => {
+   Person.create = (person, address, result)=> {
+    sql.query("INSERT INTO address SET ?", address, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err);
         return;
       }
-  
-      console.log("Created person: ", { id: res.insertId, ...person });
-      result(null, { result: {...person}, message: 'Person created successfully.' });
+
+      person.address_id = res.insertId;
+
+        sql.query("INSERT INTO person SET ?", person, (err, res) => {
+          if (err) {
+            console.log("error: ", err);
+            result(err);
+            return;
+          }
+      
+          console.log("Created person: ", { id: res.insertId, ...person });
+          result(null, { result: {id: person.dynamic_id}, message: 'Person created successfully.' });
+        });
     });
   };
 
@@ -67,7 +77,7 @@ const sql = require("./db.js");
       sql.query(
         "SELECT * FROM person " +
         "INNER JOIN address ON person.address_id = address.id " +
-        "WHERE person.dynamic_id= ?", [id], (err, res) => {
+        "WHERE person.dynamic_id= ? OR CONCAT_WS(' ', firstname, lastname) LIKE ? ", [id,'%'+id+'%'], (err, res) => {
         if (err) {
           console.log("error: ", err);
           result(err);
@@ -142,14 +152,9 @@ const sql = require("./db.js");
     let conditions = [],
         values = [];
 
-    if (params.firstname !== undefined) {
-      conditions.push("firstname LIKE ?");
-      values.push("%" + params.firstname + "%");
-    }
-
-    if (params.lastname !== undefined) {
-      conditions.push("lastname LIKE ?");
-      values.push("%" + params.lastname + "%");
+    if (params.name !== undefined) {
+      conditions.push("CONCAT_WS(' ', firstname, lastname, dynamic_id) LIKE ?");
+      values.push("%" + params.name + "%");
     }
 
     if (params.sex !== undefined) {

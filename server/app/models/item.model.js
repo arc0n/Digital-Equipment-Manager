@@ -30,7 +30,7 @@ const sql = require("./db.js");
       }
   
       console.log("Created item: ", { id: res.insertId, ...item });
-      result(null, { result: {...item}, message: 'Item created successfully.' });
+      result(null, { result: {id: item.dynamic_id}, message: 'Item created successfully.' });
     });
   };
 

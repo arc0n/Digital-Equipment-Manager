@@ -50,7 +50,7 @@ const sql = require("./db.js");
             }
     
             console.log("Created borrowed_item: ", { id: res.insertId, ...item });
-            result(null, { result: {...item}, message: 'Item borrowed successfully!' });
+            result(null, { result: true, message: 'Item borrowed successfully!' });
           });
       });
     });

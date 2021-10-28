@@ -6,4 +6,5 @@ cd ..
 echo shutting down container
 docker-compose down
 MYSQLPATH=$MYSQLPATH docker-compose up -d
+cd scripts && ./executeSQLStatements.sh
 echo everything done

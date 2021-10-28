@@ -26,8 +26,11 @@
 
 
       <div class="equipment-page-io-vertical equipment-page-info-container">
-        <div class="ion-padding">{{this.item?.id}}</div>
-        <div class="ion-padding">{{this.item?.model}}</div>
+        <div class="ion-padding">{{this.item?.dynamic_id}}</div>
+        <div class="ion-padding">{{this.item?.model_name || '-'}}</div>
+        <div class="ion-padding">{{this.item?.item_type || '-'}}</div>
+        <div class="ion-padding">{{this.item?.description}}</div>
+        <div class="ion-padding">{{this.item?.status}}</div>
       </div>
     </div>
 

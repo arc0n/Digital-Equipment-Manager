@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
-import {ModalController} from "@ionic/angular";
+import {ModalController, ToastController} from "@ionic/angular";
 import {QrScanComponent} from "../../components/qr-scan/qr-scan.component";
-import {ItemResourceService} from "../../services/item-resource.service";
+import {ItemResourceService} from "../../services/api-services/item-resource.service";
 import {Item} from "../../services/model";
 import {Observable} from "rxjs";
+import {installTempPackage} from "@angular/cli/utilities/install-package";
 
 @Component({
   selector: 'equipment-dashboard',
@@ -17,7 +18,8 @@ export class EquipmentDashboardPage {
 
   constructor(private router: Router,
               private modalController: ModalController,
-              private itemService: ItemResourceService) {
+              public itemService: ItemResourceService,
+              private toastController: ToastController) {
   }
 
   onScanClicked(event: any) {
@@ -37,26 +39,38 @@ export class EquipmentDashboardPage {
   }
 
   modalResult(value: string) {
-
     console.log("Modal result: ", value)
-    this.getItemByCode(value).subscribe((item) => {
+    this.itemService.getItemByCode(value).subscribe((item) => {
+      if(!!item){
       this.modal.dismiss();
       this.navigateToEquipmentPage(item);
+
+      }
     })
   }
 
   onContinueBtnClick(inputValue: string) {
-    this.getItemByCode(inputValue).subscribe((item) => {
+    if(!inputValue) return;
+    return this.itemService.getItemByCode(inputValue).subscribe(async(item) => {
+      console.log(item)
+      if(!item) {
+        const toast = await this.toastController.create({
+          position: "bottom",
+          duration: 2000,
+          message: "Es wurde keine Gerät mit diesem Code gefunden",
+          color: "danger"
+        })
+        toast.present();
+        return
+      }
       this.navigateToEquipmentPage(item);
     })
   }
 
   navigateToEquipmentPage(item: Item) {
-    this.router.navigate(['equipment'], {queryParams: {id: item.id}});
+    this.router.navigate(['equipment'], {queryParams: {id: item.dynamic_id}});
   }
 
-  getItemByCode(value: string): Observable<Item> {
-    return this.itemService.getItemByCode(value);
-  }
+
 
 }

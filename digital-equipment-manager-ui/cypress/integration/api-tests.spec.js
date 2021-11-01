@@ -59,9 +59,10 @@ describe('api-tests', () => {
     })
       .then((response) => {
         expect(response).property('status').to.equal(200)
-        let createdId = response.body.result.dynamic_id;
+        cy.wrap(response.body.result.id).should('not.be.empty')
+        let createdId = response.body.result.id;
         cy.request({
-          url: 'http://localhost:3000/item/' + response.body.result.dynamic_id,
+          url: 'http://localhost:3000/item/' + createdId,
           method:'GET',
         })
           .then((response) => {
@@ -112,9 +113,10 @@ describe('api-tests', () => {
     })
       .then((response) => {
         expect(response).property('status').to.equal(200)
-        let createdId = response.body.result.dynamic_id;
+        cy.wrap(response.body.result.id).should('not.be.empty')
+        let createdId = response.body.result.id;
         cy.request({
-          url:'http://localhost:3000/item/' + response.body.result.dynamic_id,
+          url:'http://localhost:3000/item/' + createdId,
           method: 'DELETE',
         })
           .then((response) => {
@@ -126,9 +128,7 @@ describe('api-tests', () => {
    })
 
   it('Edit newly created item', () => {
-    const createId = new Promise((resolve, reject) => {
-    });
-
+    let itemId;
     cy.request({
       url:'http://localhost:3000/item/',
       method:'POST',
@@ -143,8 +143,10 @@ describe('api-tests', () => {
     })
       .then((response) => {
         expect(response).property('status').to.equal(200)
+        cy.wrap(response.body.result.id).should('not.be.empty')
+        itemId = response.body.result.id;
         cy.request({
-          url:'http://localhost:3000/item/' + response.body.result.dynamic_id,
+          url:'http://localhost:3000/item/' + itemId,
           method: 'PUT',
           body:{
             "serial_number": "123456",
@@ -152,9 +154,16 @@ describe('api-tests', () => {
         })
           .then((response) => {
             expect(response).property('status').to.equal(200)
-            cy.wrap(response.body.result.serail_number).should('equal', '123456');
           })
-      })
+      }).then(()=>{
+      cy.request({
+        url:'http://localhost:3000/item/' + itemId,
+        method: 'GET',
+    }).should((response)=>{
+        expect(response).property('status').to.equal(200)
+        expect(response.body.result).property('serial_number').to.equal('123456');
+    })
+    })
 
   })
 

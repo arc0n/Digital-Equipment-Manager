@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {ActionSheetController} from "@ionic/angular";
+import {ActionSheetController, ToastController} from "@ionic/angular";
 import {CommonStateService} from "../../services/common-state.service";
 import {Subscription} from "rxjs";
 import {mergeMap} from "rxjs/operators";
-import {ItemResourceService} from "../../services/item-resource.service";
 import {Item} from "../../services/model";
+import {ItemResourceService} from "../../services/api-services/item-resource.service";
 
 @Component({
   selector: 'app-equipment-io-page',
@@ -25,7 +25,8 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
               public state: CommonStateService,
               private actionSheetController: ActionSheetController,
               private activeRoute: ActivatedRoute,
-              private itemService: ItemResourceService
+              private itemService: ItemResourceService,
+              private toastController: ToastController
               ) {
   }
 
@@ -36,8 +37,22 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
       )
     )
     this.activeRoute.queryParams.pipe(
-      mergeMap(params => this.itemService.getItemByCode(params.id))
-    ).subscribe(item =>{
+      mergeMap(params => {
+        console.log(params)
+        return this.itemService.getItemByCode(params.id)
+      })
+    ).subscribe(async (item) =>{
+      if(!item) {
+        const toast = await this.toastController.create({
+          position: "bottom",
+          duration: 2000,
+          message: "Es wurde keine Gerät mit diesem Code gefunden",
+          color: "danger"
+        })
+        await this.router.navigate(['/tabs/dashboard']);
+        toast.present();
+        return
+      }
       this.item = item;
       console.log("fetched item: ", item)
     });
@@ -56,7 +71,7 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
         text: 'QR Code generieren',
         icon: 'share',
         handler: () => {
-          console.log('Share clicked');
+          console.log('generate QR clicked');
         }
       },
         {
@@ -64,20 +79,20 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
           role: 'destructive',
           icon: 'trash',
           handler: () => {
-            console.log('Delete clicked');
+            console.log('Decomission clicked');
           }
         },
         {
         text: 'Historie anzeigen',
         icon: 'caret-forward-circle',
         handler: () => {
-          console.log('Play clicked');
+          console.log('history clicked');
         }
       }, {
         text: 'Defekte anzeigen',
         icon: 'heart',
         handler: () => {
-          console.log('Favorite clicked');
+          console.log('show defect clicked');
         }
       }, {
         text: 'Cancel',
@@ -105,5 +120,12 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
 
   backButtonClicked() {
     this.router.navigate(['/'])
+  }
+
+  getStatusColor(status: string) {
+    console.log(status);
+    if(!status) {return '#3a7be0';}
+    if(status === 'aktiv') {return 'var(--ion-color-success)';}
+    else {return 'var(--ion-color-danger)';}
   }
 }

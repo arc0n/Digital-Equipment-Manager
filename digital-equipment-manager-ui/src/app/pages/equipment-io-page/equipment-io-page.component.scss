@@ -1,7 +1,7 @@
 .equipment-page-io-vertical {
   display: flex;
   flex-direction: column;
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
 }
 
 .h-100 {
@@ -11,7 +11,6 @@
 .equipment-page-io-horizontal {
   display: flex;
   flex-direction: row;
-  align-content: center;
   justify-content: center;
 }
 
@@ -22,14 +21,24 @@
 }
 
 .equipment-page-picture-wrapper {
-  margin: 2rem;
+  margin: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 0 1 400px;
-  min-height: 400px;
+  flex: 0 1 200px;
+  min-height: 200px;
   border: 3px solid var(--ion-color-light);
   border-radius: 2px;
+  color: var(--ion-color-medium);
+}
+
+.equipment-page-io-history {
+  margin: 1rem;
+  display: flex;
+  flex: 1 1;
+  border: 3px solid var(--ion-color-light);
+  border-radius: 2px;
+  min-width: 600px;
   color: var(--ion-color-medium);
 }
 
@@ -42,9 +51,17 @@
   justify-content: center;
 }
 
+.equipment-page-info-container-description {
+  flex-shrink: 1;
+  justify-content: center;
+  align-items: end;
+}
+
 .max-width-100 {
   max-width: 250px;
 }
+
+
 
 .flex-wrap {
   flex-wrap: wrap;
@@ -54,9 +71,39 @@
   flex-grow: 1;
 }
 
+.equipment-page-status-wrapper {
+  align-items: end;
+}
+
+.equipment-io-mobile-column {
+  flex-direction: column;
+  flex-grow: 0;
+  justify-content: center;
+
+  .equipment-page-status-wrapper {
+    align-items: start;
+  }
+}
+
+
+.equipment-page-io-ordered>div:nth-child(1) {
+  order: 2;
+}
+.equipment-page-io-ordered>div:nth-child(2) {
+  order: 3;
+}
+
 .equipment-page-io-bottom-toolbar {
   justify-content: center;
   display: flex;
   padding-right: 2rem;
   padding-left: 2rem;
+}
+
+.availability-dot {
+  display: inline-flex;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  justify-self: center;
 }

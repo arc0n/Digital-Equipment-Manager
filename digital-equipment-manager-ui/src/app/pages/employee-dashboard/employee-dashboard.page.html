@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>employee-dashboard</ion-title>
+    <ion-title>An Mitarbeiter ausgeben</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,12 +8,12 @@
   <div class="equipment-page-vertical">
     <div class="employee-page-horizontal">
       <p class="employee-page-qr-header">
-        Lorem ipsum dolor sit amet,
-        consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
+        Qr Code des Mitarbeiters für die Ausgabe Scannen oder eintippen.
+        Alternativ kann nach Name des Mitarbeiters gesucht werden
       </p>
     </div>
 
-    <app-qr-control placeholder="Qr code scannen oder eintippen"
+    <app-qr-control placeholder="Name/Qr code eintippen oder scannen"
                     (onQrClick)="onScanClicked($event)"
                     [showContinueButton]="false"
                     (onValueInputChange)="onValueChange($event)"

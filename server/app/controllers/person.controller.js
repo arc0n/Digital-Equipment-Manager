@@ -1,4 +1,5 @@
 const Person = require("../models/person.model.js");
+const Address = require("../models/address.model.js");
 const randomGenerator = require("../dynamic_id_generator.js");
 const apiResponse = require("../api_response.js");
 
@@ -14,25 +15,30 @@ exports.create = (req, res) => {
     const dynamic_id = randomGenerator.generateRandomDynamicId();
 
     // Creates a new Person
-    const item = new Person({
+    const person = new Person({
       firstname: req.body.firstname,
       lastname: req.body.lastname,
       birthdate: req.body.birthdate,
-      sex: req.body.sex,
-      id_card: req.body.id_card,
-      dynamic_id: dynamic_id,
-      address_id: req.body.address_id
+      sex: (req.body.sex) ? req.body.sex : '-1',
+      id_card: (req.body.id_card) ? req.body.id_card : 'unknown',
+      dynamic_id: dynamic_id
+    });
+
+    const address = new Address({
+      city: req.body.city,
+      zip: req.body.zip,
+      street: req.body.street
     });
   
     // Save Person in the database
-    Person.create(item, (err, data) => {
+    Person.create(person, address, (err, data) => {
       apiResponse.sendResponse(res, err, data);
     });
   };
 
 //Get all Persons
 exports.getAll = (req, res) => {
-  Person.getAll((err, data) => {
+  Person.getAll(req.query, (err, data) => {
     apiResponse.sendResponse(res, err, data);
   });
 };

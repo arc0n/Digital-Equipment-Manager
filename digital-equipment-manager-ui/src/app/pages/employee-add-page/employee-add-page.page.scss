@@ -1,0 +1,35 @@
+.employee-add-form-wrapper{
+  display: flex;
+  justify-content: center;
+  height: auto;
+}
+
+.employee-add-form{
+  margin: 2rem;
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  flex: 0 1 600px;
+  border: 3px solid var(--ion-color-light);
+  border-radius: 2px;
+  color: var(--ion-color-medium);
+  height: auto;
+}
+
+.employee-add-form-item{
+  display: flex;
+}
+
+.employee-add-bottom-collapsed {
+  display: flex;
+  justify-content: space-between;
+}
+
+.webkit-datetime-edit-fields-wrapper { background: silver; }
+
+.employee-add-bottom-toolbar {
+  justify-content: center;
+  display: flex;
+  padding-right: 2rem;
+  padding-left: 2rem;
+}

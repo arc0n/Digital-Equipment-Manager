@@ -13,6 +13,7 @@ import {SharedModule} from "./services/shared.module";
 import {NegAuthGuardService} from "./auth/neg-auth-guard.service";
 
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MomentModule} from "ngx-moment";
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +26,11 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     SharedModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
+    MomentModule.forRoot({
+      relativeTimeThresholdOptions: {
+        'm': 59
+      }
+    }),
   ],
   providers: [
     AuthGuardService,

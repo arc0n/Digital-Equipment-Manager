@@ -4,7 +4,6 @@ import {Subscription} from "rxjs";
 import {Item} from "../../services/model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CommonStateService} from "../../services/common-state.service";
-import {ItemResourceService} from "../../services/item-resource.service";
 
 @Component({
   selector: 'app-tab2',
@@ -17,13 +16,9 @@ export class SettingsPage implements OnInit, OnDestroy{
   /** @internal */
   showMobileMenu = true;
 
-  /** @internal  */
-  item: Item;
-
   constructor(
     public router: Router,
     public state: CommonStateService,
-    public itemService: ItemResourceService,
     public activeRoute: ActivatedRoute
   ) {
 
@@ -35,12 +30,6 @@ export class SettingsPage implements OnInit, OnDestroy{
         (isVisible) => this.showMobileMenu = !isVisible
       )
     )
-    this.activeRoute.queryParams.pipe(
-      mergeMap(params => this.itemService.getItemByCode(params.id))
-    ).subscribe(item =>{
-      this.item = item;
-      console.log("fetched item: ", item)
-    });
   }
 
   ngOnDestroy(): void {
@@ -49,5 +38,9 @@ export class SettingsPage implements OnInit, OnDestroy{
 
   onAddItemClicked() {
     this.router.navigate(['/equipment-add-page'])
+  }
+
+  onAddEmployeeClicked() {
+    this.router.navigate(['/employee-add-page'])
   }
 }

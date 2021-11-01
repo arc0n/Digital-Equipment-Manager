@@ -33,6 +33,8 @@ app.get("/", (req, res) => {
 require("./app/routes/item.routes.js")(app);
 require("./app/routes/person.routes.js")(app);
 require("./app/routes/booking.routes.js")(app);
+require("./app/routes/item_type.routes.js")(app);
+require("./app/routes/item_model.routes.js")(app);
 
 // set port, listen for requests
 app.listen(3000, () => {

@@ -33,7 +33,7 @@ export class EmployeeDashboardPage implements OnInit, OnDestroy {
       this.triggerServerCall$.pipe(
         debounceTime(500),
         tap(()=> this.personResults = []),
-        filter((searchValue) => !!searchValue && searchValue.trim().length> 1),
+        filter((searchValue) => !!searchValue && !!searchValue.trim()),
         switchMap((searchValue) => {
           return forkJoin([
             this.employeeService.getPersonByName(searchValue),

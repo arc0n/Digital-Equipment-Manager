@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {combineLatest,  Subject, Subscription} from "rxjs";
-import { debounceTime,  switchMap} from "rxjs/operators";
+import {combineLatest, forkJoin, merge, of, Subject, Subscription} from "rxjs";
+import {combineAll, debounceTime, filter, mergeAll, switchMap, tap} from "rxjs/operators";
 import {PersonResourceService} from "../../services/api-services/person-resource.service";
 import {QrScanComponent} from "../../components/qr-scan/qr-scan.component";
-import {ModalController} from "@ionic/angular";
+import {ModalController, ToastController} from "@ionic/angular";
 import {Person} from "../../services/model";
 
 @Component({
@@ -16,24 +16,32 @@ export class EmployeeDashboardPage implements OnInit, OnDestroy {
   triggerServerCall$ = new Subject<string>();
   private modal: HTMLIonModalElement;
 
-  constructor(private employeeService: PersonResourceService, private modalController: ModalController) {
+  constructor(private employeeService: PersonResourceService,
+              private toastContrl: ToastController,
+              private modalController: ModalController) {
   }
 
   subscriptions: Subscription[] = [];
+  personResults: Person[] = [];
 
   ngOnInit() {
     this.subscriptions.push(
       this.triggerServerCall$.pipe(
         debounceTime(500),
+        tap(()=> this.personResults = []),
+        filter((searchValue) => !!searchValue && !!searchValue.trim()),
         switchMap((searchValue) => {
-          return combineLatest([
+          return forkJoin([
             this.employeeService.getPersonByName(searchValue),
             this.employeeService.getPersonByCode(searchValue)])
-          // TODO also try to get code
         })
       ).subscribe(([byName, byCode]) => {
-        if (!!byName || !!byCode) {
-          this.navigateToSummaryPage(byCode || byCode)
+        console.log("byname",byName)
+        console.log("bycode",byCode)
+        this.personResults = byName
+        if (!!byCode) {
+          this.navigateToSummaryPage(byCode)
+
         }
       })
     )
@@ -62,10 +70,18 @@ export class EmployeeDashboardPage implements OnInit, OnDestroy {
   modalResult(value: string) {
 
     console.log("Modal result: ", value)
-    this.employeeService.getPersonByCode(value).subscribe((employee) => {
+    this.employeeService.getPersonByCode(value).subscribe(async (employee) => {
+      await this.modal.dismiss();
+
       if (!!employee) {
-        this.modal.dismiss();
         this.navigateToSummaryPage(employee)
+      } else {
+        const p = await this.toastContrl.create({color:"danger", duration:2000, message:"" +
+            "Element mit diesem Code wurde nicht gefunden",
+        })
+        p.present()
+
+        // this.modal.present();
       }
     })
   }
@@ -80,4 +96,7 @@ export class EmployeeDashboardPage implements OnInit, OnDestroy {
   }
 
 
+  personSelected(person: Person) {
+    this.navigateToSummaryPage(person);
+  }
 }

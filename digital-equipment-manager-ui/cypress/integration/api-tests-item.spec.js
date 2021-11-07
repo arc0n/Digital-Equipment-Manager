@@ -23,7 +23,6 @@ describe('api-tests-item', () => {
     cy.request('http://localhost:3000/item/4z8k9a6bqx7u7ad')
       .then((response) => {
         expect(response).property('status').to.equal(200)
-        //cy.wrap(response.body.result.length).should('equal', 1)
         cy.wrap(response.body.result.dynamic_id).should('equal', '4z8k9a6bqx7u7ad')
         expect(response.body.result.dynamic_id).to.equal('4z8k9a6bqx7u7ad')
       })
@@ -33,7 +32,7 @@ describe('api-tests-item', () => {
   it('item by incomplete id', () => {
 
     cy.request({
-      url: 'http://localhost:3000/item/4',
+      url: 'http://localhost:3000/item/s',
       failOnStatusCode: false,
     })
       .then((response) => {

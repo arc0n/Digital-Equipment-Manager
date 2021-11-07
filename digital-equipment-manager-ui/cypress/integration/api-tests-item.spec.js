@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('api-tests', () => {
+describe('api-tests-item', () => {
   beforeEach( ()=>{
     //cy.intercept('POST','http://localhost:3000/item**').as('item-post');
   }
@@ -26,6 +26,19 @@ describe('api-tests', () => {
         //cy.wrap(response.body.result.length).should('equal', 1)
         cy.wrap(response.body.result.dynamic_id).should('equal', '4z8k9a6bqx7u7ad')
         expect(response.body.result.dynamic_id).to.equal('4z8k9a6bqx7u7ad')
+      })
+
+  })
+
+  it('item by incomplete id', () => {
+
+    cy.request({
+      url: 'http://localhost:3000/item/4',
+      failOnStatusCode: false,
+    })
+      .then((response) => {
+        expect(response).property('status').to.equal(404)
+        cy.wrap(response.body.result).should('equal', 'NOT_FOUND')
       })
 
   })
@@ -127,12 +140,12 @@ describe('api-tests', () => {
 
    })
 
-  it('Edit newly created item', () => {
+  it('Edit 1 Attribute from newly created item', () => {
     let itemId;
     cy.request({
-      url:'http://localhost:3000/item/',
-      method:'POST',
-      body:{
+      url: 'http://localhost:3000/item/',
+      method: 'POST',
+      body: {
         "serial_number": "12345",
         "photo": "/",
         "description": "test",
@@ -146,24 +159,103 @@ describe('api-tests', () => {
         cy.wrap(response.body.result.id).should('not.be.empty')
         itemId = response.body.result.id;
         cy.request({
-          url:'http://localhost:3000/item/' + itemId,
+          url: 'http://localhost:3000/item/' + itemId,
           method: 'PUT',
-          body:{
+          body: {
             "serial_number": "123456",
           }
         })
           .then((response) => {
             expect(response).property('status').to.equal(200)
           })
-      }).then(()=>{
+      }).then(() => {
       cy.request({
-        url:'http://localhost:3000/item/' + itemId,
+        url: 'http://localhost:3000/item/' + itemId,
         method: 'GET',
-    }).should((response)=>{
+      }).should((response) => {
         expect(response).property('status').to.equal(200)
         expect(response.body.result).property('serial_number').to.equal('123456');
+      })
     })
+  })
+
+    it('Edit multiple Attributes from newly created item', () => {
+      let itemId;
+      cy.request({
+        url: 'http://localhost:3000/item/',
+        method: 'POST',
+        body: {
+          "serial_number": "12345",
+          "photo": "/",
+          "status": "aktiv",
+          "item_model_id": 1,
+          "item_type_id": 1,
+        }
+      })
+        .then((response) => {
+          expect(response).property('status').to.equal(200)
+          cy.wrap(response.body.result.id).should('not.be.empty')
+          itemId = response.body.result.id;
+          cy.request({
+            url: 'http://localhost:3000/item/' + itemId,
+            method: 'PUT',
+            body: {
+              "serial_number": "123456",
+              "photo": "Blank",
+            }
+          })
+            .then((response) => {
+              expect(response).property('status').to.equal(200)
+            })
+        }).then(() => {
+        cy.request({
+          url: 'http://localhost:3000/item/' + itemId,
+          method: 'GET',
+        }).should((response) => {
+          expect(response).property('status').to.equal(200)
+          expect(response.body.result).property('serial_number').to.equal('123456');
+          expect(response.body.result).property('photo').to.equal('Blank');
+        })
+      })
+
     })
+
+  it('Edit foreign Key Attribute', () => {
+    let itemId;
+    cy.request({
+      url: 'http://localhost:3000/item/',
+      method: 'POST',
+      body: {
+        "serial_number": "12345",
+        "photo": "/",
+        "status": "aktiv",
+        "item_model_id": 1,
+        "item_type_id": 1,
+      }
+    })
+      .then((response) => {
+        expect(response).property('status').to.equal(200)
+        cy.wrap(response.body.result.id).should('not.be.empty')
+        itemId = response.body.result.id;
+        cy.request({
+          url: 'http://localhost:3000/item/' + itemId,
+          method: 'PUT',
+          body: {
+            "item_model_id": 2,
+          }
+        })
+          .then((response) => {
+            expect(response).property('status').to.equal(200)
+            cy.request({
+              url: 'http://localhost:3000/item/' + itemId,
+              method: 'GET',
+            }).should((response) => {
+              expect(response).property('status').to.equal(200)
+              expect(response.body.result).property('item_model_id').to.equal(2);
+              expect(response.body.result).property('description').to.equal('Elektroschockpistole');
+            })
+          })
+      })
 
   })
 

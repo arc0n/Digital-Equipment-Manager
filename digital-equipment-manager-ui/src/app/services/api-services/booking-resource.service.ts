@@ -9,7 +9,7 @@ export class BookingResourceService extends BaseResourceService<Booking>{
 
   constructor(protected http: HttpClient) {
     super(http);
-    this.baseUrl = this.baseUrl +"/item";
+    this.baseUrl = this.baseUrl +"/booking";
   }
 
   getAllBookings(): Observable<Booking[]> {

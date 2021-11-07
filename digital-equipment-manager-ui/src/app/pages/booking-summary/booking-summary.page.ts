@@ -6,6 +6,7 @@ import {forkJoin} from "rxjs";
 import {ItemResourceService} from "../../services/api-services/item-resource.service";
 import {PersonResourceService} from "../../services/api-services/person-resource.service";
 import {ToastController} from "@ionic/angular";
+import {BookingResourceService} from "../../services/api-services/booking-resource.service";
 
 @Component({
   selector: 'app-booking-summary',
@@ -22,6 +23,7 @@ export class BookingSummaryPage implements OnInit {
   constructor(private route: ActivatedRoute,
               private itemSrv: ItemResourceService,
               private personSrv: PersonResourceService,
+              private bookingSrv: BookingResourceService,
               private router: Router,
               private toastController: ToastController) {
   }
@@ -50,4 +52,7 @@ export class BookingSummaryPage implements OnInit {
   }
 
 
+  createBooking() {
+    this.bookingSrv.postBooking({item_id: this.item.dynamic_id, person_id: this.person.dynamic_id}).subscribe(console.log)
+  }
 }

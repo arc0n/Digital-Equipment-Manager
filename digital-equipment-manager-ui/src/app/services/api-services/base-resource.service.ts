@@ -49,14 +49,14 @@ export class BaseResourceService<T> {
   post(entity: T, params: QueryParams): Observable<T> {
     if (!entity) return of(null)
 
-    return this.http.post<T>(this.baseUrl, entity, {params: params}).pipe(
+    return this.http.post<{result: T}>(this.baseUrl, entity, {params: params}).pipe(
       catchError(err => {
         console.log("err in service", err);
         // TODO handle error
         return of(null);
       }),
       map(resp => {
-        return resp?.result as T || null // TODO does that work?
+        return resp?.result as T || null
       })
     )
   }

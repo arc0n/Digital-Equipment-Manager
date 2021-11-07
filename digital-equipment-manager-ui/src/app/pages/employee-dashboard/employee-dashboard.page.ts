@@ -40,7 +40,6 @@ export class EmployeeDashboardPage implements OnInit, OnDestroy {
         console.log("bycode",byCode)
         this.personResults = byName
         if (!!byCode) {
-          // TODO by name should be filled into the list
           this.navigateToSummaryPage(byCode)
 
         }

@@ -42,8 +42,7 @@ export class EmployeeDashboardPage implements OnInit, OnDestroy {
       ).subscribe(([byName, byCode]) => {
         this.personResults = byName
         if (!!byCode) {
-          // TODO code search disabled due some bug
-        //  this.navigateToSummaryPage(byCode)
+          this.navigateToSummaryPage(byCode)
         }
       })
     )

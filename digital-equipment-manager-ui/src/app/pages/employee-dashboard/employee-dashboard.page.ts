@@ -1,10 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {combineLatest, forkJoin, merge, of, Subject, Subscription} from "rxjs";
-import {combineAll, debounceTime, filter, mergeAll, switchMap, tap} from "rxjs/operators";
+import {combineAll, debounceTime, filter, mergeAll, switchMap, take, tap} from "rxjs/operators";
 import {PersonResourceService} from "../../services/api-services/person-resource.service";
 import {QrScanComponent} from "../../components/qr-scan/qr-scan.component";
 import {ModalController, ToastController} from "@ionic/angular";
 import {Person} from "../../services/model";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-employee-dashboard',
@@ -15,10 +16,13 @@ export class EmployeeDashboardPage implements OnInit, OnDestroy {
 
   triggerServerCall$ = new Subject<string>();
   private modal: HTMLIonModalElement;
+  resetControls= new Subject();
 
   constructor(private employeeService: PersonResourceService,
               private toastContrl: ToastController,
-              private modalController: ModalController) {
+              private modalController: ModalController,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
   }
 
   subscriptions: Subscription[] = [];
@@ -29,19 +33,17 @@ export class EmployeeDashboardPage implements OnInit, OnDestroy {
       this.triggerServerCall$.pipe(
         debounceTime(500),
         tap(()=> this.personResults = []),
-        filter((searchValue) => !!searchValue && !!searchValue.trim()),
+        filter((searchValue) => !!searchValue && searchValue.trim().length> 1),
         switchMap((searchValue) => {
           return forkJoin([
             this.employeeService.getPersonByName(searchValue),
             this.employeeService.getPersonByCode(searchValue)])
         })
       ).subscribe(([byName, byCode]) => {
-        console.log("byname",byName)
-        console.log("bycode",byCode)
         this.personResults = byName
         if (!!byCode) {
-          this.navigateToSummaryPage(byCode)
-
+          // TODO code search disabled due some bug
+        //  this.navigateToSummaryPage(byCode)
         }
       })
     )
@@ -55,7 +57,6 @@ export class EmployeeDashboardPage implements OnInit, OnDestroy {
     this.presentModal();
   }
 
-
   async presentModal() {
     this.modal = await this.modalController.create({
       component: QrScanComponent,
@@ -68,8 +69,6 @@ export class EmployeeDashboardPage implements OnInit, OnDestroy {
   }
 
   modalResult(value: string) {
-
-    console.log("Modal result: ", value)
     this.employeeService.getPersonByCode(value).subscribe(async (employee) => {
       await this.modal.dismiss();
 
@@ -87,8 +86,14 @@ export class EmployeeDashboardPage implements OnInit, OnDestroy {
   }
 
   navigateToSummaryPage(employee: Person): void {
-    // TODO implement
-    console.log("summary page not yet implemented", employee)
+    this.personResults = []
+    this.resetControls.next();
+    this.activatedRoute.queryParams.pipe(take(1)).subscribe(params =>{
+      this.router.navigate(['booking-summary'], {queryParams:{
+          personId: employee.dynamic_id,
+          itemId: params.itemId
+        }})
+    })
   }
 
   onValueChange(value: string) {

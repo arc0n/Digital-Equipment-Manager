@@ -42,7 +42,11 @@ const routes: Routes = [
     path: 'employee-add-page',
     loadChildren: () => import('./pages/employee-add-page/employee-add-page.module').then( m => m.EmployeeAddPagePageModule),
     canActivate: [AuthGuardService]
+  },  {
+    path: 'booking-summary',
+    loadChildren: () => import('./pages/booking-summary/booking-summary.module').then( m => m.BookingSummaryPageModule)
   }
+
 
 
 

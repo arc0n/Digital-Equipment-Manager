@@ -114,8 +114,8 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
   }
 
 
-  ioButtonClicked() {
-    this.router.navigate(['/employee-dashboard'])
+  navigateToEmployeeDashboard() {
+    this.router.navigate(['/employee-dashboard'], {queryParams: {itemId: this.item.dynamic_id}})
   }
 
   backButtonClicked() {
@@ -123,7 +123,6 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
   }
 
   getStatusColor(status: string) {
-    console.log(status);
     if(!status) {return '#3a7be0';}
     if(status === 'aktiv') {return 'var(--ion-color-success)';}
     else {return 'var(--ion-color-danger)';}

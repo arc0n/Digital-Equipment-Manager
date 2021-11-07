@@ -77,7 +77,7 @@ const sql = require("./db.js");
       sql.query(
         "SELECT * FROM person " +
         "INNER JOIN address ON person.address_id = address.id " +
-        "WHERE person.dynamic_id= ? OR CONCAT_WS(' ', firstname, lastname) LIKE ? ", [id,'%'+id+'%'], (err, res) => {
+        "WHERE person.dynamic_id= ?", [id], (err, res) => {
         if (err) {
           console.log("error: ", err);
           result(err);
@@ -153,7 +153,7 @@ const sql = require("./db.js");
         values = [];
 
     if (params.name !== undefined) {
-      conditions.push("CONCAT_WS(' ', firstname, lastname, dynamic_id) LIKE ?");
+      conditions.push("CONCAT_WS(' ', firstname, lastname) LIKE ?");
       values.push("%" + params.name + "%");
     }
 

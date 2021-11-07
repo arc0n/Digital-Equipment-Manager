@@ -8,23 +8,29 @@ import {IonicModule} from "@ionic/angular";
 import {CommonModule} from "@angular/common";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ItemResourceService} from "./api-services/item-resource.service";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import { HttpClientModule} from "@angular/common/http";
 import {PersonResourceService} from "./api-services/person-resource.service";
+import {DateTimeDisplayComponent} from "../components/date-time-display/date-time-display.component";
+import {BookingResourceService} from "./api-services/booking-resource.service";
 
 
 @NgModule({
   imports: [IonicStorageModule, IonicModule, CommonModule, ReactiveFormsModule, HttpClientModule],
-  declarations: [QrScanComponent, QrScanControlComponent],
+  declarations: [QrScanComponent, QrScanControlComponent, DateTimeDisplayComponent],
   exports: [
     QrScanComponent,
-    QrScanControlComponent
+    QrScanControlComponent,
+    DateTimeDisplayComponent
   ]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders<any> {
     return {
       ngModule: SharedModule,
-      providers: [StorageService, AuthenticationService, ItemResourceService, PersonResourceService]
+      providers: [StorageService,
+        AuthenticationService,
+        BookingResourceService,
+        ItemResourceService, PersonResourceService]
     };
   }
 }

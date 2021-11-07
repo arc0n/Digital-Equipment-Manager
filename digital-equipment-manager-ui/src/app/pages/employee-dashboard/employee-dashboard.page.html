@@ -17,10 +17,20 @@
                     (onQrClick)="onScanClicked($event)"
                     [showContinueButton]="false"
                     (onValueInputChange)="onValueChange($event)"
+                    [resetControls]="this.resetControls"
     ></app-qr-control>
 
     <div class="employee-page-content-wrapper">
-      Placeholder for list of employees
+      <!-- List of Text Items -->
+      <ion-list class="employee-page-result-list" *ngIf="personResults.length > 0; else noResultTemplate">
+        <ion-item class="employee-page-result" *ngFor="let person of personResults" (click)="personSelected(person)">
+          <ion-label>{{ person.firstname + ' ' + person.lastname }}</ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ng-template #noResultTemplate >
+        <div class="employee-page-note-content"> <p>Keine Ergebnisse</p></div>
+      </ng-template>
     </div>
   </div>
 </ion-content>

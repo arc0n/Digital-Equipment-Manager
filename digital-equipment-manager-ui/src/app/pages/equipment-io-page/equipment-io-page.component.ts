@@ -71,7 +71,7 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
         text: 'QR Code generieren',
         icon: 'share',
         handler: () => {
-          console.log('Share clicked');
+          console.log('generate QR clicked');
         }
       },
         {
@@ -79,20 +79,20 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
           role: 'destructive',
           icon: 'trash',
           handler: () => {
-            console.log('Delete clicked');
+            console.log('Decomission clicked');
           }
         },
         {
         text: 'Historie anzeigen',
         icon: 'caret-forward-circle',
         handler: () => {
-          console.log('Play clicked');
+          console.log('history clicked');
         }
       }, {
         text: 'Defekte anzeigen',
         icon: 'heart',
         handler: () => {
-          console.log('Favorite clicked');
+          console.log('show defect clicked');
         }
       }, {
         text: 'Cancel',
@@ -114,11 +114,17 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
   }
 
 
-  ioButtonClicked() {
-    this.router.navigate(['/employee-dashboard'])
+  navigateToEmployeeDashboard() {
+    this.router.navigate(['/employee-dashboard'], {queryParams: {itemId: this.item.dynamic_id}})
   }
 
   backButtonClicked() {
     this.router.navigate(['/'])
+  }
+
+  getStatusColor(status: string) {
+    if(!status) {return '#3a7be0';}
+    if(status === 'aktiv') {return 'var(--ion-color-success)';}
+    else {return 'var(--ion-color-danger)';}
   }
 }

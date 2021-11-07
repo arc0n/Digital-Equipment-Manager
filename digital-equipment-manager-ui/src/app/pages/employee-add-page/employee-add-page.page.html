@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons
+      *ngIf="this.showMobileMenu"
+      slot="start" class="employee-back-button" (click)="this.router.navigate(['/tabs/settings'])">
+      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title>Mitarbeiter anlegen</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Formular -->
+  <div class="employee-add-form-wrapper">
+    <form class="employee-add-form" [formGroup]="addEmployeeForm">
+      <ion-list>
+        <ion-item class="employee-add-form-item">
+          <ion-icon name="chatbox-ellipses" class="ion-margin"></ion-icon>
+          <ion-label>Vorname</ion-label>
+          <ion-input placeholder="Vorname" formControlName="personFirstname"></ion-input>
+        </ion-item>
+        <ion-item class="employee-add-form-item">
+          <ion-icon name="bookmark" class="ion-margin"></ion-icon>
+          <ion-label>Nachname</ion-label>
+          <ion-input placeholder="Nachname" formControlName="personLastname"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="calendar" class="ion-margin"></ion-icon>
+          <ion-label>Geburtsdatum</ion-label>
+          <input formControlName="personBirthdate" type="date">
+        </ion-item>
+        <ion-item>
+          <ion-icon name="body" class="ion-margin"></ion-icon>
+          <ion-label>Geschlecht</ion-label>
+          <ion-select formControlName="personSex" interface="popover" placeholder="Wähle Geschlecht">
+            <ion-select-option value="0">Männlich</ion-select-option>
+            <ion-select-option value="1">Weiblich</ion-select-option>
+            <ion-select-option value="2">Divers</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item class="employee-add-form-item">
+          <ion-icon name="home" class="ion-margin"></ion-icon>
+          <ion-label>Straße</ion-label>
+          <ion-input placeholder="Straße" formControlName="addressStreet"></ion-input>
+        </ion-item>
+        <ion-item class="employee-add-form-item">
+          <ion-icon name="keypad" class="ion-margin"></ion-icon>
+          <ion-label>Postleitzahl</ion-label>
+          <ion-input placeholder="1234" formControlName="addressZip"></ion-input>
+        </ion-item>
+        <ion-item class="employee-add-form-item">
+          <ion-icon name="business" class="ion-margin"></ion-icon>
+          <ion-label>Stadt</ion-label>
+          <ion-input placeholder="Stadt" formControlName="addressCity"></ion-input>
+        </ion-item>
+      </ion-list>
+    </form>
+  </div>
+
+
+  <div class="employee-add-bottom-toolbar" [ngClass]="{'ion-justify-content-between': !showMobileMenu}">
+    <div *ngIf="!showMobileMenu">
+      <ion-button class="max-width-100" color="secondary"
+                  (click)="backButtonClicked()">
+        Zurück
+      </ion-button>
+    </div>
+    <ion-button class="max-width-100" color="danger" (click)="resetForm()">
+      Reset Formular
+    </ion-button>
+    <ion-button class="max-width-100" color="primary" (click)="onSubmit()" type="submit">
+      Weiter
+    </ion-button>
+  </div>
+</ion-content>

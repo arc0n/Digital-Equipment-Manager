@@ -22,3 +22,8 @@ export interface Person {
   zip: number,
   city: string
 }
+
+export  interface Booking{
+  item_id: string,
+  person_id: string,
+}

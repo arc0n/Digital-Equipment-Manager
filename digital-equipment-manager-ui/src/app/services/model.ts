@@ -23,7 +23,7 @@ export interface Person {
   city: string
 }
 
-export  interface Booking{
+export  interface Booking {
   item_id: string,
   person_id: string,
 }

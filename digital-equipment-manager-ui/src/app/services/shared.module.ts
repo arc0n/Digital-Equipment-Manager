@@ -10,14 +10,16 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {ItemResourceService} from "./api-services/item-resource.service";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {PersonResourceService} from "./api-services/person-resource.service";
+import {DateTimeDisplayComponent} from "../components/date-time-display/date-time-display.component";
 
 
 @NgModule({
   imports: [IonicStorageModule, IonicModule, CommonModule, ReactiveFormsModule, HttpClientModule],
-  declarations: [QrScanComponent, QrScanControlComponent],
+  declarations: [QrScanComponent, QrScanControlComponent, DateTimeDisplayComponent],
   exports: [
     QrScanComponent,
-    QrScanControlComponent
+    QrScanControlComponent,
+    DateTimeDisplayComponent
   ]
 })
 export class SharedModule {

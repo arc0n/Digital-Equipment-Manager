@@ -40,11 +40,17 @@ export class EquipmentDashboardPage {
 
   modalResult(value: string) {
     console.log("Modal result: ", value)
-    this.itemService.getItemByCode(value).subscribe((item) => {
+    this.itemService.getItemByCode(value).subscribe(async (item) => {
+      await this.modal.dismiss();
+
       if(!!item){
-      this.modal.dismiss();
       this.navigateToEquipmentPage(item);
 
+      } else{
+        const p = await this.toastController.create({color:"danger", duration:2000, message:"" +
+            "Element mit diesem Code wurde nicht gefunden",
+        })
+        p.present()
       }
     })
   }

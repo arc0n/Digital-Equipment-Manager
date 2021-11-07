@@ -12,9 +12,8 @@ export class PersonResourceService extends BaseResourceService<Person>{
     this.baseUrl = this.baseUrl +"/person";
   }
 
-  getPersonByName(searchString:string): Observable<Person> {
-    // TODO not correctyl implemented
-    return this.getByID(searchString,{});
+  getPersonByName(searchString:string): Observable<Person[]> {
+    return this.getList({name: searchString});
   }
   getPersonByCode(code:string): Observable<Person> {
     return this.getByID(code,{});

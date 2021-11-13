@@ -20,6 +20,7 @@ const sql = require("./db.js");
    * @returns {Undefined} Undefined
    */
    Booking.create = (item, result)=> {
+     //Select Person
      sql.query("SELECT id FROM person WHERE dynamic_id = ?", [item.person_id], (err, res)=> {
       if (err) {
         console.log("error: ", err);
@@ -27,31 +28,63 @@ const sql = require("./db.js");
         return;
       }
 
-        const person_id = res[0].id;
-        
-        sql.query("SELECT id FROM item WHERE dynamic_id = ?", [item.item_id], (err, res)=> {
-          if (err) {
-            console.log("error: ", err);
-            result(err);
-            return;
+      if(!res || res.length === 0) result(err);
+      const person_id = res[0].id;
+      
+      //Select Item or Items
+      const conditions = (typeof item.item_id === 'object') ? 
+            Booking._buildConditions(item.item_id, ' OR ') :
+            { where: 'dynamic_id = ?', values: item.item_id };
+
+        sql.query("SELECT id FROM item WHERE " + conditions.where, conditions.values, (err, res_items)=> {
+        if (err) {
+          console.log("error: ", err);
+          result(err);
+          return;
+        }
+
+          //Check if Item or Items are already borrowed
+          sql.query("SELECT item_id FROM borrowed_item WHERE datetime_in IS NULL", (err, res_borrowed_items) => {
+            if (err) {
+              console.log("error: ", err);
+              result(err);
+              return;
+            }
+
+          const values = [], item_ids = [];
+          if(res_items.length >= 1) {
+            res_items.forEach(res_item => {
+              values.push([item.datetime_out, res_item.id, person_id]);
+              item_ids.push(res_item.id);
+            });
+            } else {
+              result(err);
+              return;
+            }
+
+          // Check intersection
+          if(res_borrowed_items.length > 0) {
+            const borrowed_items = res_borrowed_items.map(item=> item.item_id);
+            const intersection = item_ids.filter(element => borrowed_items.includes(element));
+            
+            if(intersection.length > 0) {
+              result({message: 'UNFINISHED_BOOKING',code:409});
+              return;
+            }
           }
 
-          const item_id = res[0].id;
-
-          /* Replace Dynamic IDs with Primary Key ID */
-          item.person_id = person_id;
-          item.item_id = item_id;
-
-          sql.query("INSERT INTO borrowed_item SET ?", item, (err, res) => {
+          
+          sql.query("INSERT INTO borrowed_item (datetime_out, item_id, person_id) VALUES ?", [values], (err, res) => {
             if (err) {
               console.log("error: ", err);
               result(err);
               return;
             }
     
-            console.log("Created borrowed_item: ", { id: res.insertId, ...item });
+            console.log("Items borrowed successfully!");
             result(null, { result: true, message: 'Item borrowed successfully!' });
           });
+        });
       });
     });
   };
@@ -137,7 +170,7 @@ const sql = require("./db.js");
    * @param {Object} params Object with api request parameters
    * @returns {Object} Object with condition and condition values.
    */
-   Booking._buildConditions = (params) => {
+   Booking._buildConditions = (params, delimeter = ' AND ') => {
     let conditions = [],
         values = [];
 
@@ -156,8 +189,15 @@ const sql = require("./db.js");
       values.push(params.person_id);
     }
 
+    if(typeof params === 'object') {
+      for(id in params) {
+        conditions.push("dynamic_id = ?");
+        values.push(params[id]);
+      }
+    }
+
     return {
-      where: conditions.length ? conditions.join(' AND ') : '1',
+      where: conditions.length ? conditions.join(delimeter) : '1',
       values: values
     };
   }

@@ -21,11 +21,29 @@
 .employee-page-content-wrapper {
   margin: 2rem;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
   flex: 1 1;
   border: 3px solid var(--ion-color-light);
   border-radius: 2px;
   color: var(--ion-color-medium);
   min-height: 400px;
+}
+
+.employee-page-note-content{
+  flex-grow: 1;
+    width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.employee-page-result-list{
+  width: 100%;
+}
+.employee-page-result{
+  cursor: pointer;
+  &:hover{
+    --ion-item-background: #ECECECFF !important;
+  }
 }

@@ -12,15 +12,17 @@ import { HttpClientModule} from "@angular/common/http";
 import {PersonResourceService} from "./api-services/person-resource.service";
 import {DateTimeDisplayComponent} from "../components/date-time-display/date-time-display.component";
 import {BookingResourceService} from "./api-services/booking-resource.service";
+import {HistoryListComponent} from "../components/history-list/history-list.component";
 
 
 @NgModule({
   imports: [IonicStorageModule, IonicModule, CommonModule, ReactiveFormsModule, HttpClientModule],
-  declarations: [QrScanComponent, QrScanControlComponent, DateTimeDisplayComponent],
+  declarations: [QrScanComponent, QrScanControlComponent, DateTimeDisplayComponent, HistoryListComponent],
   exports: [
     QrScanComponent,
     QrScanControlComponent,
-    DateTimeDisplayComponent
+    DateTimeDisplayComponent,
+    HistoryListComponent
   ]
 })
 export class SharedModule {

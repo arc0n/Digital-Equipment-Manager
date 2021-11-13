@@ -1,0 +1,18 @@
+<ion-list>
+
+  <ion-list-header>
+    <ion-label>Vorname</ion-label>
+    <ion-label>Nachname</ion-label>
+    <ion-label>Datum Ausgabe</ion-label>
+    <ion-label>Datum Rückgabe</ion-label>
+  </ion-list-header>
+
+  <ion-item *ngFor="let booking of bookings">
+    <div class="history-ion-item-inner">
+      <div> {{ booking.firstname }}</div>
+      <div> {{ booking.lastname }}</div>
+      <div> {{ (booking.datetime_out | date ) || '-' }}</div>
+      <div> {{ (booking.datetime_in | date ) || '-' }}</div>
+    </div>
+  </ion-item>
+</ion-list>

@@ -15,7 +15,7 @@ export interface Person {
   firstname: string,
   lastname: string,
   birthdate: Date,
-  sex: string,
+  sex: number,
   id_card?: string,
   dynamic_id: string,
   street: string,

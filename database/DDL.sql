@@ -102,9 +102,9 @@ INSERT INTO item_model (name, model_number, item_type_id) VALUES ("T-14", "14", 
 INSERT INTO item_model (name, model_number, item_type_id) VALUES ("H-12", "12", 3);
 INSERT INTO item_model (name, model_number, item_type_id) VALUES ("P-117", "117", 4);
 
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12001,"4z8k9a6bqx7u7ad", "/","", "aktiv",1);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12002,"q6irq09w1aha126", "/","", "aktiv",1);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12003,"7zdqatdaohetbl9", "/","", "aktiv",1);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12001,"4z8k9a6bqx7u7ad", "/","some desc", "aktiv",1);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12002,"q6irq09w1aha126", "/","lorem ipsum", "aktiv",1);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12003,"7zdqatdaohetbl9", "/","test description which is a bit longer", "aktiv",1);
 INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12004,"jvi6q46zqrns5hv", "/","", "aktiv",1);
 INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12005,"k9ioxw31r7m5h92", "/","", "aktiv",1);
 INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12006,"yh63pmq4jq2qa46", "/","", "aktiv",1);

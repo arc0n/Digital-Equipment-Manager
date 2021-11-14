@@ -24,6 +24,16 @@ export interface Person {
 }
 
 export  interface Booking {
-  item_id: string,
   person_id: string,
+  item_id: string,
+
+  booking_id?: number,
+  datetime_out?: Date,
+  datetime_in?: null,
+  firstname?: string,
+  lastname?: string,
+  model_id?: number,
+  model_name?: string,
+  item_type_id?: number,
+  item_type?: string
 }

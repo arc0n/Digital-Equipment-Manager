@@ -32,7 +32,12 @@ exports.getAll = (req, res) => {
 
 //Returns a borrowed item
 exports.return = (req, res) => {
-  Booking.return(req.params.id, (err, data) => {
+  if (!req.body || !req.body.item_id) {
+    apiResponse.sendResponse(res, {message: 'INVALID_REQUEST'}, 'Missing body parameters');
+    return;
+  }
+
+  Booking.return(req.body, (err, data) => {
     apiResponse.sendResponse(res, err, data);
   });
 };

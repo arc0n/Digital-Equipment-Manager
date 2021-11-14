@@ -98,8 +98,8 @@ const sql = require("./db.js");
    Booking.getAll = (params, result) => {
     const conditions = Booking._buildConditions(params);
 
-    sql.query("SELECT borrowed_item.id AS booking_id, datetime_out, datetime_in, p.dynamic_id as person_id, p.firstname, p.lastname, i.dynamic_id as item_id, " +
-    "im.id AS model_id, im.name AS model_name, it.id AS item_type_id, it.name AS item_type FROM borrowed_item " +
+    sql.query("SELECT borrowed_item.id AS booking_id, datetime_out, datetime_in, p.dynamic_id as person_id, p.sex, p.id_card, p.firstname, p.lastname, i.dynamic_id as item_id, " +
+    "im.name AS model_name, it.name AS item_type FROM borrowed_item " +
     "INNER JOIN person p ON p.id = borrowed_item.person_id " +
     "INNER JOIN item i ON i.id = borrowed_item.item_id " +
     "INNER JOIN item_model im ON im.id = i.item_model_id " + 
@@ -109,52 +109,71 @@ const sql = require("./db.js");
         result(err);
         return;
       }
-  
-      console.log("items: ", res);
-      result(null, res);
+      let formattedReponse = [];
+      res.forEach(booking => {
+        formattedReponse.push({
+          booking_id: booking.booking_id,
+          datetime_out: booking.datetime_out,
+          datetime_in: booking.datetime_in,
+          person: {
+            person_id: booking.person_id,
+            firstname: booking.firstname,
+            lastname: booking.lastname,
+          },
+          item: {
+            item_id: booking.item_id,
+            model_id: booking.model_id,
+            model_name: booking.model_name,
+            item_type_id: booking.item_type_id,
+            item_type: booking.item_type,
+          }
+        });
+      });
+      console.log("items: ", formattedReponse);
+      result(null, formattedReponse);
     });
   };
   
     /**
      * Returns a borrowed item with a specific dynamic ID
      * @todo
-     * @param {Number} dynamic_id Dynamic ID of the item that should be returned
+     * @param {Object} item_ids Objekt mit einem Array oder String mit item_ids
      * @param {Function} result Callback
      * @returns {Undefined} Undefined
      */
-    Booking.return = (dynamic_id, result) => {
-      //WORKS BUT WORK IN PROGRESS (CHECKS and other stuff)
-      sql.query("SELECT id FROM item WHERE dynamic_id = ?", [dynamic_id], (err, res)=> {
+    Booking.return = (item_ids, result) => {
+       //Select Item or Items
+       const conditions = (typeof item_ids.item_id === 'object') ? 
+       Booking._buildConditions(item_ids.item_id, ' OR ') :
+       { where: 'dynamic_id = ?', values: item_ids.item_id };
+
+      sql.query("SELECT id FROM item WHERE " + conditions.where, conditions.values, (err, res)=> {
         if (err) {
           console.log("error: ", err);
           result(err);
           return;
         }
 
-        const item_id = res[0].id;
-        console.log(item_id);
+        let query = "", conditions2 = [];
+        //TODO is null datetime_in and WHERE?
+        res.forEach(item=> {
+          query += "UPDATE borrowed_item SET datetime_in = ? WHERE item_id = ? AND datetime_in IS NULL ORDER BY datetime_out DESC LIMIT 1; "
+          conditions2.push(Booking.dateNow(),item.id);
+        });
+
         sql.query(
-            "UPDATE borrowed_item " +
-            "SET datetime_in = ? "  +
-            "WHERE item_id = ? "         +
-            "ORDER BY datetime_out DESC LIMIT 1",
-            [Booking.dateNow(), item_id],
+          query, conditions2,
             (err, res) => {
             if (err) {
                 console.log("error: ", err);
                 result(err);
                 return;
             }
-        
-            if (res.affectedRows == 0) {
-              // not found Booking with the id
-              result({message: 'NOT_FOUND', code: 404});
-              return;
-            }
+
+            // TODO: more detailed response
   
-        
-            console.log("The item was returned: ", { "serial_number": dynamic_id });
-            result(null, {"result": dynamic_id, "message": 'Item returned successfully!' });
+            console.log("The item/s was/were returned");
+            result(null, {"result": true, "message": 'Item returned successfully!' });
             }
         );
       });

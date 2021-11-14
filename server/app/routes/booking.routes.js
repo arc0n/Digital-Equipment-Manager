@@ -8,7 +8,7 @@
   
     app.post("/booking", booking.create);
    
-    app.put("/booking/:id", booking.return);
+    app.put("/booking", booking.return);
 
     app.get("/booking", booking.getAll);
 

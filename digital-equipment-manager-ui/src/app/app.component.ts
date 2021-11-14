@@ -10,7 +10,7 @@ const MAIN_PAGE_LINKS: EquipmentRouterLink[] = [
   {title: 'Home', url: '/tabs/dashboard', icon: 'home', secondary: false},
   {title: 'Mitarbeiter anlegen', url: '/employee-add-page', icon: 'person-add', secondary: true},
   {title: 'Gegenstand anlegen', url: '/equipment-add-page', icon: 'duplicate', secondary: true},
-  {title: 'Geräteliste', url: '/nux1', icon: 'briefcase', secondary: true}
+  {title: 'Geräteliste', url: '/item-list', icon: 'briefcase', secondary: true}
 ];
 
 const EQUIPMENT_PAGE_LINKS: EquipmentRouterLink[] = [

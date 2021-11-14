@@ -1,0 +1,16 @@
+<ion-list>
+
+  <ion-list-header>
+    <ion-label>Model</ion-label>
+    <ion-label>Item Typ</ion-label>
+    <ion-label>Status</ion-label>
+    <ion-label>Description</ion-label>
+  </ion-list-header>
+
+  <ion-item *ngFor="let item of items">
+    <ion-label> {{ item.model_name }}</ion-label>
+    <ion-label> {{ item.item_type || '-' }}</ion-label>
+    <ion-label> {{  item.status || '-' }}</ion-label>
+    <ion-label> {{ item.description || '-' }}</ion-label>
+  </ion-item>
+</ion-list>

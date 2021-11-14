@@ -15,6 +15,10 @@ export class BookingResourceService extends BaseResourceService<Booking>{
   getAllBookings(params: QueryParams): Observable<Booking[]> {
     return this.getList(params);
   }
+
+  getBookingsByPerson(personId: string, params: QueryParams): Observable<Booking[]> {
+    return this.getList({...params, person_id: personId});
+  }
   postBooking(booking: Booking): Observable<Booking>{
     return this.post(booking, {})
   }

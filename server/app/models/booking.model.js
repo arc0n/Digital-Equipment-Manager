@@ -189,7 +189,8 @@ const sql = require("./db.js");
       values.push(params.person_id);
     }
 
-    if(typeof params === 'object') {
+    //TODO: Quickfix for booking parametrs to work. Debug later
+    if(typeof params === 'object' && delimeter === ' OR ') {
       for(id in params) {
         conditions.push("dynamic_id = ?");
         values.push(params[id]);

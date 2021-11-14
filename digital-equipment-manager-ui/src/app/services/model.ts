@@ -23,13 +23,12 @@ export interface Person {
   city: string
 }
 
-export  interface Booking {
+export interface Booking {
   person_id: string,
   item_id: string,
-
   booking_id?: number,
   datetime_out?: Date,
-  datetime_in?: null,
+  datetime_in?: Date,
   firstname?: string,
   lastname?: string,
   model_id?: number,

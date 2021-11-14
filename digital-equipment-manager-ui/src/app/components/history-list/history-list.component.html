@@ -8,11 +8,9 @@
   </ion-list-header>
 
   <ion-item *ngFor="let booking of bookings">
-    <div class="history-ion-item-inner">
-      <div> {{ booking.firstname }}</div>
-      <div> {{ booking.lastname }}</div>
-      <div> {{ (booking.datetime_out | date ) || '-' }}</div>
-      <div> {{ (booking.datetime_in | date ) || '-' }}</div>
-    </div>
+      <ion-label> {{ booking.firstname }}</ion-label>
+      <ion-label> {{ booking.lastname }}</ion-label>
+      <ion-label> {{ (booking.datetime_out | date ) || '-' }}</ion-label>
+      <ion-label> {{ (booking.datetime_in | date ) || '-' }}</ion-label>
   </ion-item>
 </ion-list>

@@ -7,13 +7,4 @@ ion-list{
 }
 ion-item{
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-.history-ion-item-inner{
-  width: 100%;
-  display: flex;
-  div{
-    flex: 1 1 100px;
-  }
 }

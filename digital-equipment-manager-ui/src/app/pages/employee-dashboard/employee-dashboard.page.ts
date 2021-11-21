@@ -89,6 +89,7 @@ export class EmployeeDashboardPage implements OnInit, OnDestroy {
     this.resetControls.next();
     this.activatedRoute.queryParams.pipe(take(1)).subscribe(params =>{
       this.router.navigate(['booking-summary'], {queryParams:{
+          isOpenBooking: params.isOpenBooking,
           personId: employee.dynamic_id,
           itemId: params.itemId
         }})

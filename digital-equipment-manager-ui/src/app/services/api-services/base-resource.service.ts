@@ -46,17 +46,32 @@ export class BaseResourceService<T> {
   }
 
 
-  post(entity: T, params: QueryParams): Observable<T> {
+  post(entity: T, params: QueryParams): Observable<boolean | string> {
     if (!entity) return of(null)
 
-    return this.http.post<{result: T}>(this.baseUrl, entity, {params: params}).pipe(
+    return this.http.post<{result: boolean | string}>(this.baseUrl, entity, {params: params}).pipe(
       catchError(err => {
         console.log("err in service", err);
         // TODO handle error
         return of(null);
       }),
       map(resp => {
-        return resp?.result as T || null
+        return resp?.result || null
+      })
+    )
+  }
+
+  put(entity: T, params: QueryParams): Observable<boolean | string> {
+    if (!entity) return of(null)
+
+    return this.http.post<{result: boolean | string}>(this.baseUrl, entity, {params: params}).pipe(
+      catchError(err => {
+        console.log("err in service", err);
+        // TODO handle error
+        return of(null);
+      }),
+      map(resp => {
+        return resp?.result || null
       })
     )
   }

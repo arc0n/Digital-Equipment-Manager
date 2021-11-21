@@ -39,7 +39,6 @@ export class EquipmentDashboardPage {
   }
 
   modalResult(value: string) {
-    console.log("Modal result: ", value)
     this.itemService.getItemByCode(value).subscribe(async (item) => {
       await this.modal.dismiss();
 

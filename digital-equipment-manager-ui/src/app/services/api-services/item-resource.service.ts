@@ -3,6 +3,7 @@ import {Observable, of} from "rxjs";
 import {Item, Person} from "../model";
 import {BaseResourceService, QueryParams} from "./base-resource.service";
 import {HttpClient} from "@angular/common/http";
+import {map} from "rxjs/operators";
 
 @Injectable()
 export class ItemResourceService extends BaseResourceService<Item>{
@@ -13,12 +14,12 @@ export class ItemResourceService extends BaseResourceService<Item>{
   }
 
   getItemByCode(code:string): Observable<Item> {
-    return this.getByID(code,{});
+    return this.getByID(code,{}).pipe(map(item => ({...item, isBorrowed: item.borrowed === 'true'})));
   }
   getAllItems(filter: QueryParams): Observable<Item[]> {
     return this.getList(filter);
   }
-  postItem(item: Item): Observable<Item>{
-    return this.post(item, {})
+  postItem(item: Item): Observable<string>{
+    return this.post(item, {}).pipe(map(res => res as string))
   }
 }

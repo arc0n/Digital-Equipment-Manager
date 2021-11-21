@@ -51,7 +51,7 @@
       </div>
         <ion-button class="max-width-100" color="primary"
         (click)="navigateToEmployeeDashboard()">
-          Aus/Eingabe
+          {{this.item?.isBorrowed ? 'Rücknahme' : 'Ausgabe'}}
         </ion-button>
     </div>
 

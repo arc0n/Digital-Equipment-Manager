@@ -71,9 +71,13 @@ const sql = require("./db.js");
    */
      Item.getById = (id, result) => {
       sql.query(
-      "SELECT * FROM item " +
-      "INNER JOIN item_model ON item.item_model_id = item_model.id " +
-      "INNER JOIN item_type ON item_type.id = item_model.item_type_id " +
+          "SELECT item.*, item_model.name AS model_name, item_type.name AS item_type, item_type.id AS item_type_id, item_type.description AS item_type_description, " +
+          "CASE WHEN t.borrowed IS NULL THEN 'false' ELSE t.borrowed END AS borrowed FROM item " +
+          "INNER JOIN item_model ON item_model.id = item.item_model_id " +
+          "INNER JOIN item_type ON item_type.id = item_model.item_type_id " +
+          "LEFT JOIN (WITH ordered_items AS (SELECT CASE WHEN datetime_in IS NULL THEN 'false' ELSE 'true' END AS borrowed, item_id, ROW_NUMBER() " +
+          "OVER (PARTITION BY item_id ORDER BY datetime_out DESC) AS rn FROM borrowed_item) " +
+          "SELECT * FROM ordered_items  where rn = 1) AS t ON item.id = t.item_id " +
       "WHERE item.dynamic_id= ?", [id], (err, res) => {
         if (err) {
           console.log("error: ", err);

@@ -3,6 +3,7 @@ import {Observable, of} from "rxjs";
 import {Person, Item} from "../model";
 import {BaseResourceService} from "./base-resource.service";
 import {HttpClient} from "@angular/common/http";
+import {map} from "rxjs/operators";
 
 @Injectable()
 export class PersonResourceService extends BaseResourceService<Person>{
@@ -21,7 +22,7 @@ export class PersonResourceService extends BaseResourceService<Person>{
   getAllPersons(): Observable<Person[]> {
     return this.getList({});
   }
-  postPerson(person: Person): Observable<Person>{
-    return this.post(person, {})
+  postPerson(person: Person): Observable<boolean | string>{
+    return this.post(person, {}).pipe(map(res => res as string))
   }
 }

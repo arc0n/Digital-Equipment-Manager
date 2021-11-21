@@ -1,7 +1,12 @@
+.qr-scanner-header{
+  margin: 2rem 1rem 2rem 1rem;
+}
+
 .qr-scanner-horizontal{
   display: flex;
   justify-content: space-between;
   margin: 0 1rem 0 1rem;
+  align-items: end;
 }
 
 .qr-scanner-wrapper{
@@ -12,5 +17,5 @@
 
 .qr-scanner-video-element-container{
   margin: 1rem 2rem;
-  min-height: 406px;
+  min-height: 306px;
 }

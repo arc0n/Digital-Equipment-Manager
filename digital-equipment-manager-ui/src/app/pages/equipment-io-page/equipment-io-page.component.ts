@@ -115,7 +115,8 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
 
 
   navigateToEmployeeDashboard() {
-    this.router.navigate(['/employee-dashboard'], {queryParams: {itemId: this.item.dynamic_id}})
+    this.router.navigate(['/employee-dashboard'], {
+      queryParams: {itemId: this.item.dynamic_id, isOpenBooking: !!this.item.isBorrowed}})
   }
 
   backButtonClicked() {

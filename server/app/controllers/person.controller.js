@@ -6,7 +6,7 @@ const apiResponse = require("../api_response.js");
 // Create and Save a new Person
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body) {
+    if (!req.body || !req.body.birthdate || !req.body.sex || !req.body.firstname || !req.body.lastname) {
       apiResponse.sendResponse(res, {message: 'INVALID_REQUEST'}, 'Missing body parameters');
       return;
     }
@@ -18,7 +18,7 @@ exports.create = (req, res) => {
     const person = new Person({
       firstname: req.body.firstname,
       lastname: req.body.lastname,
-      birthdate: req.body.birthdate,
+      birthdate: new Date(req.body.birthdate).toISOString().split('T')[0],
       sex: (req.body.sex) ? req.body.sex : '-1',
       id_card: (req.body.id_card) ? req.body.id_card : 'unknown',
       dynamic_id: dynamic_id

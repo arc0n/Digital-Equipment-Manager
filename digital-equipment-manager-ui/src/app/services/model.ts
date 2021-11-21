@@ -5,7 +5,7 @@ export interface Item {
   description: string,
   status: string,
   item_model_id: number,
-  name: string,
+  model_name: string,
   item_type: string,
   item_type_id: number,
   item_type_description: string
@@ -15,7 +15,7 @@ export interface Person {
   firstname: string,
   lastname: string,
   birthdate: Date,
-  sex: string,
+  sex: number,
   id_card?: string,
   dynamic_id: string,
   street: string,
@@ -23,7 +23,9 @@ export interface Person {
   city: string
 }
 
-export  interface Booking {
-  item_id: string,
+export interface Booking {
   person_id: string,
+  item_id: string,
+  person?: Person,
+  item?: Item
 }

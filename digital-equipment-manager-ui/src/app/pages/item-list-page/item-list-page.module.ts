@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import {IonicModule} from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';
 
-import { EquipmentIoPagePageRoutingModule } from './equipment-io-page-routing.module';
+import { ItemListPagePageRoutingModule } from './item-list-page-routing.module';
 
-import { EquipmentIoPage } from './equipment-io-page.component';
+import { ItemListPagePage } from './item-list-page.page';
 import {SharedModule} from "../../services/shared.module";
 
 @NgModule({
@@ -14,10 +14,9 @@ import {SharedModule} from "../../services/shared.module";
         CommonModule,
         FormsModule,
         IonicModule,
-        EquipmentIoPagePageRoutingModule,
+        ItemListPagePageRoutingModule,
         SharedModule
     ],
-  declarations: [EquipmentIoPage]
+  declarations: [ItemListPagePage]
 })
-export class EquipmentIoPagePageModule {
-}
+export class ItemListPagePageModule {}

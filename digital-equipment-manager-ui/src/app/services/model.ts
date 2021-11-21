@@ -5,7 +5,7 @@ export interface Item {
   description: string,
   status: string,
   item_model_id: number,
-  model_name: string,
+  name: string,
   item_type: string,
   item_type_id: number,
   item_type_description: string

@@ -17,8 +17,6 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
 
 .booking-summary-picture-wrapper {
@@ -33,16 +31,39 @@
   color: var(--ion-color-medium);
 }
 
-.booking-summary-picture-list-wrapper {
+
+
+.booking-summary-flex-list-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 1rem;
+  padding-right   : 1rem;
+}
+
+.booking-summary-list-header-item{
+  flex-grow: 1;
+  display: flex;
+  align-items: start;
+}
+.booking-summary-list-item{
+  flex-grow: 1;
+  display: flex;
+  align-items: start;
+}
+
+.booking-summary-list-picture-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   flex: 0 1 50px;
   min-height: 50px;
+  max-width: 50px;
   border: 3px solid var(--ion-color-light);
   border-radius: 2px;
   color: var(--ion-color-medium);
 }
+
 
 .booking-summary-add-button {
   display: flex;

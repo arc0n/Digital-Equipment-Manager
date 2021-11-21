@@ -9,6 +9,7 @@ const connection =  mysql.createConnection({
   user:'root',
   password: 'root',
   database:'equipment_manager',
+  multipleStatements: true
 });
 
 // open the MySQL connection

@@ -72,7 +72,7 @@ const sql = require("./db.js");
    */
      Item.getById = (id, result) => {
       sql.query(
-      "SELECT item.*,CASE WHEN t.borrowed IS NULL THEN 'false' ELSE t.borrowed END AS borrowed FROM item " +
+      "SELECT item.*, item_model.*, item_type.*, CASE WHEN t.borrowed IS NULL THEN 'false' ELSE t.borrowed END AS borrowed FROM item " +
       "INNER JOIN item_model ON item.item_model_id = item_model.id " +
       "INNER JOIN item_type ON item_type.id = item_model.item_type_id " +
       "LEFT JOIN (WITH ordered_items AS (SELECT CASE WHEN datetime_in IS NULL THEN 'true' ELSE 'false' END AS borrowed, item_id, ROW_NUMBER() " +

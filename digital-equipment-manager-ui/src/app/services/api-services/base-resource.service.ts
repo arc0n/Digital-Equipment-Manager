@@ -19,25 +19,22 @@ export class BaseResourceService<T> {
   }
 
   getList(params: QueryParams): Observable<T[]> {
-    console.log(params)
     return this.http.get<{ result: T[]}>(this.baseUrl, {params: params}).pipe(
       map(res => res.result as T[]),
       catchError(err => {
         console.log(err);
-        // TODO handle error
+        // TODO handle error for list
         return of([]);
       })
     )
   }
 
-  getByID(id: string | number, params: QueryParams): Observable<T> {
+  getByID(id: string | number, params: QueryParams): Observable<T > {
     if (!id) return of(null)
 
-    return this.http.get<{ result: T }>(this.baseUrl + `/${id}`, {params: params}).pipe(
+    return this.http.get<{ result: T | string }>(this.baseUrl + `/${id}`, {params: params}).pipe(
       catchError(err => {
-        console.log("err in service", err);
-        // TODO handle error
-        return of(null);
+        return this.handleError(err);
       }),
       map(resp => {
         return resp?.result || null
@@ -51,9 +48,7 @@ export class BaseResourceService<T> {
 
     return this.http.post<{result: boolean | string}>(this.baseUrl, entity, {params: params}).pipe(
       catchError(err => {
-        console.log("err in service", err);
-        // TODO handle error
-        return of(null);
+        return this.handleError(err);
       }),
       map(resp => {
         return resp?.result || null
@@ -61,17 +56,20 @@ export class BaseResourceService<T> {
     )
   }
 
+  private handleError(err) {
+    console.log("err in service", err);
+    return of(err.error);
+  }
+
   put(entity: T, params: QueryParams): Observable<boolean | string> {
     if (!entity) return of(null)
 
-    return this.http.post<{result: boolean | string}>(this.baseUrl, entity, {params: params}).pipe(
+    return this.http.put<{result: boolean | string}>(this.baseUrl, entity, {params: params}).pipe(
       catchError(err => {
-        console.log("err in service", err);
-        // TODO handle error
-        return of(null);
+        return this.handleError(err);
       }),
       map(resp => {
-        return resp?.result || null
+        return resp?.result
       })
     )
   }

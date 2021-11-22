@@ -13,8 +13,8 @@ export class ItemResourceService extends BaseResourceService<Item>{
     this.baseUrl = this.baseUrl +"/item";
   }
 
-  getItemByCode(code:string): Observable<Item> {
-    return this.getByID(code,{}).pipe(map(item => ({...item, isBorrowed: item.borrowed === 'true'})));
+  getItemByCode(code:string): Observable<Item | string> {
+    return this.getByID(code,{});
   }
   getAllItems(filter: QueryParams): Observable<Item[]> {
     return this.getList(filter);

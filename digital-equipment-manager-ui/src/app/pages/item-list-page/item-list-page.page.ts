@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
+import {Item} from "../../services/model";
 
 @Component({
   selector: 'app-item-list-page',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ItemListPagePage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
+  itemClicked(event: Item) {
+    this.router.navigate(['equipment'], {queryParams: {id: event.dynamic_id}});
+  }
 }

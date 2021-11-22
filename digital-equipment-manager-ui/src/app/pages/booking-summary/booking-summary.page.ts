@@ -2,7 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {mergeMap, take} from "rxjs/operators";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Item, Person} from "../../services/model";
-import {forkJoin, Subscription} from "rxjs";
+import {forkJoin, of, Subscription} from "rxjs";
 import {ItemResourceService} from "../../services/api-services/item-resource.service";
 import {PersonResourceService} from "../../services/api-services/person-resource.service";
 import {ModalController, ToastController} from "@ionic/angular";
@@ -56,25 +56,25 @@ export class BookingSummaryPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.queryParams.pipe(take(1),
       mergeMap(params => {
-        this.isOpenBooking = params.isOpenBooking
         return forkJoin(
           [
             this.itemSrv.getItemByCode(params.itemId),
-            this.personSrv.getPersonByCode(params.personId)
+            (this.isOpenBooking ? of(null) : this.personSrv.getPersonByCode(params.personId))
           ]
         )
       })
     ).subscribe(async ([item, person]) => {
-      this.items.push(item);
-      this.person = person
-      this.isOpenBooking = item.isBorrowed;
-      if (!item || !person) {
+      if (!item ||item === 'NOT_FOUND' ||person === 'NOT_FOUND') {
         const toast = await this.toastController.create({
           position: "bottom", color: "danger",
           message: "Verbindung zum Server verloren, bitte Seite neu laden"
         })
         toast.present();
       }
+      this.items.push(item as Item);
+      this.person = person as Person
+      this.isOpenBooking = (item as Item).borrowed;
+
     })
   }
 
@@ -87,11 +87,11 @@ export class BookingSummaryPage implements OnInit, OnDestroy {
     if (this.isOpenBooking) {
       this.bookingSrv.putBooking({
         item_id: this.items?.map(i => i.dynamic_id),
-        person_id: this.person.dynamic_id
       }).subscribe(val => {
         this.handleBookingResponse(val)
       })
     } else {
+      console.log(this.person)
       this.bookingSrv.postBooking({
         item_id: this.items?.map(i => i.dynamic_id),
         person_id: this.person.dynamic_id
@@ -116,11 +116,23 @@ export class BookingSummaryPage implements OnInit, OnDestroy {
   }
 
   modalResult(value: string) {
-    this.itemService.getItemByCode(value).subscribe(async (item) => {
+    this.itemService.getItemByCode(value)
+
+      /*.pipe(
+      mergeMap(params => {
+        return forkJoin([this.itemService.getItemByCode(params.id),
+          this.bookingService.getBookingsByItem(params.id, {})])
+      })
+    ).subscribe(async ([item, bookings]) =>{
+      if(!!bookings && bookings.length > 0) {
+        item.borrowed = bookings.some(b => !b.datetime_in)
+        console.log(item.borrowed)
+      }*/
+      .subscribe(async (item) => {
       await this.modal.dismiss();
 
       if (!!item) {
-        this.addItemToList(item);
+        this.addItemToList(item as Item);
 
       } else {
         const p = await this.toastController.create({
@@ -136,13 +148,13 @@ export class BookingSummaryPage implements OnInit, OnDestroy {
   async addItemToList(item: Item) {
     if (this.items.some(i => i.dynamic_id === item.dynamic_id)) {
       const p = await this.toastController.create({
-        color: "danger", duration: 2000,
+        color: "danger", duration: 4000,
         message: "Das Element existiert bereits in der Liste",
       })
       p.present()
-    } else if (item.isBorrowed !== this.isOpenBooking) {
+    } else if (item.borrowed !== this.isOpenBooking) {
       const p = await this.toastController.create({
-        color: "danger", duration: 2000,
+        color: "danger", duration: 6000,
         message: "Das Element ist aktuell nicht" + this.isOpenBooking ? 'Ausgegeben' : 'Verfügbar',
       })
       p.present()
@@ -157,15 +169,20 @@ export class BookingSummaryPage implements OnInit, OnDestroy {
   }
 
 
-  private async handleBookingResponse(val: boolean | string) {
-    if (val === 'INVALID_REQUEST') {
+  private async handleBookingResponse(val: any) {
+    console.log(val)
+    if (!val || val === 'INVALID_REQUEST' || val === 'UNFINISHED_BOOKING') {
       const p = await this.toastController.create({
-        color: "danger", duration: 2000, message: "" +
+        color: "danger", duration: 6000, message: "" +
           "Error Code: " + val,
       })
       p.present()
     } else {
       await this.router.navigate(['/'])
+      const p = await this.toastController.create({
+        color: "success", duration: 2000, message: `die ${this.isOpenBooking ? 'Rückgabe' : 'Ausgabe'} wurde gebucht`
+      })
+      p.present()
     }
   }
 }

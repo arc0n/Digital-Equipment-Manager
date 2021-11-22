@@ -1,4 +1,4 @@
-import {Component, OnInit, Query, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, Query, SimpleChanges} from '@angular/core';
 import {Item} from "../../services/model";
 import {QueryParams} from "../../services/api-services/base-resource.service";
 import {ItemResourceService} from "../../services/api-services/item-resource.service";
@@ -11,6 +11,7 @@ import {ItemResourceService} from "../../services/api-services/item-resource.ser
 export class ItemListComponent implements OnInit {
   items: Item[];
   filter: QueryParams
+  @Output() itemClicked = new EventEmitter<Item>();
 
   constructor(private itemService: ItemResourceService) { }
 
@@ -30,4 +31,7 @@ export class ItemListComponent implements OnInit {
     })
   }
 
+  emitItemClick(item: Item) {
+    this.itemClicked.emit(item)
+  }
 }

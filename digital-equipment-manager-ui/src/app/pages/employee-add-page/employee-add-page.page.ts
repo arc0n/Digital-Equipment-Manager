@@ -53,7 +53,6 @@ export class EmployeeAddPagePage implements OnInit, OnDestroy {
         street: rawFormValues.addressStreet,
         zip: rawFormValues.addressZip
       }
-      console.log(personEntries);
     });
   }
 

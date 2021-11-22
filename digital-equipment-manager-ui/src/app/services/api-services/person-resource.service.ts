@@ -16,7 +16,7 @@ export class PersonResourceService extends BaseResourceService<Person>{
   getPersonByName(searchString:string): Observable<Person[]> {
     return this.getList({name: searchString});
   }
-  getPersonByCode(code:string): Observable<Person> {
+  getPersonByCode(code:string): Observable<Person | string> {
     return this.getByID(code,{});
   }
   getAllPersons(): Observable<Person[]> {

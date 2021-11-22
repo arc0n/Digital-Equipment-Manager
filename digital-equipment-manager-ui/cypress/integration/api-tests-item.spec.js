@@ -251,7 +251,7 @@ describe('api-tests-item', () => {
             }).should((response) => {
               expect(response).property('status').to.equal(200)
               expect(response.body.result).property('item_model_id').to.equal(2);
-              expect(response.body.result).property('description').to.equal('Elektroschockpistole');
+              expect(response.body.result).property('item_type_description').to.equal('Elektroschockpistole');
             })
           })
       })

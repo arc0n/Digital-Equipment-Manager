@@ -1,16 +1,20 @@
 <ion-list>
 
   <ion-list-header>
+    <ion-label>Id</ion-label>
     <ion-label>Model</ion-label>
     <ion-label>Item Typ</ion-label>
     <ion-label>Status</ion-label>
-    <ion-label>Description</ion-label>
+    <ion-label>Beschreibung</ion-label>
+    <ion-label>Ausgeborgt</ion-label>
   </ion-list-header>
 
-  <ion-item *ngFor="let item of items">
+  <ion-item *ngFor="let item of items" (click)="emitItemClick(item)">
+    <ion-label> {{ item.dynamic_id}}</ion-label>
     <ion-label> {{ item.model_name }}</ion-label>
     <ion-label> {{ item.item_type || '-' }}</ion-label>
     <ion-label> {{  item.status || '-' }}</ion-label>
     <ion-label> {{ item.description || '-' }}</ion-label>
+    <ion-label> {{ !!item.borrowed ? 'Ja' : 'Nein'  }}</ion-label>
   </ion-item>
 </ion-list>

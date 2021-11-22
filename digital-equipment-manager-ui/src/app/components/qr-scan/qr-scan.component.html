@@ -1,11 +1,22 @@
 <div class="qr-scanner-wrapper">
-  <div class="qr-scanner-video-element-container" >
+  <ion-item class="qr-scanner-header">
+    Bitte Scannen Sie Ihren Qr Code or tippen Sie diesen alternative in das untenstehende Feld
+  </ion-item>
+  <div class="qr-scanner-video-element-container">
     <video #video [hidden]="!scanActive" width="100%"></video>
     <canvas style="border: 1px solid green" #canvas hidden></canvas>
   </div>
 
   <div class="qr-scanner-horizontal">
-  <ion-button (click)="cancelBtnClicked()" color="light">cancel</ion-button>
+    <app-qr-control [showQrButton]="false"
+                    (onContinueBtnClick)="onContinueButtonClicked($event)"
+                    [customStyles]="{
+                    'flex-direction': 'row',
+                    'display': 'flex'    }"
+    >
+    </app-qr-control>
+
+    <ion-button (click)="cancelBtnClicked()" color="light">cancel</ion-button>
   </div>
 
 

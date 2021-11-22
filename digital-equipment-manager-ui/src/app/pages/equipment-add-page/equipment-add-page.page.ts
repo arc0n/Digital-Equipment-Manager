@@ -45,8 +45,8 @@ export class EquipmentAddPagePage implements OnInit, OnDestroy {
     this.activeRoute.queryParams.pipe(
       mergeMap(params => this.itemService.getItemByCode(params.id))
     ).subscribe(item =>{
-      this.item = item;
-      console.log("fetched item: ", item)
+      if(item === 'NOT_FOUND') return
+      this.item = item as Item;
     });
 
     this.addItemForm.valueChanges.subscribe((rawFormValues) => {

@@ -39,10 +39,10 @@ export class EmployeeDashboardPage implements OnInit, OnDestroy {
             this.employeeService.getPersonByName(searchValue),
             this.employeeService.getPersonByCode(searchValue)])
         })
-      ).subscribe(([byName, byCode]) => {
-        this.personResults = byName
-        if (!!byCode) {
-          this.navigateToSummaryPage(byCode)
+      ).subscribe(([personByNAme, personByCode]) => {
+        this.personResults = personByNAme
+        if (!!personByCode && personByCode !== 'NOT_FOUND') {
+          this.navigateToSummaryPage(personByCode as Person);
         }
       })
     )
@@ -71,13 +71,13 @@ export class EmployeeDashboardPage implements OnInit, OnDestroy {
     this.employeeService.getPersonByCode(value).subscribe(async (employee) => {
       await this.modal.dismiss();
 
-      if (!!employee) {
-        this.navigateToSummaryPage(employee)
+      if (!!employee && employee !== 'NOT_FOUND') {
+        this.navigateToSummaryPage(employee as Person);
       } else {
         const p = await this.toastContrl.create({color:"danger", duration:2000, message:"" +
             "Element mit diesem Code wurde nicht gefunden",
-        })
-        p.present()
+        });
+        p.present();
 
         // this.modal.present();
       }
@@ -89,9 +89,10 @@ export class EmployeeDashboardPage implements OnInit, OnDestroy {
     this.resetControls.next();
     this.activatedRoute.queryParams.pipe(take(1)).subscribe(params =>{
       this.router.navigate(['booking-summary'], {queryParams:{
+          isOpenBooking: params.isOpenBooking,
           personId: employee.dynamic_id,
           itemId: params.itemId
-        }})
+        }});
     })
   }
 

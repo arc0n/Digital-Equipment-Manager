@@ -4,8 +4,6 @@ import {ModalController, ToastController} from "@ionic/angular";
 import {QrScanComponent} from "../../components/qr-scan/qr-scan.component";
 import {ItemResourceService} from "../../services/api-services/item-resource.service";
 import {Item} from "../../services/model";
-import {Observable} from "rxjs";
-import {installTempPackage} from "@angular/cli/utilities/install-package";
 
 @Component({
   selector: 'equipment-dashboard',
@@ -39,12 +37,11 @@ export class EquipmentDashboardPage {
   }
 
   modalResult(value: string) {
-    console.log("Modal result: ", value)
     this.itemService.getItemByCode(value).subscribe(async (item) => {
       await this.modal.dismiss();
 
-      if(!!item){
-      this.navigateToEquipmentPage(item);
+      if(!!item && item !== 'NOT_FOUND'){
+      this.navigateToEquipmentPage(item as Item);
 
       } else{
         const p = await this.toastController.create({color:"danger", duration:2000, message:"" +
@@ -58,8 +55,7 @@ export class EquipmentDashboardPage {
   onContinueBtnClick(inputValue: string) {
     if(!inputValue) return;
     return this.itemService.getItemByCode(inputValue).subscribe(async(item) => {
-      console.log(item)
-      if(!item) {
+      if(!item || item === 'NOT_FOUND') {
         const toast = await this.toastController.create({
           position: "bottom",
           duration: 2000,
@@ -69,7 +65,7 @@ export class EquipmentDashboardPage {
         toast.present();
         return
       }
-      this.navigateToEquipmentPage(item);
+      this.navigateToEquipmentPage(item as Item);
     })
   }
 

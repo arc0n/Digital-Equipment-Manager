@@ -1,15 +1,70 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>booking-summary</ion-title>
+    <ion-buttons
+      *ngIf="this.showMobileMenu"
+      slot="start" class="employee-back-button" (click)="goBack()">
+      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title>Zusammenfassung über {{this.isOpenBooking ? 'Rücknahme' : 'Ausgabe'}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <p>
-    {{ this.item?.dynamic_id  }}
-  </p>
+<div class="booking-summary-content-wrapper">
+  <div class="booking-summary-content-card ion-margin">
+    <div class="booking-summary-flex-item">
+      <div class="booking-summary-picture-wrapper">
+        Person Picture
+      </div>
+      <div class="booking-summary-item-wrapper">
+        <h3>Person</h3>
+        <p>Vorname: {{ this.person?.firstname}}</p>
+        <p>Nachname: {{ this.person?.lastname}}</p>
+        <p>ID: {{ this.person?.id_card}}</p>
+      </div>
+    </div>
+    <div class="booking-summary-flex-list-header">
+      <ion-label class="booking-summary-list-header-item"><p>Picture</p></ion-label>
+      <ion-label class="booking-summary-list-header-item"><p>
+        Name
+      </p></ion-label>
+      <ion-label class="booking-summary-list-header-item"><p>
+        Seriennummer
+      </p></ion-label>
+    </div>
+    <ion-list class="booking-summary-flex-item-list" *ngFor="let item of items; let i = index">
+      <ion-item class="booking-summary-list-item">
+        <ion-label>
+          <div  class="booking-summary-list-picture-wrapper">
+            {{ item.photo }}
+          </div>
+        </ion-label>
+        <ion-label>{{ item.model_name }}</ion-label>
+        <ion-label>{{ item.serial_number }}</ion-label>
+        <ion-label><ion-button (click)="deleteItemFromList(i)">Delete</ion-button></ion-label>
 
-  <p>  {{ this.person?.firstname}}</p>
+      </ion-item>
+
+    </ion-list>
+    <div class="booking-summary-add-button ion-margin ion-padding">
+      <ion-button (click)="presentModal()">Gegenstand hinzufügen</ion-button>
+    </div>
 
 
+
+
+
+  </div>
+  <div class="equipment-add-bottom-toolbar" [ngClass]="{'ion-justify-content-between': !showMobileMenu}">
+    <div *ngIf="!showMobileMenu">
+      <ion-button class="max-width-100" color="secondary"
+                  (click)="goBack()">
+        Zurück
+      </ion-button>
+    </div>
+    <ion-button class="max-width-100" color="primary" (click)="createBooking()">
+      Bestätigen
+    </ion-button>
+  </div>
+</div>
 </ion-content>

@@ -1,6 +1,6 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {LoadingController} from "@ionic/angular";
-import jsQR  from 'jsqr'
+import jsQR from 'jsqr'
 
 @Component({
   selector: 'app-qr-scan',
@@ -8,8 +8,10 @@ import jsQR  from 'jsqr'
   styleUrls: ['./qr-scan.component.scss'],
 })
 export class QrScanComponent implements OnInit {
-  @Input() cancelClicked: ()=>any = ()=>{}
-  @Input() qrCodeRead: (code: string)=>any = ()=>{}
+  @Input() cancelClicked: () => any = () => {
+  }
+  @Input() qrCodeRead: (code: string) => any = () => {
+  }
 
 
   @ViewChild('video', {static: true}) video: ElementRef;
@@ -20,6 +22,7 @@ export class QrScanComponent implements OnInit {
 
   scanActive = true;
   loading: HTMLIonLoadingElement;
+
 
   constructor(private loadingCtl: LoadingController) {
   }
@@ -45,13 +48,12 @@ export class QrScanComponent implements OnInit {
     await this.videoNativeElement.play();
 
 
-
     this.scanActive = true;
     requestAnimationFrame(this.scanCode.bind(this))
   }
 
   async scanCode() {
-    if(!this.scanActive) return;
+    if (!this.scanActive) return;
     if (this.videoNativeElement.readyState === this.videoNativeElement.HAVE_ENOUGH_DATA) {
       if (await this.loading) {
         this.loading.dismiss();
@@ -74,7 +76,7 @@ export class QrScanComponent implements OnInit {
       )
 
       const code = this.processImageData(imageData);
-      if(code) {
+      if (code) {
         this.stopScan()
         this.qrCodeRead(code.data);
         return
@@ -94,12 +96,18 @@ export class QrScanComponent implements OnInit {
   }
 
   private processImageData(imageData: ImageData) {
-    return jsQR(imageData.data, imageData.width, imageData.height, {
-    });
+    return jsQR(imageData.data, imageData.width, imageData.height, {});
   }
 
-  cancelBtnClicked():void {
+  cancelBtnClicked(): void {
     this.stopScan();
     this.cancelClicked();
+  }
+
+  onContinueButtonClicked(event: string) {
+    console.log(event)
+    this.stopScan()
+    this.qrCodeRead(event);
+    return
   }
 }

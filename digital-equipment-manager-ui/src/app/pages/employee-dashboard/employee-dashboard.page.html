@@ -8,12 +8,12 @@
   <div class="equipment-page-vertical">
     <div class="employee-page-horizontal">
       <p class="employee-page-qr-header">
-        Qr Code des Mitarbeiters für die Ausgabe Scannen oder eintippen.
+        QR Code des Mitarbeiters für die Ausgabe Scannen oder eintippen.
         Alternativ kann nach Name des Mitarbeiters gesucht werden
       </p>
     </div>
 
-    <app-qr-control placeholder="Name/Qr code eintippen oder scannen"
+    <app-qr-control placeholder="Name / QR Code"
                     (onQrClick)="onScanClicked($event)"
                     [showContinueButton]="false"
                     (onValueInputChange)="onValueChange($event)"

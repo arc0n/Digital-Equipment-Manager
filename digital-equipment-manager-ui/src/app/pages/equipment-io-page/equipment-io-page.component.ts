@@ -2,10 +2,11 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ActionSheetController, ToastController} from "@ionic/angular";
 import {CommonStateService} from "../../services/common-state.service";
-import {Subscription} from "rxjs";
+import {forkJoin, Subscription} from "rxjs";
 import {mergeMap} from "rxjs/operators";
 import {Item} from "../../services/model";
 import {ItemResourceService} from "../../services/api-services/item-resource.service";
+import {BookingResourceService} from "../../services/api-services/booking-resource.service";
 
 @Component({
   selector: 'app-equipment-io-page',
@@ -26,7 +27,7 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
               private actionSheetController: ActionSheetController,
               private activeRoute: ActivatedRoute,
               private itemService: ItemResourceService,
-              private toastController: ToastController
+              private toastController: ToastController,
               ) {
   }
 
@@ -38,11 +39,10 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
     )
     this.activeRoute.queryParams.pipe(
       mergeMap(params => {
-        console.log(params)
         return this.itemService.getItemByCode(params.id)
       })
     ).subscribe(async (item) =>{
-      if(!item) {
+      if(!item || item === 'NOT_FOUND') {
         const toast = await this.toastController.create({
           position: "bottom",
           duration: 2000,
@@ -53,8 +53,7 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
         toast.present();
         return
       }
-      this.item = item;
-      console.log("fetched item: ", item)
+      this.item = item as Item;
     });
   }
 
@@ -110,20 +109,28 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
   }
 
   onMenuClicked() {
-    this.presentActionSheet(); // TODO do not present on desktop
+    this.presentActionSheet();
   }
 
 
-  navigateToEmployeeDashboard() {
-    this.router.navigate(['/employee-dashboard'], {queryParams: {itemId: this.item.dynamic_id}})
+  navigateToBookAndReturn() {
+    this.item.borrowed ?
+    this.router.navigate(['booking-summary'], {
+      queryParams: {itemId: this.item.dynamic_id, isOpenBooking: !!this.item.borrowed}}) :
+      this.router.navigate(['/employee-dashboard'], {
+        queryParams: {itemId: this.item.dynamic_id, isOpenBooking: !!this.item.borrowed}})
+
   }
 
   backButtonClicked() {
     this.router.navigate(['/'])
   }
 
-  getStatusColor(status: string) {
+  getStatusColor(status: string, isBorrowed: boolean) {
     if(!status) {return '#3a7be0';}
+    if(isBorrowed) {
+      return 'yellow'
+    }
     if(status === 'aktiv') {return 'var(--ion-color-success)';}
     else {return 'var(--ion-color-danger)';}
   }

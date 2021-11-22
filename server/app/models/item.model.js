@@ -58,8 +58,9 @@ const sql = require("./db.js");
         return;
       }
   
-      console.log("items: ", res);
-      result(null, res);
+      const resConverted = res.map(item => ({...item, borrowed: item.borrowed === 'true'}));
+      console.log("items: ", resConverted);
+      result(null, resConverted);
     });
   };
 
@@ -71,9 +72,12 @@ const sql = require("./db.js");
    */
      Item.getById = (id, result) => {
       sql.query(
-      "SELECT * FROM item " +
+      "SELECT item.*,CASE WHEN t.borrowed IS NULL THEN 'false' ELSE t.borrowed END AS borrowed FROM item " +
       "INNER JOIN item_model ON item.item_model_id = item_model.id " +
       "INNER JOIN item_type ON item_type.id = item_model.item_type_id " +
+      "LEFT JOIN (WITH ordered_items AS (SELECT CASE WHEN datetime_in IS NULL THEN 'false' ELSE 'true' END AS borrowed, item_id, ROW_NUMBER() " +
+      "OVER (PARTITION BY item_id ORDER BY datetime_out DESC) AS rn FROM borrowed_item) " +
+      "SELECT * FROM ordered_items  where rn = 1) AS t ON item.id = t.item_id " +
       "WHERE item.dynamic_id= ?", [id], (err, res) => {
         if (err) {
           console.log("error: ", err);
@@ -86,8 +90,9 @@ const sql = require("./db.js");
           return;
         }
 
-        console.log("Item: ", res);
-        result(null, res[0]);
+        const resConverted = res.map(item => ({...item, borrowed: item.borrowed === 'true'}));
+        console.log("Item: ", resConverted);
+        result(null, resConverted[0]);
       });
     };
 

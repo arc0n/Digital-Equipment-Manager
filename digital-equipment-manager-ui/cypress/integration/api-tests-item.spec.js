@@ -96,7 +96,6 @@ describe('api-tests-item', () => {
         "photo": "/",
         "description": "",
         "status": "aktiv",
-        //"item_model_id": 1,
         "item_type_id": 1,
       }
     })

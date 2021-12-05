@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('api-tests-item', () => {
+describe('api-tests-person', () => {
   beforeEach( ()=>{
       //cy.intercept('POST','http://localhost:3000/item**').as('item-post');
     }

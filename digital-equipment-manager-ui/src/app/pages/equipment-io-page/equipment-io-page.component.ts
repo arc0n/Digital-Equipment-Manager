@@ -2,9 +2,9 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ActionSheetController, ToastController} from "@ionic/angular";
 import {CommonStateService} from "../../services/common-state.service";
-import {forkJoin, Subscription} from "rxjs";
+import { of, Subscription} from "rxjs";
 import {mergeMap} from "rxjs/operators";
-import {Item} from "../../services/model";
+import {Booking, Item} from "../../services/model";
 import {ItemResourceService} from "../../services/api-services/item-resource.service";
 import {BookingResourceService} from "../../services/api-services/booking-resource.service";
 
@@ -28,6 +28,7 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
               private activeRoute: ActivatedRoute,
               private itemService: ItemResourceService,
               private toastController: ToastController,
+              private bookingService: BookingResourceService
               ) {
   }
 
@@ -114,11 +115,18 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
 
 
   navigateToBookAndReturn() {
-    this.item.borrowed ?
-    this.router.navigate(['booking-summary'], {
-      queryParams: {itemId: this.item.dynamic_id, isOpenBooking: !!this.item.borrowed}}) :
-      this.router.navigate(['/employee-dashboard'], {
-        queryParams: {itemId: this.item.dynamic_id, isOpenBooking: !!this.item.borrowed}})
+    let obs = of(null);
+    if(this.item.borrowed){
+      obs = this.bookingService.getBookingsByItem(this.item.dynamic_id, {borrowed: true})
+    }
+    obs.subscribe((booking: Booking) => {
+      this.item.borrowed ?
+        this.router.navigate(['booking-summary'], {
+          queryParams: {itemId: this.item.dynamic_id, personId: booking?.person_id, isOpenBooking: !!this.item.borrowed}}) :
+        this.router.navigate(['/employee-dashboard'], {
+          queryParams: {itemId: this.item.dynamic_id, isOpenBooking: !!this.item.borrowed}})
+    })
+
 
   }
 

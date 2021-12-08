@@ -1,29 +1,33 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonStateService} from "./services/common-state.service";
-import { ResolveEnd, Router} from "@angular/router";
+import {DefaultUrlSerializer, ResolveEnd, Router, UrlSerializer} from "@angular/router";
 import {filter} from "rxjs/operators";
 import {AuthenticationService} from "./services/authentication.service";
-
+import * as _ from 'lodash'
 
 
 const MAIN_PAGE_LINKS: EquipmentRouterLink[] = [
-  {title: 'Home', url: '/tabs/dashboard', icon: 'home', secondary: false},
-  {title: 'Mitarbeiter anlegen', url: '/employee-add-page', icon: 'person-add', secondary: true},
-  {title: 'Gegenstand anlegen', url: '/equipment-add-page', icon: 'duplicate', secondary: true},
-  {title: 'Geräteliste', url: '/item-list', icon: 'briefcase', secondary: true}
+  {title: 'Home', url: '/tabs/dashboard', icon: 'home', secondary: false, disabled: false},
+  {title: 'Mitarbeiter anlegen', url: '/employee-add-page', icon: 'person-add', secondary: false, disabled: false},
+  {title: 'Gegenstand anlegen', url: '/equipment-add-page', icon: 'duplicate', secondary: false, disabled: false},
+  {title: 'Geräteliste', url: '/item-list', icon: 'briefcase', secondary: false, disabled: false}
 ];
 
-const EQUIPMENT_PAGE_LINKS: EquipmentRouterLink[] = [
-  {title: 'Home', url: '/tabs/dashboard', icon: 'home', secondary: false},
-  {title: 'Option 1', url: '/nix', icon: 'settings', secondary: true},
-  {title: 'Option 2', url: '/nox', icon: 'log-out', secondary: true}
+const EQUIPMENT_PAGE_LINKS_DEFAULT: EquipmentRouterLink[] = [
+  {title: 'Zurück zu Home', url: '/tabs/dashboard', icon: 'home', secondary: false,  disabled: false},
+  {title: 'Gerät', url: '/equipment', icon: 'settings', secondary: true, disabled: true}, // the id needs to be added
+  {title: 'Mitarbeitter verknüpfen', url: '/employee-dashboard', icon: 'log-out', secondary: true,  disabled: true}, // the id needs to be added
+  {title: 'Übersicht', url: '/booking-summary', icon: 'log-out', secondary: true,  disabled: true}
 ];
+
 
 export interface EquipmentRouterLink {
   title: string;
   url: string,
   icon: string,
-  secondary: boolean
+  secondary: boolean,
+  disabled: boolean,
+  params?: any
 
 }
 
@@ -34,23 +38,39 @@ export interface EquipmentRouterLink {
 })
 export class AppComponent implements OnInit {
 
-  public appPages: EquipmentRouterLink[] = MAIN_PAGE_LINKS
+  public sidebarRoutes: EquipmentRouterLink[] = MAIN_PAGE_LINKS
   public mytime: moment.MomentInput;
   mydate: moment.MomentInput;
+  public urlParser = new DefaultUrlSerializer();
+
+
+  private currentActiveEquipmentRoutes: EquipmentRouterLink[] = _.clone(EQUIPMENT_PAGE_LINKS_DEFAULT);
 
   constructor(
     private commonStateService: CommonStateService,
     private authService: AuthenticationService,
-    private router: Router,
-    ) {
+    private router: Router) {
   }
 
   ngOnInit() {
     this.router.events.pipe(
       filter(event => (event instanceof ResolveEnd))
     ).subscribe((resolveEndEvent: ResolveEnd) => {
-      this.appPages = resolveEndEvent.url.match(/^\/equipment/) ?
-        EQUIPMENT_PAGE_LINKS : MAIN_PAGE_LINKS;
+      const index = resolveEndEvent.url.match(/^\/equipment\?.*id/) ? 1 :
+        resolveEndEvent.url.match(/^\/employee-dashboard.itemId/) ? 2 :
+          resolveEndEvent.url.match(/^\/booking-summary/) ? 3
+          : 0
+      const parsedUrl = this.urlParser.parse(resolveEndEvent.state.url);
+      const segments = parsedUrl.root.children.primary.segments.map(seg => seg.path);
+
+      if(index) { // 0 is falsy
+        this.currentActiveEquipmentRoutes[index] =
+          {...this.currentActiveEquipmentRoutes[index], url: segments.join(''), params: parsedUrl.queryParams, disabled: false}
+        this.sidebarRoutes = this.currentActiveEquipmentRoutes
+      } else {
+        this.sidebarRoutes = MAIN_PAGE_LINKS
+        this.currentActiveEquipmentRoutes = EQUIPMENT_PAGE_LINKS_DEFAULT;
+      }
     })
   }
 

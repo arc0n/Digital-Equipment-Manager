@@ -1,6 +1,6 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component,  OnDestroy, OnInit} from '@angular/core';
 import {mergeMap, take} from "rxjs/operators";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute,  Router} from "@angular/router";
 import {Item, Person} from "../../services/model";
 import {forkJoin, of, Subscription} from "rxjs";
 import {ItemResourceService} from "../../services/api-services/item-resource.service";
@@ -118,16 +118,6 @@ export class BookingSummaryPage implements OnInit, OnDestroy {
   modalResult(value: string) {
     this.itemService.getItemByCode(value)
 
-      /*.pipe(
-      mergeMap(params => {
-        return forkJoin([this.itemService.getItemByCode(params.id),
-          this.bookingService.getBookingsByItem(params.id, {})])
-      })
-    ).subscribe(async ([item, bookings]) =>{
-      if(!!bookings && bookings.length > 0) {
-        item.borrowed = bookings.some(b => !b.datetime_in)
-        console.log(item.borrowed)
-      }*/
       .subscribe(async (item) => {
       await this.modal.dismiss();
 

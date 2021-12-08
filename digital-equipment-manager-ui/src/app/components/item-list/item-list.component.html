@@ -9,7 +9,7 @@
     <ion-label>Ausgeborgt</ion-label>
   </ion-list-header>
 
-  <ion-item *ngFor="let item of items" (click)="emitItemClick(item)">
+  <ion-item *ngFor="let item of items" (click)="emitItemClick(item)" class="clickable">
     <ion-label> {{ item.dynamic_id}}</ion-label>
     <ion-label> {{ item.model_name }}</ion-label>
     <ion-label> {{ item.item_type || '-' }}</ion-label>

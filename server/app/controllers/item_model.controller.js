@@ -6,9 +6,3 @@ exports.getAll = (req, res) => {
     apiResponse.sendResponse(res, err, data);
   });
 };
-
-exports.getById = (req, res) => {
-  ItemModel.getById(req.params.id, (err, data) => {
-  apiResponse.sendResponse(res, err, data);
-});
-};

@@ -8,5 +8,4 @@
   
     app.get("/itemmodel", itemModel.getAll);
 
-    app.get("/itemmodel/:id", itemModel.getById);
 };

@@ -12,40 +12,15 @@ const sql = require("./db.js");
 
 
   /**
-   * Returns all ItemModels that have a specific item_type_id
-   * @param {Number} id The item type id
-   * @param {Function} result Callback
-   * @returns {Undefined} Undefined
-   */
-   ItemModel.getById = (id, result) => {
-    sql.query(
-      "SELECT * FROM item_model WHERE item_type_id = ? ", [id], (err, res) => {
-      if (err) {
-        console.log("error: ", err);
-        result(err);
-        return;
-      }
-  
-      if(res.length === 0) {
-        result({message: 'NOT_FOUND', code: 404});
-        return;
-      }
-
-      console.log("Item: ", res);
-      result(null, res);
-    });
-  };
-
-
-
-  /**
    * Returns all ItemModel 
    * @param {Function} result Callback
    * @returns {Undefined} Undefined
    */
    ItemModel.getAll = (params, result) => {
+    const conditions = ItemModel._buildConditions(params);
+    console.log(conditions);
     sql.query(
-      "SELECT * FROM item_model", (err, res) => {
+      "SELECT * FROM item_model WHERE " + conditions.where, conditions.values , (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err);
@@ -57,5 +32,25 @@ const sql = require("./db.js");
     });
   };
 
+    /**
+   * Builds Query conditions
+   * @private
+   * @param {Object} params Object with api request parameters
+   * @returns {Object} Object with condition and condition values.
+   */
+     ItemModel._buildConditions = (params, delimeter = ' AND ') => {
+      let conditions = [],
+          values = [];
+  
+      if (params.item_type_id !== undefined) {
+        conditions.push("item_type_id = ?");
+        values.push(params.item_type_id);
+      }
+  
+      return {
+        where: conditions.length ? conditions.join(delimeter) : '1',
+        values: values
+      };
+    }
 
 module.exports = ItemModel;

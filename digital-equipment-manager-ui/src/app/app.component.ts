@@ -63,13 +63,18 @@ export class AppComponent implements OnInit {
       const parsedUrl = this.urlParser.parse(resolveEndEvent.state.url);
       const segments = parsedUrl.root.children.primary.segments.map(seg => seg.path);
 
+      if((parsedUrl.queryParams?.id || parsedUrl.queryParams?.itemId)
+        !== this.currentActiveEquipmentRoutes[1]?.params?.id)      {
+        this.currentActiveEquipmentRoutes = _.clone(EQUIPMENT_PAGE_LINKS_DEFAULT);
+        this.sidebarRoutes = _.clone(EQUIPMENT_PAGE_LINKS_DEFAULT);
+      }
       if(index) { // 0 is falsy
         this.currentActiveEquipmentRoutes[index] =
           {...this.currentActiveEquipmentRoutes[index], url: segments.join(''), params: parsedUrl.queryParams, disabled: false}
         this.sidebarRoutes = this.currentActiveEquipmentRoutes
       } else {
         this.sidebarRoutes = MAIN_PAGE_LINKS
-        this.currentActiveEquipmentRoutes = EQUIPMENT_PAGE_LINKS_DEFAULT;
+        this.currentActiveEquipmentRoutes = _.clone(EQUIPMENT_PAGE_LINKS_DEFAULT);
       }
     })
   }

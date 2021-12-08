@@ -116,12 +116,12 @@ const sql = require("./db.js");
           datetime_out: booking.datetime_out,
           datetime_in: booking.datetime_in,
           person: {
-            person_id: booking.person_id,
+            dynamic_id: booking.person_id,
             firstname: booking.firstname,
             lastname: booking.lastname,
           },
           item: {
-            item_id: booking.item_id,
+            dynamic_id: booking.item_id,
             model_id: booking.model_id,
             model_name: booking.model_name,
             item_type_id: booking.item_type_id,

@@ -98,7 +98,7 @@ const sql = require("./db.js");
    Booking.getAll = (params, result) => {
     const conditions = Booking._buildConditions(params);
 
-    sql.query("SELECT borrowed_item.id AS booking_id, datetime_out, datetime_in, p.dynamic_id as person_id, p.sex, p.id_card, p.firstname, p.lastname, i.dynamic_id as item_id, " +
+    sql.query("SELECT im.name AS model_name, im.id AS model_id, it.id AS item_type_id, borrowed_item.id AS booking_id, datetime_out, datetime_in, p.dynamic_id as person_id, p.sex, p.id_card, p.firstname, p.lastname, i.dynamic_id as item_id, " +
     "im.name AS model_name, it.name AS item_type FROM borrowed_item " +
     "INNER JOIN person p ON p.id = borrowed_item.person_id " +
     "INNER JOIN item i ON i.id = borrowed_item.item_id " +
@@ -116,12 +116,12 @@ const sql = require("./db.js");
           datetime_out: booking.datetime_out,
           datetime_in: booking.datetime_in,
           person: {
-            person_id: booking.person_id,
+            dynamic_id: booking.person_id,
             firstname: booking.firstname,
             lastname: booking.lastname,
           },
           item: {
-            item_id: booking.item_id,
+            dynamic_id: booking.item_id,
             model_id: booking.model_id,
             model_name: booking.model_name,
             item_type_id: booking.item_type_id,
@@ -195,7 +195,6 @@ const sql = require("./db.js");
 
    if (params.borrowed !== undefined && params.borrowed == 'true') {
       conditions.push("datetime_in IS NULL");
-      values.push("");
     }
 
    if (params.item_id !== undefined) {

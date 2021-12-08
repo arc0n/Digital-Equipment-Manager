@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {catchError, map} from "rxjs/operators";
@@ -6,51 +6,70 @@ import {catchError, map} from "rxjs/operators";
 export interface QueryParams {
   [key: string]: any
 }
+
 @Injectable({
   providedIn: 'root'
 })
 export class BaseResourceService<T> {
 
-  protected baseUrl= "http://localhost:3000"
-  constructor(protected http: HttpClient){
+  protected baseUrl = "http://localhost:3000"
+
+  constructor(protected http: HttpClient) {
 
   }
 
   getList(params: QueryParams): Observable<T[]> {
-    return this.http.get<T>(this.baseUrl, params).pipe( // todo does not work, not use as querypram
+    return this.http.get<{ result: T[]}>(this.baseUrl, {params: params}).pipe(
+      map(res => res.result as T[]),
       catchError(err => {
         console.log(err);
-        // TODO handle error
-        return of(null);
+        // TODO handle error for list
+        return of([]);
       })
     )
   }
 
-  getByID(id: string | number, params: QueryParams): Observable<T> {
-    if(!id) return of(null)
+  getByID(id: string | number, params: QueryParams): Observable<T > {
+    if (!id) return of(null)
 
-    return this.http.get<T>(this.baseUrl + `/${id}`, params).pipe(
+    return this.http.get<{ result: T | string }>(this.baseUrl + `/${id}`, {params: params}).pipe(
       catchError(err => {
-        console.log("err in service", err);
-        // TODO handle error
-        return of(null);
+        return this.handleError(err);
       }),
       map(resp => {
-        return resp?.result as T || null
+        return resp?.result || null
       })
     )
   }
-  post(entity: T, params: QueryParams): Observable<T> {
-    if(!entity) return of(null)
 
-    return this.http.post<T>(this.baseUrl,entity, params).pipe(
+
+  post(entity: T, params: QueryParams): Observable<boolean | string> {
+    if (!entity) return of(null)
+
+    return this.http.post<{result: boolean | string}>(this.baseUrl, entity, {params: params}).pipe(
       catchError(err => {
-        console.log("err in service", err);
-        // TODO handle error
-        return of(null);
+        return this.handleError(err);
       }),
       map(resp => {
-        return resp?.result as T || null // TODO does that work?
+        return resp?.result || null
+      })
+    )
+  }
+
+  private handleError(err) {
+    console.log("err in service", err);
+    return of(err.error);
+  }
+
+  put(entity: T, params: QueryParams): Observable<boolean | string> {
+    if (!entity) return of(null)
+
+    return this.http.put<{result: boolean | string}>(this.baseUrl, entity, {params: params}).pipe(
+      catchError(err => {
+        return this.handleError(err);
+      }),
+      map(resp => {
+        return resp?.result
       })
     )
   }

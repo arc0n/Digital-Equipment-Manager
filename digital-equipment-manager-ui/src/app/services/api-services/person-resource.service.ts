@@ -3,6 +3,7 @@ import {Observable, of} from "rxjs";
 import {Person, Item} from "../model";
 import {BaseResourceService} from "./base-resource.service";
 import {HttpClient} from "@angular/common/http";
+import {map} from "rxjs/operators";
 
 @Injectable()
 export class PersonResourceService extends BaseResourceService<Person>{
@@ -12,17 +13,16 @@ export class PersonResourceService extends BaseResourceService<Person>{
     this.baseUrl = this.baseUrl +"/person";
   }
 
-  getPersonByName(searchString:string): Observable<Person> {
-    // TODO not correctyl implemented
-    return this.getByID(searchString,{});
+  getPersonByName(searchString:string): Observable<Person[]> {
+    return this.getList({name: searchString});
   }
-  getPersonByCode(code:string): Observable<Person> {
+  getPersonByCode(code:string): Observable<Person | string> {
     return this.getByID(code,{});
   }
   getAllPersons(): Observable<Person[]> {
     return this.getList({});
   }
-  postPerson(person: Person): Observable<Person>{
-    return this.post(person, {})
+  postPerson(person: Person): Observable<boolean | string>{
+    return this.post(person, {}).pipe(map(res => res as string))
   }
 }

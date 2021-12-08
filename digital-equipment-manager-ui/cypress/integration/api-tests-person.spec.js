@@ -61,7 +61,7 @@ describe('api-tests-person', () => {
       body:{
         "firstname": "Testus",
         "lastname": "Maximus",
-        "birthdate": "1977-11-05",
+        "birthdate": "2021-11-10T00:00:00.000Z",
         "sex": 1,
         "id_card": "1122334455",
        "street": "Steiner Landstraße 45",

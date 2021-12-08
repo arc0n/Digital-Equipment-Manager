@@ -5,7 +5,7 @@
       slot="start" class="equipment-back-button" (click)="this.router.navigate(['/tabs/dashboard'])">
       <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
     </ion-buttons>
-    <ion-title>Equipment: {{this.item?.name}}</ion-title>
+    <ion-title>Equipment: {{this.item?.model_name}}</ion-title>
     <ion-buttons slot="primary" *ngIf="this.showMobileMenu">
       <ion-button color="primary" (click)="onMenuClicked()">
         <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
@@ -21,7 +21,8 @@
     <div class="equipment-page-io-horizontal flex-wrap flex-grow">
 
       <div class="equipment-page-io-vertical flex-grow">
-        <div class="equipment-page-io-horizontal equipment-page-io-ordered" [ngClass]="{ 'equipment-io-mobile-column': showMobileMenu }">
+        <div class="equipment-page-io-horizontal equipment-page-io-ordered"
+             [ngClass]="{ 'equipment-io-mobile-column': showMobileMenu }">
           <div class="equipment-page-picture-wrapper">
             Placeholder Picture
           </div>
@@ -32,12 +33,15 @@
             <div class="ion-padding">Beschreibung: {{this.item?.description}}</div>
           </div>
           <div class="equipment-page-io-vertical equipment-page-status-wrapper" [ngStyle]="{'order': showMobileMenu ? 1:4}">
-            <div class="ion-padding">Status: {{this.item?.status}} <span class="availability-dot" [ngStyle]="{'background-color': getStatusColor(this.item?.status)}"></span></div>
+            <div class="ion-padding">Status: {{this.item?.status }}, {{+ this.item?.borrowed? 'ausgegeben' : 'verfügbar'}}
+              <span class="availability-dot"
+                    [ngStyle]="{'background-color':
+                    getStatusColor(this.item?.status, this.item?.borrowed)}"></span></div>
             <div class="ion-padding">ID: {{this.item?.dynamic_id}}</div>
           </div>
         </div>
         <div class="equipment-page-io-horizontal equipment-page-io-history" *ngIf="!showMobileMenu">
-          Placeholder History
+          <app-history-list></app-history-list>
         </div>
       </div>
     </div>
@@ -50,8 +54,8 @@
         </ion-button>
       </div>
         <ion-button class="max-width-100" color="primary"
-        (click)="ioButtonClicked()">
-          Aus/Eingabe
+        (click)="navigateToBookAndReturn()">
+          {{this.item?.borrowed ? 'Rücknahme' : 'Ausgabe'}}
         </ion-button>
     </div>
 

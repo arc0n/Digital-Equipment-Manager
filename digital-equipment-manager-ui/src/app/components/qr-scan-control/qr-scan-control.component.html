@@ -1,5 +1,5 @@
-<div class="qr-scan-wrapper">
-    <div class="qr-scan-horizontal" >
+<div class="qr-scan-wrapper"   [style]="getCustomStyles()">
+    <div class="qr-scan-horizontal">
       <form [formGroup]="qrInputForm">
         <ion-input
           class="qr-control"
@@ -9,6 +9,7 @@
       </form>
 
       <ion-button
+        *ngIf="this.showQrButton"
         class="qr-control-button" color="primary"
 
         (click)="scanBtnClicked($event)">

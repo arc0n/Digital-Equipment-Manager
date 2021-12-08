@@ -82,9 +82,9 @@ describe('api-tests-person', () => {
             cy.wrap(response.body.result.dynamic_id).should('equal', createdId)
           })
       })
-
   })
-  /*
+
+/*
   it('Edit 1 Attribute from newly created person', () => {
     let personId;
     cy.request({
@@ -109,7 +109,14 @@ describe('api-tests-person', () => {
           url: 'http://localhost:3000/person/' + personId,
           method: 'PUT',
           body: {
+            "firstname": "Testus",
             "lastname": "Edited",
+            "birthdate": "1977-11-05",
+            "sex": 1,
+            "id_card": "112233445566",
+            "street": "Steiner Landstraße 45",
+            "zip": 3500,
+            "city": "Stein",
           }
         })
           .then((response) => {
@@ -126,4 +133,5 @@ describe('api-tests-person', () => {
     })
   })
   */
+
 })

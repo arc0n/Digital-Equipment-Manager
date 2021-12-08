@@ -43,10 +43,10 @@ export class BaseResourceService<T> {
   }
 
 
-  post(entity: T, params: QueryParams): Observable<boolean | string> {
+  post(entity: T, params: QueryParams): Observable<boolean | string | {id: string}> {
     if (!entity) return of(null)
 
-    return this.http.post<{result: boolean | string}>(this.baseUrl, entity, {params: params}).pipe(
+    return this.http.post<{result: boolean | string | {id: string}}>(this.baseUrl, entity, {params: params}).pipe(
       catchError(err => {
         return this.handleError(err);
       }),

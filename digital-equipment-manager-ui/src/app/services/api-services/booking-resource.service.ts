@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {Observable, of} from "rxjs";
-import {Booking, BookingList, Item, Person} from "../model";
+import {Observable} from "rxjs";
+import {Booking, } from "../model";
 import {BaseResourceService, QueryParams} from "./base-resource.service";
 import {HttpClient} from "@angular/common/http";
+import {map} from "rxjs/operators";
 
 @Injectable()
 export class BookingResourceService extends BaseResourceService<Booking>{
@@ -23,7 +24,7 @@ export class BookingResourceService extends BaseResourceService<Booking>{
     return this.getList({...params, item_id: itemId});
   }
   postBooking(booking: Booking): Observable<boolean | string>{
-    return this.post(booking, {})
+    return this.post(booking, {}).pipe(map(res => res as string | boolean))
   }
 
   putBooking(booking: Booking): Observable<boolean | string>{

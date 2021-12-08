@@ -20,6 +20,12 @@ export class ItemResourceService extends BaseResourceService<Item>{
     return this.getList(filter);
   }
   postItem(item: Item): Observable<string>{
-    return this.post(item, {}).pipe(map(res => res as string))
+    return this.post(item, {}).pipe(
+      map(res => {
+        if ((res as { id: string })?.id) {
+          return (res as { id: string })?.id
+        }
+        return res as string
+      }))
   }
 }

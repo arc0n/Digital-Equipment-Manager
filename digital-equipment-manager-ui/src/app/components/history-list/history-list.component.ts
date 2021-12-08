@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Booking} from "../../services/model";
 import {BookingResourceService} from "../../services/api-services/booking-resource.service";
 import {QueryParams} from "../../services/api-services/base-resource.service";
@@ -10,7 +10,7 @@ import {QueryParams} from "../../services/api-services/base-resource.service";
 })
 export class HistoryListComponent implements OnInit, OnChanges {
   bookings: Booking[] = [];
-  filter: QueryParams = {};
+  @Input() filter: QueryParams = {};
 
   constructor(private bookingsService: BookingResourceService) { }
 

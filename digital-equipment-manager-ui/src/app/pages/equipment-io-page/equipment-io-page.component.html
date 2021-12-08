@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="equipment-page-io-horizontal equipment-page-io-history" *ngIf="!showMobileMenu">
-          <app-history-list></app-history-list>
+          <app-history-list [filter]="{item_id: this.item?.dynamic_id}"></app-history-list>
         </div>
       </div>
     </div>

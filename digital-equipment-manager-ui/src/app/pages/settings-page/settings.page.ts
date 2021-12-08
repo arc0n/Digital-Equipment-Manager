@@ -19,7 +19,6 @@ export class SettingsPage implements OnInit, OnDestroy{
   constructor(
     public router: Router,
     public state: CommonStateService,
-    public activeRoute: ActivatedRoute
   ) {
 
   }
@@ -36,11 +35,5 @@ export class SettingsPage implements OnInit, OnDestroy{
     this.subscriptions.forEach(s => s.unsubscribe());
   }
 
-  onAddItemClicked() {
-    this.router.navigate(['/equipment-add-page'])
-  }
 
-  onAddEmployeeClicked() {
-    this.router.navigate(['/employee-add-page'])
-  }
 }

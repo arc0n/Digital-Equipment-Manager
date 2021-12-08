@@ -7,4 +7,5 @@
     const itemModel = require("../controllers/item_model.controller.js");
   
     app.get("/itemmodel", itemModel.getAll);
+
 };

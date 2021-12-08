@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ActionSheetController, ToastController} from "@ionic/angular";
 import {CommonStateService} from "../../services/common-state.service";
-import { of, Subscription} from "rxjs";
+import {Observable, of, Subscription} from "rxjs";
 import {mergeMap} from "rxjs/operators";
 import {Booking, Item} from "../../services/model";
 import {ItemResourceService} from "../../services/api-services/item-resource.service";
@@ -115,14 +115,15 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
 
 
   navigateToBookAndReturn() {
-    let obs = of(null);
+    let obs: Observable<Booking[]> = of([null]);
     if(this.item.borrowed){
       obs = this.bookingService.getBookingsByItem(this.item.dynamic_id, {borrowed: true})
     }
-    obs.subscribe((booking: Booking) => {
+    obs.subscribe((booking) => {
+      let openBooking= booking[0];
       this.item.borrowed ?
         this.router.navigate(['booking-summary'], {
-          queryParams: {itemId: this.item.dynamic_id, personId: booking?.person_id, isOpenBooking: !!this.item.borrowed}}) :
+          queryParams: {itemId: this.item.dynamic_id, personId: openBooking?.person_id, isOpenBooking: !!this.item.borrowed}}) :
         this.router.navigate(['/employee-dashboard'], {
           queryParams: {itemId: this.item.dynamic_id, isOpenBooking: !!this.item.borrowed}})
     })

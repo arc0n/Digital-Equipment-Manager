@@ -32,8 +32,3 @@ export interface Booking {
   person?: Person,
   item?: Item
 }
-
-export interface BookingList {
-  person_id: string,
-  item_id: string[]
-}

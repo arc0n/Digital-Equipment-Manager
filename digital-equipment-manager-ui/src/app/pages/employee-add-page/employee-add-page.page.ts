@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {CommonStateService} from "../../services/common-state.service";
 import {Person} from "../../services/model";
@@ -21,13 +21,13 @@ export class EmployeeAddPagePage implements OnInit, OnDestroy {
   /** @internal */
   addEmployeeForm = new FormGroup(
     {
-            personFirstname: new FormControl(''),
-            personLastname: new FormControl(''),
-            personBirthdate: new FormControl(''),
-            personSex: new FormControl(''),
-            addressStreet: new FormControl(''),
-            addressZip: new FormControl(''),
-            addressCity: new FormControl(''),
+            personFirstname: new FormControl('',Validators.required),
+            personLastname: new FormControl('', Validators.required),
+            personBirthdate: new FormControl('', Validators.required),
+            personSex: new FormControl('', Validators.required),
+            addressStreet: new FormControl('', Validators.required),
+            addressZip: new FormControl('', Validators.required ),
+            addressCity: new FormControl('',Validators.required),
           }
     )
 
@@ -71,6 +71,10 @@ export class EmployeeAddPagePage implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    if(this.addEmployeeForm.invalid) {
+      this.presentToast('Unvollständige Eingabe', 'danger')
+      return;
+    }
     const rawFormValues = this.addEmployeeForm.getRawValue();
     let personEntries :Person = {
       birthdate: new Date(rawFormValues.personBirthdate),

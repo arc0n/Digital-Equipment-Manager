@@ -123,7 +123,7 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
       let openBooking= booking[0];
       this.item.borrowed ?
         this.router.navigate(['booking-summary'], {
-          queryParams: {itemId: this.item.dynamic_id, personId: openBooking?.person_id, isOpenBooking: !!this.item.borrowed}}) :
+          queryParams: {itemId: this.item.dynamic_id, personId: openBooking?.person?.dynamic_id, isOpenBooking: !!this.item.borrowed}}) :
         this.router.navigate(['/employee-dashboard'], {
           queryParams: {itemId: this.item.dynamic_id, isOpenBooking: !!this.item.borrowed}})
     })

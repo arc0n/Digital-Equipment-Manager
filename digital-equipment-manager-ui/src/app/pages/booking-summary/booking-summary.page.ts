@@ -74,7 +74,6 @@ export class BookingSummaryPage implements OnInit, OnDestroy {
       this.items.push(item as Item);
       this.person = person as Person
       this.isOpenBooking = (item as Item).borrowed;
-
     })
   }
 
@@ -91,7 +90,6 @@ export class BookingSummaryPage implements OnInit, OnDestroy {
         this.handleBookingResponse(val)
       })
     } else {
-      console.log(this.person)
       this.bookingSrv.postBooking({
         item_id: this.items?.map(i => i.dynamic_id),
         person_id: this.person.dynamic_id
@@ -160,19 +158,18 @@ export class BookingSummaryPage implements OnInit, OnDestroy {
 
 
   private async handleBookingResponse(val: any) {
-    console.log(val)
     if (!val || val === 'INVALID_REQUEST' || val === 'UNFINISHED_BOOKING') {
       const p = await this.toastController.create({
         color: "danger", duration: 6000, message: "" +
           "Error Code: " + val,
       })
-      p.present()
+      await p.present()
     } else {
-      await this.router.navigate(['/'])
       const p = await this.toastController.create({
         color: "success", duration: 2000, message: `die ${this.isOpenBooking ? 'Rückgabe' : 'Ausgabe'} wurde gebucht`
       })
-      p.present()
+      await p.present()
+      await this.router.navigate(['/tabs/dashboard'] )
     }
   }
 }

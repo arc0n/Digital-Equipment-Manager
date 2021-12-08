@@ -73,7 +73,7 @@ export class AppComponent implements OnInit {
           {...this.currentActiveEquipmentRoutes[index], url: segments.join(''), params: parsedUrl.queryParams, disabled: false}
         this.sidebarRoutes = this.currentActiveEquipmentRoutes
       } else {
-        this.sidebarRoutes = MAIN_PAGE_LINKS
+        this.sidebarRoutes =  _.clone(MAIN_PAGE_LINKS)
         this.currentActiveEquipmentRoutes = _.clone(EQUIPMENT_PAGE_LINKS_DEFAULT);
       }
     })

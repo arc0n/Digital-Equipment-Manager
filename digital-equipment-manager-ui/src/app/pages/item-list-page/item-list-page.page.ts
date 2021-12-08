@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import {ActivatedRoute, ActivatedRouteSnapshot, Router} from "@angular/router";
 import {Item} from "../../services/model";
 import {CommonStateService} from "../../services/common-state.service";
 import {Subscription} from "rxjs";
@@ -15,7 +15,8 @@ export class ItemListPagePage implements OnInit, OnDestroy {
   public showMobileMenu: boolean = false;
 
 
-  constructor(public router: Router, public state: CommonStateService) {
+  constructor(public router: Router,
+              public state: CommonStateService) {
   }
 
   ngOnInit() {
@@ -30,8 +31,8 @@ export class ItemListPagePage implements OnInit, OnDestroy {
     this.subscriptions.forEach(s => s.unsubscribe());
   }
 
-  itemClicked(event: Item) {
-    this.router.navigate(['equipment'], {queryParams: {id: event.dynamic_id}});
+  async itemClicked(event: Item) {
+    await this.router.navigate(['equipment'], {queryParams: {id: event.dynamic_id}, replaceUrl: true});
   }
 
 

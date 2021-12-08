@@ -2,7 +2,6 @@
 
 describe('api-tests-item', () => {
   beforeEach(() => {
-      //cy.intercept('POST','http://localhost:3000/item**').as('item-post');
     }
   )
 
@@ -86,7 +85,6 @@ describe('api-tests-item', () => {
   })
 
   it('try to create item without item_model_id', () => {
-
     cy.request({
       url: 'http://localhost:3000/item/',
       method: 'POST',
@@ -96,7 +94,6 @@ describe('api-tests-item', () => {
         "photo": "/",
         "description": "",
         "status": "aktiv",
-        //"item_model_id": 1,
         "item_type_id": 1,
       }
     })

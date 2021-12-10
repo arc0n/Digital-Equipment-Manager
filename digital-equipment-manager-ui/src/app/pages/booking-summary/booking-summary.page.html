@@ -47,7 +47,7 @@
 
     </ion-list>
     <div class="booking-summary-add-button ion-margin ion-padding">
-      <ion-button (click)="presentModal()">Gegenstand hinzufügen</ion-button>
+      <ion-button cy-data="Equ-Add" (click)="presentModal()">Gegenstand hinzufügen</ion-button>
     </div>
 
 
@@ -62,7 +62,7 @@
         Zurück
       </ion-button>
     </div>
-    <ion-button class="max-width-100" color="primary" (click)="createBooking()">
+    <ion-button cy-data="Btn-Confirm" class="max-width-100" color="primary" (click)="createBooking()">
       Bestätigen
     </ion-button>
   </div>

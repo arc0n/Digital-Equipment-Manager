@@ -18,12 +18,13 @@
                     [showContinueButton]="false"
                     (onValueInputChange)="onValueChange($event)"
                     [resetControls]="this.resetControls"
+                    cy-data="QR-Code"
     ></app-qr-control>
 
     <div class="employee-page-content-wrapper">
       <!-- List of Text Items -->
       <ion-list class="employee-page-result-list" *ngIf="personResults.length > 0; else noResultTemplate">
-        <ion-item class="employee-page-result" *ngFor="let person of personResults" (click)="personSelected(person)">
+        <ion-item cy-data="person-result" class="employee-page-result" *ngFor="let person of personResults" (click)="personSelected(person)">
           <ion-label>{{ person.firstname + ' ' + person.lastname }}</ion-label>
         </ion-item>
       </ion-list>

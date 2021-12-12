@@ -145,8 +145,12 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
   }
 
   navigateToUpdateItem() {
-    this.router.navigate(['item-update'], {
-      queryParams: {itemID: this.item.dynamic_id}, replaceUrl: true,
+
+  }
+
+  navigateToDefect() {
+    this.router.navigate(['item-defect'], {
+      queryParams: {itemID: this.item.dynamic_id},
     })
   }
 }

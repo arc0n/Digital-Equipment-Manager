@@ -10,11 +10,19 @@
 </ion-header>
 
 <ion-content>
-  <div class="item-update-flex-main ion-margin ion-padding">
-    <div class="item-update-flex-item-infos">
+  <div class="item-defect-flex-main ion-margin ion-padding">
+    <div class="item-defect-flex-item-infos">
       <p>MOCK INFOS for tests</p>
       <p>Item Name: {{this.item?.model_name}}</p>
       <p>Item Beschreibung: {{this.item?.description}}</p>
+    </div>
+    <div *ngIf="this.item?.status === 'aktiv'" class="item-defect-textarea">
+      <ion-textarea
+        placeholder="Gib Informationen ein, warum der Gegenstand deaktiviert/dekommissioniert wird..."></ion-textarea>
+    </div>
+    <div *ngIf="this.item?.status === 'inaktiv'" class="item-defect-textarea">
+      <ion-textarea
+        placeholder="Gib Informationen ein, warum der Gegenstand aktiviert wird..."></ion-textarea>
     </div>
   </div>
   <div class="page-io-bottom-toolbar" [ngClass]="{ 'ion-justify-content-between': !showMobileMenu }">
@@ -28,9 +36,9 @@
                 (click)="decommissionAndReturn()">
       Dekommissionieren
     </ion-button>
-    <ion-button class="max-width-100" color="primary"
+    <ion-button class="max-width-100" [color]="this.item?.status === 'aktiv' ? 'danger' : 'success'"
                 (click)="deactivateAndReturn()">
-      Deaktivieren
+      {{this.item?.status === 'aktiv' ? 'Defekt melden' : 'aktivieren'}}
     </ion-button>
   </div>
 </ion-content>

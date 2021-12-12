@@ -2,13 +2,19 @@
   margin: 0 0 0 1rem;
 }
 
-.item-update-flex-main {
-  display: flex;
-}
-
-.item-update-flex-item-infos {
+.item-defect-flex-main {
   display: flex;
   flex-direction: column;
+}
+
+.item-defect-flex-item-infos {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-defect-textarea {
+  border: solid #f6f7f9 2px;
+  border-radius: 6px;
 }
 
 .page-io-bottom-toolbar {

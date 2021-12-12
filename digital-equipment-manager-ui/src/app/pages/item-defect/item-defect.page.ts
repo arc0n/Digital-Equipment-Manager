@@ -9,10 +9,10 @@ import {ItemResourceService} from "../../services/api-services/item-resource.ser
 
 @Component({
   selector: 'app-item-update',
-  templateUrl: './item-update.page.html',
-  styleUrls: ['./item-update.page.scss'],
+  templateUrl: './item-defect.page.html',
+  styleUrls: ['./item-defect.page.scss'],
 })
-export class ItemUpdatePage implements OnInit, OnDestroy {
+export class ItemDefectPage implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
   /** @internal */
@@ -42,27 +42,17 @@ export class ItemUpdatePage implements OnInit, OnDestroy {
       })
     ).subscribe(async (item) => {
       if (!item || item === 'NOT_FOUND') {
-        const toast = await this.toastController.create({
-          position: "bottom",
-          duration: 2000,
-          message: "Es wurde keine Gerät mit diesem Code gefunden",
-          color: "danger"
-        })
+        this.presentToast('Es wurde keine Gerät mit diesem Code gefunden',
+          'danger', 2000, "bottom");
         await this.router.navigate(['/tabs/dashboard']);
-        toast.present();
         return
       }
       this.item = item as Item;
       if(this.item.borrowed === true) {
-        const toast = await this.toastController.create({
-          position: "middle",
-          duration: 4000,
-          message: "Achtung - Gerät ist aktuell ausgeborgt!",
-          color: "warning"
-        })
-        toast.present();
+        this.presentToast('Achtung - Gerät ist aktuell ausgeborgt!',
+          'warning', 4000, "middle");
       }
-      console.log('item: '+this.item.borrowed);
+      //console.log('item: '+this.item.borrowed);
     });
   }
 
@@ -81,6 +71,11 @@ export class ItemUpdatePage implements OnInit, OnDestroy {
   }
 
   deactivateAndReturn() {
-    //TODO - deactivate item
+    //TODO - deactivate Item
+  }
+
+  async presentToast(message: string, color: string, duration: number, position: any) {
+    const p = await this.toastController.create({message, color, duration, position})
+    await p.present();
   }
 }

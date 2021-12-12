@@ -58,6 +58,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/item-defect/item-defect.module').then(m => m.ItemDefectPageModule),
     canActivate: [AuthGuardService]
   },
+  {
+    path: 'item-update',
+    loadChildren: () => import('./pages/item-update/item-update.module').then( m => m.ItemUpdatePageModule),
+    canActivate: [AuthGuardService]
+  },
+
 
 ];
 

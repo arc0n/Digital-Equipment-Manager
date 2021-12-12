@@ -45,16 +45,19 @@ const routes: Routes = [
   },
   {
     path: 'booking-summary',
-    loadChildren: () => import('./pages/booking-summary/booking-summary.module').then( m => m.BookingSummaryPageModule)
+    loadChildren: () => import('./pages/booking-summary/booking-summary.module').then( m => m.BookingSummaryPageModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'item-list',
-    loadChildren: () => import('./pages/item-list-page/item-list-page.module').then( m => m.ItemListPagePageModule)
-  }
-
-
-
-
+    loadChildren: () => import('./pages/item-list-page/item-list-page.module').then( m => m.ItemListPagePageModule),
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'item-update',
+    loadChildren: () => import('./pages/item-update/item-update.module').then( m => m.ItemUpdatePageModule),
+    canActivate: [AuthGuardService]
+  },
 
 ];
 

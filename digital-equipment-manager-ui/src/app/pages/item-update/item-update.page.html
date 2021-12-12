@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons
+      *ngIf="this.showMobileMenu"
+      slot="start" class="back-button" (click)="backButtonClicked()">
+      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title>Equipment: {{this.item?.model_name}} / {{this.item?.status}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="item-update-flex-main ion-margin ion-padding">
+    <div class="item-update-flex-item-infos">
+      <p>MOCK INFOS for tests</p>
+      <p>Item Name: {{this.item?.model_name}}</p>
+      <p>Item Beschreibung: {{this.item?.description}}</p>
+    </div>
+  </div>
+  <div class="page-io-bottom-toolbar" [ngClass]="{ 'ion-justify-content-between': !showMobileMenu }">
+    <div *ngIf="!showMobileMenu">
+      <ion-button class="max-width-100" color="secondary"
+                  (click)="backButtonClicked()">
+        Zurück
+      </ion-button>
+    </div>
+    <ion-button class="max-width-100" color="primary"
+                (click)="decommissionAndReturn()">
+      Dekommissionieren
+    </ion-button>
+    <ion-button class="max-width-100" color="primary"
+                (click)="deactivateAndReturn()">
+      Deaktivieren
+    </ion-button>
+  </div>
+</ion-content>

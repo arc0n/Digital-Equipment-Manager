@@ -143,4 +143,10 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
     if(status === 'aktiv') {return 'var(--ion-color-success)';}
     else {return 'var(--ion-color-danger)';}
   }
+
+  navigateToUpdateItem() {
+    this.router.navigate(['item-update'], {
+      queryParams: {itemID: this.item.dynamic_id}, replaceUrl: true,
+    })
+  }
 }

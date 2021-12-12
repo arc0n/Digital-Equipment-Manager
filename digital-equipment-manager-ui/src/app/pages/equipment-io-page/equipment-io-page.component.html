@@ -38,6 +38,9 @@
                     [ngStyle]="{'background-color':
                     getStatusColor(this.item?.status, this.item?.borrowed)}"></span></div>
             <div class="ion-padding">ID: {{this.item?.dynamic_id}}</div>
+            <ion-button class="max-width-100 ion-padding" color="warning" (click)="navigateToUpdateItem()">
+              Item bearbeiten
+            </ion-button>
           </div>
         </div>
         <div class="equipment-page-io-horizontal equipment-page-io-history" *ngIf="!showMobileMenu">

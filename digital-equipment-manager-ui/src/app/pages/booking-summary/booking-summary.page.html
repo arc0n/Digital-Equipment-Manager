@@ -31,6 +31,7 @@
       <ion-label class="booking-summary-list-header-item"><p>
         Seriennummer
       </p></ion-label>
+      <ion-label class="booking-summary-list-header-item"><p>Option</p></ion-label>
     </div>
     <ion-list class="booking-summary-flex-item-list" *ngFor="let item of items; let i = index">
       <ion-item class="booking-summary-list-item">
@@ -41,7 +42,7 @@
         </ion-label>
         <ion-label>{{ item.model_name }}</ion-label>
         <ion-label>{{ item.serial_number }}</ion-label>
-        <ion-label><ion-button (click)="deleteItemFromList(i)">Delete</ion-button></ion-label>
+        <ion-label><ion-button (click)="deleteItemFromList(i)">Item Entfernen</ion-button></ion-label>
 
       </ion-item>
 

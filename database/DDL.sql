@@ -61,9 +61,8 @@ CREATE TABLE casuality
       date DATETIME NOT NULL,
 		description VARCHAR(255) NOT NULL,
 		status VARCHAR(50),
-      borrowed_item_id INTEGER,
       item_id INTEGER NOT NULL,
-		casuality_type_id INTEGER NOT NULL
+		casuality_type_id INTEGER
    );
    
 
@@ -84,7 +83,6 @@ alter table item ADD FOREIGN KEY(item_model_id) references item_model (id) on de
 
 alter table casuality ADD FOREIGN KEY(casuality_type_id) references casuality_type (id) on delete cascade;
 alter table casuality ADD FOREIGN KEY(item_id) references item (id) on delete cascade;
-alter table casuality ADD FOREIGN KEY(borrowed_item_id) references borrowed_item (id) on delete cascade;
 
 alter table borrowed_item ADD FOREIGN KEY (item_id) references item (id) on delete cascade;
 alter table borrowed_item ADD FOREIGN KEY (person_id) references person (id) on delete cascade;
@@ -151,3 +149,6 @@ INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_mode
 INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (11703,"h3x4mtowsc2pf56", "/","", "aktiv",4);
 INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (11704,"le25wyiivnfvy1k", "/","", "aktiv",4);
 INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (11705,"d55wf8ervjqi65m", "/","", "aktiv",4);
+
+INSERT INTO casuality_type(id,name) VALUES ('1', 'Defekt'), ('2', 'Ende der Lebzeit');
+INSERT INTO casuality (id,date,description,status,item_id,casuality_type_id) VALUES ('1', '2021-12-19 18:26:31', 'Herr Fellner hat den Taser unabsichtlich beschädigt.', 'inaktiv', '1', '1'), ('2', '2021-12-19 18:26:31', 'Taser ist kaputt gegangen', 'dekommisioniert', '2', '2')

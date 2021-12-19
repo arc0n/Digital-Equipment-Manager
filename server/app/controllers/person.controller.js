@@ -7,7 +7,7 @@ const apiResponse = require("../api_response.js");
 exports.create = (req, res) => {
     // Validate request
     if (!req.body || !req.body.birthdate || !req.body.sex || !req.body.firstname || !req.body.lastname) {
-      apiResponse.sendResponse(res, {message: 'INVALID_REQUEST'}, 'Missing or invalid body parameters');
+      apiResponse.sendResponse(res, {message: 'INVALID_REQUEST', code: 400}, 'Missing or invalid body parameters');
       return;
     }
   

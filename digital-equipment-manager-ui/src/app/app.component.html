@@ -4,6 +4,9 @@
       <ion-content>
         <div class="flex-column">
           <ion-list id="inbox-list">
+            <div  class="flex-logo ion-justify-content-center">
+              <img src="../assets/images/DEM.png" alt="Digital Equipment Manager Logo" width="400px"/>
+            </div>
             <app-date-time-display></app-date-time-display>
             <ion-note class="date"> {{mydate | amLocal | amDateFormat: 'dddd, DD.MM.YYYY'}}</ion-note>
 

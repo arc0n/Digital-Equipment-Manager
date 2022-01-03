@@ -12,6 +12,19 @@ export interface Item {
   borrowed: boolean
 }
 
+export interface ItemType {
+  id: number,
+  name: string,
+  description: string,
+}
+
+export interface ItemModel {
+  id: number,
+  name: string,
+  model_number: string,
+  item_type_id: number,
+}
+
 export interface Person {
   firstname: string,
   lastname: string,

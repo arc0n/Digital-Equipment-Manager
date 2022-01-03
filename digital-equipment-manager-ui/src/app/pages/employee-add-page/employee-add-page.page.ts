@@ -94,7 +94,6 @@ export class EmployeeAddPagePage implements OnInit, OnDestroy {
       } else {
         this.presentToast('Unvollständige Eingabe', 'danger')
       }
-      //TODO post that to server if ok - otherwise null
     });
   }
 

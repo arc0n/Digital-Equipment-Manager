@@ -36,7 +36,7 @@
       <ion-item class="booking-summary-list-item">
         <ion-label>
           <div  class="booking-summary-list-picture-wrapper">
-            <ion-img [src]="'assets/equipment/'+ this.item?.photo || 'no-image.png'"></ion-img>
+            <ion-img [src]="'assets/equipment/'+ (this.item?.photo || 'no-image.png')"></ion-img>
           </div>
         </ion-label>
         <ion-label>{{ item.model_name }}</ion-label>

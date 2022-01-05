@@ -10,6 +10,8 @@
 </ion-header>
 
 <ion-content>
+
+  <div class="employee-page-wrapper">
   <!-- Formular -->
   <div class="employee-add-form-wrapper">
     <form class="employee-add-form" [formGroup]="addEmployeeForm">
@@ -57,19 +59,19 @@
     </form>
   </div>
 
-
   <div class="employee-add-bottom-toolbar" [ngClass]="{'ion-justify-content-between': !showMobileMenu}">
     <div *ngIf="!showMobileMenu">
-      <ion-button class="max-width-100" color="secondary"
+      <ion-button class="max-width-100" color="primary" [fill]="'outline'"
                   (click)="backButtonClicked()">
         Zurück
       </ion-button>
     </div>
-    <ion-button class="max-width-100" color="danger" (click)="resetForm()">
-      Reset Formular
+    <ion-button class="max-width-100" [fill]="'outline'" color="danger" (click)="resetForm()">
+      Formular resetten
     </ion-button>
     <ion-button class="max-width-100" color="primary" (click)="onSubmit()" type="submit">
-      Weiter
+      Anlegen
     </ion-button>
+  </div>
   </div>
 </ion-content>

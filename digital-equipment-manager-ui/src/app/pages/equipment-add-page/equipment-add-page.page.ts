@@ -59,15 +59,6 @@ export class EquipmentAddPagePage implements OnInit, OnDestroy {
       })
     )
 
-    /* TODO editmode
-     this.activeRoute.queryParams.pipe(
-      mergeMap(params => this.itemService.getItemByCode(params.id))
-    ).subscribe(item =>{
-      if(item === 'NOT_FOUND') return
-      //patch-values
-    });
-    */
-
     this.itemTypeService.getList({}).subscribe( (types) => {
       this.typeArray = types;
     })

@@ -26,7 +26,7 @@
                     [showContinueButton]="true"
     ></app-qr-control>
 
-    <div class="equipment-page-content-wrapper">
+    <div class="equipment-page-content-wrapper" *ngIf="!this.showMobileMenu">
       <div class="booking-header">
         Letzte Buchungen
       </div>

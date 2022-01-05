@@ -106,7 +106,7 @@ describe('api-tests-booking', () => {
       url:'http://localhost:3000/booking/',
       method:'POST',
       body:{
-        "item_id": "pyar1ofbl2vulma",
+        "item_id": "yh63pmq4jq2qa46",
         "person_id": "68gngbkw875rc6x",
       }
     })
@@ -117,7 +117,7 @@ describe('api-tests-booking', () => {
               method:'POST',
               failOnStatusCode: false,
               body:{
-                "item_id": "pyar1ofbl2vulma",
+                "item_id": "yh63pmq4jq2qa46",
                 "person_id": "cjz7282s5y9ro9d",
               }
             })
@@ -128,7 +128,7 @@ describe('api-tests-booking', () => {
                   url: 'http://localhost:3000/booking/',
                   method: 'PUT',
                   body:{
-                    "item_id": "pyar1ofbl2vulma",
+                    "item_id": "yh63pmq4jq2qa46",
                   }
                 }).then((response) => {
                   expect(response).property('status').to.equal(200)

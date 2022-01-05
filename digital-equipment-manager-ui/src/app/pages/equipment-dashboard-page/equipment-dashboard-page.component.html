@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Equipment
+      Startseite
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -27,7 +27,11 @@
     ></app-qr-control>
 
     <div class="equipment-page-content-wrapper">
-      Placeholder
+      <div class="booking-header">
+        Letzte Buchungen
+      </div>
+      <app-history-list [filter]="{}" [showItem]="true" [clickable]="true"
+                        (bookingClicked)="bookingClicked($event)"></app-history-list>
     </div>
   </div>
 

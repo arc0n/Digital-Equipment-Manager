@@ -14,7 +14,7 @@
   <div class="booking-summary-content-card ion-margin">
     <div class="booking-summary-flex-item">
       <div class="booking-summary-picture-wrapper">
-        Person Picture
+        <ion-img [src]="'assets/portrait.jpg'"></ion-img>
       </div>
       <div class="booking-summary-item-wrapper">
         <h3>Person</h3>
@@ -36,7 +36,7 @@
       <ion-item class="booking-summary-list-item">
         <ion-label>
           <div  class="booking-summary-list-picture-wrapper">
-            {{ item.photo }}
+            <ion-img [src]="'assets/equipment/'+ (this.item?.photo || 'no-image.png')"></ion-img>
           </div>
         </ion-label>
         <ion-label>{{ item.model_name }}</ion-label>

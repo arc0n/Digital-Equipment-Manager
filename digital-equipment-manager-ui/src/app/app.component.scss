@@ -125,7 +125,9 @@ ion-item.selected {
 
 .flex-logo {
   display: flex;
+  justify-content: start;
   margin-top: -20px;
+  width: 250px;
 }
 
 
@@ -137,9 +139,10 @@ ion-item.selected {
   display: flex;
   flex-direction: column;
 }
-
-.time {
-  font-size: xxx-large;
+.datetime-wrapper{
+  margin-left:1rem
 }
-
+.main-date{
+  margin-top: -15px;
+}
 

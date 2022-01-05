@@ -16,7 +16,6 @@
   <!-- Formular -->
   <div class="equipment-add-form-wrapper">
     <form class="equipment-add-form" [formGroup]="addItemForm">
-      <ion-list>
         <ion-item>
           <ion-icon name="journal" class="ion-margin"></ion-icon>
           <ion-label>Type</ion-label>
@@ -41,7 +40,6 @@
           <ion-label>Beschreibung</ion-label>
           <ion-input placeholder="Beschreibung"  formControlName="itemDescription"></ion-input>
         </ion-item>
-      </ion-list>
     </form>
   </div>
   <div class="equipment-add-bottom-toolbar" [ngClass]="{'ion-justify-content-between': !showMobileMenu}">

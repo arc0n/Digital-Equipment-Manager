@@ -10,6 +10,8 @@
 </ion-header>
 
 <ion-content>
+  <div class="item-defect-wrapper">
+
   <div class="item-defect-flex-main ion-margin ion-padding">
     <div class="item-defect-flex-item-infos">
       <p>MOCK INFOS for tests</p>
@@ -40,5 +42,6 @@
                 (click)="deactivateAndReturn()">
       {{this.item?.status === 'aktiv' ? 'Defekt melden' : 'aktivieren'}}
     </ion-button>
+  </div>
   </div>
 </ion-content>

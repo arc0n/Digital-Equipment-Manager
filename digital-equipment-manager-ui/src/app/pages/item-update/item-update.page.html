@@ -5,13 +5,15 @@
       slot="start" class="back-button" (click)="backButtonClicked()">
       <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
     </ion-buttons>
-    <ion-title>Equipment: {{this.item?.model_name}} / {{this.item?.status}}</ion-title>
+    <ion-title>Equipment bearbeiten: {{this.item?.model_name}} / {{this.item?.status}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <div class="item-update-wrapper">
+
   <div class="item-update-flex-main ion-margin ion-padding">
-    <p>Bitte fülle die folgenden Werte aus um sie zu bearbeiten:</p>
     <div class="item-update-flex-item-forms-card">
       <div class="item-update-flex-item-form">
         <div class="item-update-flex-item-form-info">
@@ -66,5 +68,8 @@
                 (click)="saveAndReturn()">
       Speichern
     </ion-button>
+  </div>
+
+
   </div>
 </ion-content>

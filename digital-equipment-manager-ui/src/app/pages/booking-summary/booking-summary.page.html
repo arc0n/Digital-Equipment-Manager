@@ -58,7 +58,7 @@
   </div>
   <div class="equipment-add-bottom-toolbar" [ngClass]="{'ion-justify-content-between': !showMobileMenu}">
     <div *ngIf="!showMobileMenu">
-      <ion-button class="max-width-100" color="secondary"
+      <ion-button class="max-width-100" color="primary" [fill]="'outline'"
                   (click)="goBack()">
         Zurück
       </ion-button>

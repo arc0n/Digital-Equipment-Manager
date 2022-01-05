@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons
       *ngIf="this.showMobileMenu"
-      slot="start" class="equipment-back-button" (click)="this.router.navigate(['/tabs/dashboard'])">
+      slot="start" class="back-button" (click)="this.router.navigate(['/tabs/dashboard'])">
       <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
     </ion-buttons>
     <ion-title>Equipment: {{this.item?.model_name}}</ion-title>
@@ -38,10 +38,10 @@
                     [ngStyle]="{'background-color':
                     getStatusColor(this.item?.status, this.item?.borrowed)}"></span></div>
             <div style="padding: 1rem 1rem 0 1rem">ID: {{this.item?.dynamic_id}}</div>
-            <ion-button class="max-width-100 ion-padding btn-secondary" [fill]="'outline'" color="medium" (click)="navigateToUpdateItem()">
+            <ion-button *ngIf="!showMobileMenu" class="max-width-100 ion-padding btn-secondary" [fill]="'outline'" color="medium" (click)="navigateToUpdateItem()">
               Item bearbeiten
             </ion-button>
-            <ion-button class="max-width-100 ion-padding btn-secondary" [fill]="'outline'" color="danger" (click)="navigateToDefect()">
+            <ion-button *ngIf="!showMobileMenu" class="max-width-100 ion-padding btn-secondary" [fill]="'outline'" color="danger" (click)="navigateToDefect()">
               Defekt melden
             </ion-button>
           </div>

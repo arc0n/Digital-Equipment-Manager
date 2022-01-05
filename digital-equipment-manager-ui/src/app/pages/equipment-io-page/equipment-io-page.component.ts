@@ -65,41 +65,40 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
 
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({
-      header: 'Albums',
-      cssClass: 'my-custom-class',
-      buttons: [{
-        text: 'QR Code generieren',
-        icon: 'share',
-        handler: () => {
-          console.log('generate QR clicked');
-        }
-      },
+      header: 'Optionen für Equipment',
+      buttons: [
         {
-          text: 'Dekommisionieren',
+          text: 'Defekt Melden',
           role: 'destructive',
           icon: 'trash',
           handler: () => {
-            console.log('Decomission clicked');
+            this.navigateToDefect()
           }
         },
         {
         text: 'Historie anzeigen',
         icon: 'caret-forward-circle',
         handler: () => {
-          console.log('history clicked');
+          this.navigateToHistory();
         }
-      }, {
+      },  {
+        text: 'Item bearbeiten',
+        icon: 'caret-forward-circle',
+        handler: () => {
+          this.navigateToUpdateItem();
+        }
+      },/*, {
         text: 'Defekte anzeigen',
         icon: 'heart',
         handler: () => {
-          console.log('show defect clicked');
+          this.navigateToDefect();
+
         }
-      }, {
+      },*/ {
         text: 'Cancel',
         icon: 'close',
         role: 'cancel',
         handler: () => {
-          console.log('Cancel clicked');
         }
       }]
     });
@@ -112,7 +111,6 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
   onMenuClicked() {
     this.presentActionSheet();
   }
-
 
   navigateToBookAndReturn() {
     let obs: Observable<Booking[]> = of([null]);
@@ -146,13 +144,18 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
 
   navigateToUpdateItem() {
     this.router.navigate(['item-update'], {
-      queryParams: {itemID: this.item.dynamic_id},
+      queryParams: {itemId: this.item.dynamic_id},
     })
   }
 
   navigateToDefect() {
     this.router.navigate(['item-defect'], {
-      queryParams: {itemID: this.item.dynamic_id},
+      queryParams: {itemId: this.item.dynamic_id},
+    })
+  }
+  navigateToHistory() {
+    this.router.navigate(['item-history'], {
+      queryParams: {itemId: this.item.dynamic_id},
     })
   }
 }

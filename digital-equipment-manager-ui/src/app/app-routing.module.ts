@@ -63,6 +63,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/item-update/item-update.module').then( m => m.ItemUpdatePageModule),
     canActivate: [AuthGuardService]
   },
+  {
+    path: 'item-history',
+    loadChildren: () => import('./pages/history-page/history-page.module').then( m => m.HistoryPagePageModule)
+  },
+
 
 
 ];

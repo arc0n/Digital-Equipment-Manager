@@ -38,7 +38,7 @@ export class ItemUpdatePage implements OnInit, OnDestroy {
     )
     this.activeRoute.queryParams.pipe(
       mergeMap(params => {
-        return this.itemService.getItemByCode(params.itemID)
+        return this.itemService.getItemByCode(params.itemId)
       })
     ).subscribe(async (item) => {
       if (!item || item === 'NOT_FOUND') {

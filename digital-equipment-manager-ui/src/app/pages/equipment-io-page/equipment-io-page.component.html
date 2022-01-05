@@ -33,11 +33,11 @@
             <div class="ion-padding">Beschreibung: {{this.item?.description}}</div>
           </div>
           <div class="equipment-page-io-vertical equipment-page-status-wrapper" [ngStyle]="{'order': showMobileMenu ? 1:4}">
-            <div class="ion-padding">Status: {{this.item?.status }}, {{+ this.item?.borrowed? 'ausgegeben' : 'verfügbar'}}
+            <div style="padding: 1rem 1rem 0 1rem">Status: {{this.item?.status }}, {{+ this.item?.borrowed? 'ausgegeben' : 'verfügbar'}}
               <span class="availability-dot"
                     [ngStyle]="{'background-color':
                     getStatusColor(this.item?.status, this.item?.borrowed)}"></span></div>
-            <div class="ion-padding">ID: {{this.item?.dynamic_id}}</div>
+            <div style="padding: 1rem 1rem 0 1rem">ID: {{this.item?.dynamic_id}}</div>
             <ion-button class="max-width-100 ion-padding btn-secondary" [fill]="'outline'" color="medium" (click)="navigateToUpdateItem()">
               Item bearbeiten
             </ion-button>

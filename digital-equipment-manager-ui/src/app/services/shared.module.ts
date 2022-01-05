@@ -16,6 +16,7 @@ import {HistoryListComponent} from "../components/history-list/history-list.comp
 import {ItemListComponent} from "../components/item-list/item-list.component";
 import {ItemTypeResourceService} from "./api-services/item-type.service";
 import {ItemModelResourceService} from "./api-services/item-model.service";
+import {AppLogoComponent} from "../components/app-logo/app-logo.component";
 
 
 @NgModule({
@@ -30,14 +31,16 @@ import {ItemModelResourceService} from "./api-services/item-model.service";
     QrScanControlComponent,
     DateTimeDisplayComponent,
     HistoryListComponent,
-    ItemListComponent
+    ItemListComponent,
+    AppLogoComponent
   ],
   exports: [
     QrScanComponent,
     QrScanControlComponent,
     DateTimeDisplayComponent,
     HistoryListComponent,
-    ItemListComponent
+    ItemListComponent,
+    AppLogoComponent
   ]
 })
 export class SharedModule {

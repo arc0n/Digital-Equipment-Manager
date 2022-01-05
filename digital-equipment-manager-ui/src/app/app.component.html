@@ -3,9 +3,7 @@
     <ion-menu contentId="main-content" menuId="main-menu-id" type="overlay">
       <ion-content>
         <div class="flex-column">
-            <div class="flex-logo">
-              <img src="../assets/images/DEM.png" alt="Digital Equipment Manager Logo" />
-            </div>
+          <app-logo></app-logo>
           <div class="datetime-wrapper">
             <app-date-time-display></app-date-time-display>
             <ion-note class="main-date"> {{mydate | amLocal | amDateFormat: 'dddd, DD.MM.YYYY'}}</ion-note>

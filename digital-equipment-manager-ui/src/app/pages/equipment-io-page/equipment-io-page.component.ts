@@ -83,7 +83,7 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
         }
       },  {
         text: 'Item bearbeiten',
-        icon: 'caret-forward-circle',
+        icon: 'create-outline',
         handler: () => {
           this.navigateToUpdateItem();
         }

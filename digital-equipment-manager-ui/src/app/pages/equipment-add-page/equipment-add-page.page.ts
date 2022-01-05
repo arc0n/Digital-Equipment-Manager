@@ -105,7 +105,7 @@ export class EquipmentAddPagePage implements OnInit, OnDestroy {
       item_type: (rawValues.itemType as ItemType).name,
       item_type_id: (rawValues.itemType as ItemType).id,
       model_name: (rawValues.itemModel as ItemModel).name,
-      photo: "/",
+      photo: this.getPhotoLink(rawValues.itemType as ItemType),
       serial_number: rawValues.itemSN,
       status: "aktiv"
     } as Item;
@@ -126,5 +126,14 @@ export class EquipmentAddPagePage implements OnInit, OnDestroy {
   }
 
 
-
+  private getPhotoLink(itemType: ItemType) {
+    switch (itemType.id) {
+      case 1: return 'equipment_schlagstock.jpeg'
+      case 2: return 'equipment_taser.jpeg'
+      case 3: return 'equipment_handschellen.jpeg'
+      case 4: return 'equipment_spray.jpeg'
+      case 5: return 'equipment_glock.jpeg'
+    }
+    return "";
+  }
 }

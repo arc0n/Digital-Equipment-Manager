@@ -94,27 +94,29 @@ INSERT INTO item_type (name, description) VALUES ("Schlagstock", "Ein langes zyl
 INSERT INTO item_type (name, description) VALUES ("Taser", "Elektroschockpistole");
 INSERT INTO item_type (name, description) VALUES ("Handschellen", "Handschellen");
 INSERT INTO item_type (name, description) VALUES ("Pfefferspray", "Pfefferspray");
+INSERT INTO item_type (name, description) VALUES ("Handfeuerwaffe", "Pistole");
 
 INSERT INTO item_model (name, model_number, item_type_id) VALUES ("S-12", "12", 1);
 INSERT INTO item_model (name, model_number, item_type_id) VALUES ("T-14", "14", 2);
 INSERT INTO item_model (name, model_number, item_type_id) VALUES ("H-12", "12", 3);
 INSERT INTO item_model (name, model_number, item_type_id) VALUES ("P-117", "117", 4);
+INSERT INTO item_model (name, model_number, item_type_id) VALUES ("Glock", "G17", 5);
 
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12001,"4z8k9a6bqx7u7ad", "/","some desc", "aktiv",1);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12002,"q6irq09w1aha126", "/","lorem ipsum", "aktiv",1);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12003,"7zdqatdaohetbl9", "/","test description which is a bit longer", "aktiv",1);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12004,"jvi6q46zqrns5hv", "/","", "aktiv",1);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12005,"k9ioxw31r7m5h92", "/","", "aktiv",1);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12006,"yh63pmq4jq2qa46", "/","", "aktiv",1);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12007,"grxhy5j72vfiwmw", "/","", "aktiv",1);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12008,"gqh073b9yrf49oj", "/","", "aktiv",1);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12009,"6i8tvxzhnv85b54", "/","", "aktiv",1);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12010,"okt240f1tqzk1us", "/","", "aktiv",1);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12011,"bxrnkl15s8dvkv5", "/","", "aktiv",1);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12012,"f9lloij3b9wmz82", "/","", "aktiv",1);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12013,"ifdgzecuseimxci", "/","", "aktiv",1);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12014,"nv2kopck0vg6ave", "/","", "aktiv",1);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12015,"k8spg6siw36act6", "/","", "aktiv",1);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12001,"4z8k9a6bqx7u7ad", "equipment_schlagstock.jpeg","some desc", "aktiv",1);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12002,"q6irq09w1aha126", "equipment_schlagstock.jpeg","lorem ipsum", "aktiv",1);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12003,"7zdqatdaohetbl9", "equipment_schlagstock.jpeg","test description which is a bit longer", "aktiv",1);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12004,"jvi6q46zqrns5hv", "equipment_glock.jpeg","", "aktiv",5);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12005,"k9ioxw31r7m5h92", "equipment_glock.jpeg","", "aktiv",5);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12006,"yh63pmq4jq2qa46", "equipment_spray.jpeg","", "aktiv",4);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12007,"grxhy5j72vfiwmw", "equipment_taser.jpeg","", "aktiv",2);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12008,"gqh073b9yrf49oj", "equipment_taser.jpeg","", "aktiv",2);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12009,"6i8tvxzhnv85b54", "equipment_taser.jpeg","", "aktiv",2);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12010,"okt240f1tqzk1us", "equipment_spray.jpeg","", "aktiv",4);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12011,"bxrnkl15s8dvkv5", "equipment_handschellen.jpeg","", "aktiv",3);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12012,"f9lloij3b9wmz82", "equipment_handschellen.jpeg","", "aktiv",3);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12013,"ifdgzecuseimxci", "","", "aktiv",1);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12014,"nv2kopck0vg6ave", "","", "aktiv",1);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12015,"k8spg6siw36act6", "","", "aktiv",1);
 
 INSERT INTO address(street, zip, city) VALUES ("Steiner Landstraße 45", 3500, "Stein");
 INSERT INTO address(street, zip, city) VALUES ("Steiner Landstraße 48", 3500, "Stein");

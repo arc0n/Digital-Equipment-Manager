@@ -24,7 +24,7 @@
         <div class="equipment-page-io-horizontal equipment-page-io-ordered"
              [ngClass]="{ 'equipment-io-mobile-column': showMobileMenu }">
           <div class="equipment-page-picture-wrapper">
-            Placeholder Picture
+            <ion-img [src]="'assets/equipment/'+ this.item?.photo || 'no-image.png'"></ion-img>
           </div>
           <div class="equipment-page-io-vertical flex-grow">
             <div class="ion-padding">Modell Mock</div>

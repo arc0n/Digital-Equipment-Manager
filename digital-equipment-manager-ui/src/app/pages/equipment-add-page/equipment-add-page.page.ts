@@ -6,7 +6,7 @@ import {CommonStateService} from "../../services/common-state.service";
 import {ActionSheetController, ToastController} from "@ionic/angular";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ItemResourceService} from "../../services/api-services/item-resource.service";
-import {ItemTypeResourceService} from "../../services/api-services/ item-type.service";
+import {ItemTypeResourceService} from "../../services/api-services/item-type.service";
 import {ItemModelResourceService} from "../../services/api-services/item-model.service";
 
 @Component({

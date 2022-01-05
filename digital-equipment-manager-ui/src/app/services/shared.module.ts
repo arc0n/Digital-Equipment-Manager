@@ -14,7 +14,7 @@ import {DateTimeDisplayComponent} from "../components/date-time-display/date-tim
 import {BookingResourceService} from "./api-services/booking-resource.service";
 import {HistoryListComponent} from "../components/history-list/history-list.component";
 import {ItemListComponent} from "../components/item-list/item-list.component";
-import {ItemTypeResourceService} from "./api-services/ item-type.service";
+import {ItemTypeResourceService} from "./api-services/item-type.service";
 import {ItemModelResourceService} from "./api-services/item-model.service";
 
 

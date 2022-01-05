@@ -30,7 +30,8 @@
       <div class="booking-header">
         Letzte Buchungen
       </div>
-      <app-history-list [filter]="{}"></app-history-list>
+      <app-history-list [filter]="{}" [showItem]="true" [clickable]="true"
+                        (bookingClicked)="bookingClicked($event)"></app-history-list>
     </div>
   </div>
 

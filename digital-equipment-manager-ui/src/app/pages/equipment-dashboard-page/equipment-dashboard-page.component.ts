@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import {ModalController, ToastController} from "@ionic/angular";
 import {QrScanComponent} from "../../components/qr-scan/qr-scan.component";
 import {ItemResourceService} from "../../services/api-services/item-resource.service";
-import {Item} from "../../services/model";
+import {Booking, Item} from "../../services/model";
 
 @Component({
   selector: 'equipment-dashboard',
@@ -74,5 +74,7 @@ export class EquipmentDashboardPage {
   }
 
 
-
+  bookingClicked(event: Booking) {
+    this.navigateToEquipmentPage(event.item)
+  }
 }

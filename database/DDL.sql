@@ -134,23 +134,5 @@ INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, add
 INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Theresia", "Rosenbauer", '1977-11-05', 0, "1475758","iwgb3zkzbt1jaho",1);
 INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Maria", "Winkelbauer", '1970-01-05', 0, "248789","e4bcon7egqe0d9a",2);
 
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (14001,"rykrz5rmxd5opao", "/","", "aktiv",2);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (14002,"vi3qhwrsyk1ig0m", "/","", "aktiv",2);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (14003,"axa5npz97xt1gy9", "/","", "aktiv",2);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (14004,"m9y1zrj4ociygi8", "/","", "aktiv",2);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (14005,"615dx69zug3ckde", "/","", "aktiv",2);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (14006,"4xlm7ymb1a4l318", "/","", "aktiv",2);
-
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12007,"k1g7v55x3lo3vw3", "/","", "aktiv",3);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12008,"mlm5h4cw54fmwgp", "/","", "aktiv",3);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12009,"c7341j0vum6weq2", "/","", "aktiv",3);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12010,"pyar1ofbl2vulma", "/","", "aktiv",3);
-
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (11701,"2qxgkb8t1d1mka0", "/","", "aktiv",4);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (11702,"nzltwe0xlnv5lng", "/","", "aktiv",4);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (11703,"h3x4mtowsc2pf56", "/","", "aktiv",4);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (11704,"le25wyiivnfvy1k", "/","", "aktiv",4);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (11705,"d55wf8ervjqi65m", "/","", "aktiv",4);
-
 INSERT INTO casuality_type(id,name) VALUES ('1', 'Defekt'), ('2', 'Ende der Lebzeit');
 INSERT INTO casuality (id,date,description,status,item_id,casuality_type_id) VALUES ('1', '2021-12-19 18:26:31', 'Herr Fellner hat den Taser unabsichtlich beschädigt.', 'inaktiv', '1', '1'), ('2', '2021-12-19 18:26:31', 'Taser ist kaputt gegangen', 'dekommisioniert', '2', '2')

@@ -1,27 +1,46 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {ModalController, ToastController} from "@ionic/angular";
 import {QrScanComponent} from "../../components/qr-scan/qr-scan.component";
 import {ItemResourceService} from "../../services/api-services/item-resource.service";
 import {Booking, Item} from "../../services/model";
+import {Subscription} from "rxjs";
+import {CommonStateService} from "../../services/common-state.service";
 
 @Component({
   selector: 'equipment-dashboard',
   templateUrl: 'equipment-dashboard-page.component.html',
   styleUrls: ['equipment-dashboard-page.component.scss']
 })
-export class EquipmentDashboardPage {
+export class EquipmentDashboardPage implements OnInit, OnDestroy{
 
   private modal: HTMLIonModalElement;
+
+  private subscriptions: Subscription[] = []
+  /** @internal */
+  showMobileMenu = false;
 
   constructor(private router: Router,
               private modalController: ModalController,
               public itemService: ItemResourceService,
-              private toastController: ToastController) {
+              private toastController: ToastController,
+              private state: CommonStateService) {
   }
 
   onScanClicked(event: any) {
     this.presentModal();
+  }
+
+  ngOnInit() {
+    this.subscriptions.push(
+      this.state.getSplitPaneVisible().subscribe(
+        (isVisible) => this.showMobileMenu = !isVisible
+      )
+    )
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 
 

@@ -1,12 +1,13 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
-import {Item} from "../../services/model";
+import {Item, ItemModel, ItemType} from "../../services/model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CommonStateService} from "../../services/common-state.service";
-import {ActionSheetController} from "@ionic/angular";
-import {mergeMap} from "rxjs/operators";
-import {FormControl, FormGroup} from "@angular/forms";
+import {ActionSheetController, ToastController} from "@ionic/angular";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ItemResourceService} from "../../services/api-services/item-resource.service";
+import {ItemTypeResourceService} from "../../services/api-services/item-type.service";
+import {ItemModelResourceService} from "../../services/api-services/item-model.service";
 
 @Component({
   selector: 'app-equipment-add-page',
@@ -15,24 +16,31 @@ import {ItemResourceService} from "../../services/api-services/item-resource.ser
 })
 export class EquipmentAddPagePage implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
-  private item: Item;
+  public typeArray: ItemType[];
+  public modelArray: ItemModel[];
+  public filteredModelArray: ItemModel[];
+
 
   /** @internal */
   showMobileMenu = true;
 
   /** @internal  */
   addItemForm = new FormGroup({
-    itemType: new FormControl(''),
-    itemModel: new FormControl(''),
-    itemSN: new FormControl(''),
-    itemComment: new FormControl('')
+    itemType: new FormControl('', Validators.required),
+    itemModel: new FormControl('', Validators.required),
+    itemSN: new FormControl('', Validators.required),
+    itemDescription: new FormControl('', Validators.required)
   })
 
   constructor(public router: Router,
               public state: CommonStateService,
+              private toastController: ToastController,
               private actionSheetController: ActionSheetController,
               private activeRoute: ActivatedRoute,
-              private itemService: ItemResourceService
+              private itemService: ItemResourceService,
+              private itemTypeService: ItemTypeResourceService,
+              private itemModelService: ItemModelResourceService,
+
   ) {
   }
 
@@ -42,16 +50,22 @@ export class EquipmentAddPagePage implements OnInit, OnDestroy {
         (isVisible) => this.showMobileMenu = !isVisible
       )
     )
-    this.activeRoute.queryParams.pipe(
-      mergeMap(params => this.itemService.getItemByCode(params.id))
-    ).subscribe(item =>{
-      if(item === 'NOT_FOUND') return
-      this.item = item as Item;
-    });
+    this.subscriptions.push(
+      this.addItemForm.get("itemType").valueChanges.subscribe((value: ItemType) => {
+        this.addItemForm.get("itemModel").patchValue(null);
+        this.filteredModelArray = this.modelArray?.filter((model) => {
+          return model?.item_type_id === value?.id;
+        })
+      })
+    )
 
-    this.addItemForm.valueChanges.subscribe((rawFormValues) => {
-      console.log(rawFormValues);
-    });
+    this.itemTypeService.getList({}).subscribe( (types) => {
+      this.typeArray = types;
+    })
+
+    this.itemModelService.getList({}).subscribe( (models) => {
+      this.modelArray = models;
+    })
   }
 
   ngOnDestroy() {
@@ -68,9 +82,49 @@ export class EquipmentAddPagePage implements OnInit, OnDestroy {
     this.addItemForm.reset();
   }
 
-  onSubmit($event: any) {
-    this.addItemForm.valueChanges.subscribe(v => {
-      console.log("submitted values: "+v);
-    });
+  onSubmit() {
+    if(this.addItemForm.invalid) {
+      this.presentToast('Unvollständige Eingabe', 'danger')
+      return;
+    }
+    const rawValues = this.addItemForm.getRawValue();
+
+    const newItem: Item = {
+      borrowed: false,
+      description: rawValues.itemDescription,
+      item_model_id: (rawValues.itemModel as ItemModel).id,
+      item_type: (rawValues.itemType as ItemType).name,
+      item_type_id: (rawValues.itemType as ItemType).id,
+      model_name: (rawValues.itemModel as ItemModel).name,
+      photo: this.getPhotoLink(rawValues.itemType as ItemType),
+      serial_number: rawValues.itemSN,
+      status: "aktiv"
+    } as Item;
+    this.itemService.postItem(newItem).subscribe(result => {
+      if(result !== 'INVALID_REQUIEST') {
+        this.presentToast('Item angelegt', 'success').then(() => {
+          this.router.navigate(['/tabs/dashboard'])
+        })
+      } else {
+        this.presentToast('Unvollständige Eingabe', 'danger');
+      }
+    })
+  }
+
+  async presentToast(message: string, color: string) {
+    const p = await this.toastController.create({message, color, duration:3000})
+    await p.present();
+  }
+
+
+  private getPhotoLink(itemType: ItemType) {
+    switch (itemType.id) {
+      case 1: return 'equipment_schlagstock.jpeg'
+      case 2: return 'equipment_taser.jpeg'
+      case 3: return 'equipment_handschellen.jpeg'
+      case 4: return 'equipment_spray.jpeg'
+      case 5: return 'equipment_glock.jpeg'
+    }
+    return "";
   }
 }

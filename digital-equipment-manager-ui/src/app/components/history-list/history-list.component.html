@@ -1,13 +1,21 @@
 <ion-list>
 
   <ion-list-header>
+    <ion-label *ngIf="this.showItem"> Equipment Typ</ion-label>
+    <ion-label *ngIf="this.showItem">Modell</ion-label>
     <ion-label>Vorname</ion-label>
     <ion-label>Nachname</ion-label>
     <ion-label>Datum Ausgabe</ion-label>
     <ion-label>Datum Rückgabe</ion-label>
   </ion-list-header>
 
-  <ion-item *ngFor="let booking of bookings">
+  <ion-item *ngFor="let booking of bookings" (click)="this.bookingClicked.emit(booking)"
+   [ngStyle]="{
+   'cursor': this.clickable? 'pointer' : ''
+   }"
+  >
+      <ion-label *ngIf="showItem"> {{ booking.item.item_type }}</ion-label>
+      <ion-label *ngIf="showItem"> {{ booking.item.model_name }}</ion-label>
       <ion-label> {{ booking.person?.firstname }}</ion-label>
       <ion-label> {{ booking.person?.lastname }}</ion-label>
       <ion-label> {{ (booking.datetime_out | date ) || '-' }}</ion-label>

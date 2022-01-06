@@ -3,9 +3,12 @@
     <ion-menu contentId="main-content" menuId="main-menu-id" type="overlay">
       <ion-content>
         <div class="flex-column">
-          <ion-list id="inbox-list">
+          <app-logo></app-logo>
+          <div class="datetime-wrapper">
             <app-date-time-display></app-date-time-display>
-            <ion-note class="date"> {{mydate | amLocal | amDateFormat: 'dddd, DD.MM.YYYY'}}</ion-note>
+            <ion-note class="main-date"> {{mydate | amLocal | amDateFormat: 'dddd, DD.MM.YYYY'}}</ion-note>
+          </div>
+
 
             <ion-menu-toggle auto-hide="false" *ngFor="let link of sidebarRoutes; let i = index">
               <ion-item
@@ -24,7 +27,6 @@
 
               </ion-item>
             </ion-menu-toggle>
-          </ion-list>
 
           <div class="flex-grow flex-column ion-justify-content-end">
             <ion-item button class="ion-justify-content-between ion-color-medium" (click)="logoutUser()">

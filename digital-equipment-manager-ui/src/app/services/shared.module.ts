@@ -14,6 +14,9 @@ import {DateTimeDisplayComponent} from "../components/date-time-display/date-tim
 import {BookingResourceService} from "./api-services/booking-resource.service";
 import {HistoryListComponent} from "../components/history-list/history-list.component";
 import {ItemListComponent} from "../components/item-list/item-list.component";
+import {ItemTypeResourceService} from "./api-services/item-type.service";
+import {ItemModelResourceService} from "./api-services/item-model.service";
+import {AppLogoComponent} from "../components/app-logo/app-logo.component";
 
 
 @NgModule({
@@ -28,14 +31,16 @@ import {ItemListComponent} from "../components/item-list/item-list.component";
     QrScanControlComponent,
     DateTimeDisplayComponent,
     HistoryListComponent,
-    ItemListComponent
+    ItemListComponent,
+    AppLogoComponent
   ],
   exports: [
     QrScanComponent,
     QrScanControlComponent,
     DateTimeDisplayComponent,
     HistoryListComponent,
-    ItemListComponent
+    ItemListComponent,
+    AppLogoComponent
   ]
 })
 export class SharedModule {
@@ -45,7 +50,11 @@ export class SharedModule {
       providers: [StorageService,
         AuthenticationService,
         BookingResourceService,
-        ItemResourceService, PersonResourceService]
+        ItemResourceService,
+        PersonResourceService,
+        ItemTypeResourceService,
+        ItemModelResourceService,
+      ]
     };
   }
 }

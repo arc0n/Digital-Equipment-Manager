@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {combineLatest, forkJoin, merge, of, Subject, Subscription} from "rxjs";
-import {combineAll, debounceTime, filter, mergeAll, switchMap, take, tap} from "rxjs/operators";
+import { forkJoin, Subject, Subscription} from "rxjs";
+import { debounceTime, filter, switchMap, take, tap} from "rxjs/operators";
 import {PersonResourceService} from "../../services/api-services/person-resource.service";
 import {QrScanComponent} from "../../components/qr-scan/qr-scan.component";
 import {ModalController, ToastController} from "@ionic/angular";

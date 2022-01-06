@@ -124,6 +124,7 @@ ion-item.selected {
 }
 
 
+
 .flex-grow{
   flex-grow: 1;
 }
@@ -132,9 +133,10 @@ ion-item.selected {
   display: flex;
   flex-direction: column;
 }
-
-.time {
-  font-size: xxx-large;
+.datetime-wrapper{
+  margin-left:1rem
 }
-
+.main-date{
+  margin-top: -15px;
+}
 

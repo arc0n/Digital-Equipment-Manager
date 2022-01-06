@@ -21,12 +21,14 @@
 }
 
 .equipment-page-picture-wrapper {
+  overflow: hidden;
   margin: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex: 0 1 200px;
   min-height: 200px;
+  max-width: 200px;
   border: 3px solid var(--ion-color-light);
   border-radius: 2px;
   color: var(--ion-color-medium);
@@ -44,6 +46,7 @@
 
 .equipment-back-button {
   margin: 0 0 0 1rem;
+  cursor: pointer;
 }
 
 .equipment-page-info-container {

@@ -1,7 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Equipment
+      Startseite
+      <app-logo *ngIf="showMobileMenu" class="toolbar-logo"></app-logo>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,7 +11,9 @@
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Ausrüstung</ion-title>
+
     </ion-toolbar>
+
   </ion-header>
 
   <div class="equipment-page-vertical">
@@ -26,8 +29,12 @@
                     [showContinueButton]="true"
     ></app-qr-control>
 
-    <div class="equipment-page-content-wrapper">
-      Placeholder
+    <div class="equipment-page-content-wrapper" *ngIf="!this.showMobileMenu">
+      <div class="booking-header">
+        Letzte Buchungen
+      </div>
+      <app-history-list [filter]="{}" [showItem]="true" [clickable]="true"
+                        (bookingClicked)="bookingClicked($event)"></app-history-list>
     </div>
   </div>
 

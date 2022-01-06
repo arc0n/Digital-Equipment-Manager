@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Booking} from "../../services/model";
 import {BookingResourceService} from "../../services/api-services/booking-resource.service";
 import {QueryParams} from "../../services/api-services/base-resource.service";
@@ -10,7 +10,10 @@ import {QueryParams} from "../../services/api-services/base-resource.service";
 })
 export class HistoryListComponent implements OnInit, OnChanges {
   bookings: Booking[] = [];
+  @Input() showItem: boolean;
+  @Input() clickable: boolean;
   @Input() filter: QueryParams = {};
+  @Output() bookingClicked = new EventEmitter<Booking>()
 
   constructor(private bookingsService: BookingResourceService) { }
 

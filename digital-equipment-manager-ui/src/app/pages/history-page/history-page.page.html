@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons
+      *ngIf="this.showMobileMenu"
+      slot="start" class="back-button" (click)="backButtonClicked()">
+      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title>Equipment History</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<app-history-list [showItem]="false" [clickable]="false" [filter]="historyFilter"></app-history-list>
+</ion-content>

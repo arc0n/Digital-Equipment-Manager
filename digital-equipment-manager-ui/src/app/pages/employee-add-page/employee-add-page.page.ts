@@ -94,7 +94,6 @@ export class EmployeeAddPagePage implements OnInit, OnDestroy {
       } else {
         this.presentToast('Unvollständige Eingabe', 'danger')
       }
-      //TODO post that to server if ok - otherwise null
     });
   }
 
@@ -102,5 +101,4 @@ export class EmployeeAddPagePage implements OnInit, OnDestroy {
     const p = await this.toastController.create({message, color, duration:3000})
     await p.present();
   }
-
 }

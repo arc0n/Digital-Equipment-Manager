@@ -37,7 +37,7 @@ app.post('/login', async (req, res) => {
         if (refreshToken in refreshTokens) {
             const user = await User.getByEmail(req.body.email.toLowerCase())
             if(!user) res.status(400).send("Invalid Email/Username")
-            const token = await user.generateAuthToken(); // TODO
+            const token = await user.generateAuthToken();
             res.json({jwt: token, email: user.email})    }
 
         else {

@@ -4,11 +4,12 @@ import {MenuController, Platform} from "@ionic/angular";
 import {StorageService} from "./storage.service";
 import {catchError, map, mergeMap} from "rxjs/operators";
 import {HttpClient} from "@angular/common/http";
+import {fromPromise} from "rxjs/internal-compatibility";
 
 @Injectable()
 export class AuthenticationService {
   authState = new BehaviorSubject(false);
-  private baseLink= "http://localhost:3000/login"
+  private baseLink= "http://localhost:3000"
   constructor(
     private storage: StorageService,
     private platform: Platform,
@@ -29,10 +30,13 @@ export class AuthenticationService {
       }
     });
   }
+  public getJwt(): Observable<string> {
+    return fromPromise(this.storage.get('JWT'))
+  }
 
   public login(email: string, password: string): Observable<boolean> {
     return this.http.post<{jwt: string, refreshToken: string, email: string}>(
-      this.baseLink,  {     email,  password}
+      this.baseLink + '/login',  {     email,  password}
     ).pipe(
       catchError((err) => {
         if(err.code === 403) {
@@ -60,6 +64,15 @@ export class AuthenticationService {
   }
 
   public logout(): Observable<boolean> {
+    this.getRefreshToken().pipe(
+      mergeMap(token => {
+        return this.http.post(this.baseLink + '/logout', {refreshToken: token})
+
+      })
+    ).subscribe((res)=>{
+      // ignored
+       })
+
     return from(
       this.storage.remove('JWT').then(() => {this.storage.remove('REFRESH_TOKEN')
       this.authState.next(false);
@@ -72,5 +85,9 @@ export class AuthenticationService {
     return this.authState.asObservable();
   }
 
+  getRefreshToken(): Observable<string> {
+    return   fromPromise(this.storage.get('REFRESH_TOKEN'))
+
+  }
 }
 

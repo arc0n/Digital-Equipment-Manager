@@ -1,3 +1,6 @@
+const auth = require("../middleware/auth-middleware");
+
+
 /**
  * Exports app routings for CRUD operations on <person>.
  * @param {Function} app Express application
@@ -6,13 +9,13 @@
 module.exports = app => {
     const person = require("../controllers/person.controller.js");
   
-    app.post("/person", person.create);
+    app.post("/person",auth, person.create);
 
-    app.get("/person", person.getAll);
+    app.get("/person",auth, person.getAll);
 
-    app.get("/person/:id", person.getById);
+    app.get("/person/:id",auth, person.getById);
 
-    app.put("/person/:id", person.updateById);
+    app.put("/person/:id",auth, person.updateById);
 
-    app.delete("/person/:id", person.delete);
+    app.delete("/person/:id",auth, person.delete);
 };

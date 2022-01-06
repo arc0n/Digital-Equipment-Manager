@@ -153,4 +153,4 @@ INSERT INTO borrowed_item(datetime_out, datetime_in, item_id, person_id) VALUES 
 INSERT INTO borrowed_item(datetime_out, datetime_in, item_id, person_id) VALUES ("2021-12-20 08:10:15", "2021-12-20 18:10:25", 6, 4);
 INSERT INTO borrowed_item(datetime_out, datetime_in, item_id, person_id) VALUES ("2021-12-21 08:10:15", NULL, 2, 4);
 
-INSERT INTO user(username, email, password) VALUES ('admin', 'admin@email.com', '');
+INSERT INTO user(username, email, password) VALUES ('admin', 'admin@email.com', '$2b$10$lPR3pJcnep5h7qAFJ6wpaOVALfmm9nlguOURAjtYRj422D.IYPFZy');

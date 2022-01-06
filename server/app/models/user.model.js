@@ -1,5 +1,6 @@
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const sql = require("./db.js");
 
 
 class User {
@@ -15,13 +16,7 @@ class User {
             isAdmin: this.isAdmin
         }, "mockedPrivateKey", {expiresIn: 600000})
     }
-
-    /** get user from db by email */
-    getByEmail(email) {
-        // TODO
-        return null
-    }
-
+    
     /** use this to hash the password before saving it to the db*/
     async hashPassword(pw){
         const salt = await bcrypt.genSalt(10); // hardcoded bcrypt salt
@@ -29,4 +24,18 @@ class User {
     }
 }
 
+User.getByEmail = (email) => {
+    return new Promise(async (resolve,reject)=> {
+
+    sql.query(
+        "SELECT * FROM user WHERE email = ?",[email], (err, res) => {
+        if (err) {
+            reject(err);
+          return;
+        }
+        const user = new User(res[0]);
+        resolve(user);
+      });
+    })
+}
 module.exports = User;

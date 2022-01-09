@@ -14,13 +14,14 @@ app.post('/login', async (req, res) => {
 
         let user = await User.getByEmail(req.body.email.toLowerCase());
          if(!user) return res.status(403).send("Email oder Passwort falsch");
+        user.role = (user.role > 0) ? 'USER' : 'ADMIN';
 
         const validPassword = await bcrypt.compare(req.body.password, user.password);
         if(!validPassword) return res.status(403).send("Email oder Passwort falsch");
         const token = await user.generateAuthToken();
         const refreshToken = randtoken.uid(256);
         refreshTokens[refreshToken] = user.email;
-        res.status(201).send({jwt: token, refreshToken: refreshToken,email: user.email});
+        res.status(201).send({jwt: token, refreshToken: refreshToken,email: user.email, role: user.role});
     });
 
     app.post('/logout', async (req, res) => {

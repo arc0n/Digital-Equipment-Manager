@@ -54,8 +54,12 @@ const sql = require("./db.js");
           const values = [], item_ids = [];
           if(res_items.length >= 1) {
             res_items.forEach(res_item => {
-              values.push([item.datetime_out, res_item.id, person_id]);
-              item_ids.push(res_item.id);
+              if(res_item.status !== 'inaktiv' || res_item.status !== 'dekommisioniert') {
+                values.push([item.datetime_out, res_item.id, person_id]);
+                item_ids.push(res_item.id);
+              } else {
+                result({result: 'ITEM_CANNOT_BE_BORROWED'});
+              }
             });
             } else {
               result(err);

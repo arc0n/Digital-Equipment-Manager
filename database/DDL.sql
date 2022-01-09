@@ -51,6 +51,7 @@ CREATE TABLE user
    (    
       id INTEGER AUTO_INCREMENT PRIMARY KEY, 
       username VARCHAR(255) NOT NULL,
+      role INTEGER NOT NULL,
       email VARCHAR(255) NOT NULL,
       password VARCHAR(255)
    );
@@ -153,4 +154,6 @@ INSERT INTO borrowed_item(datetime_out, datetime_in, item_id, person_id) VALUES 
 INSERT INTO borrowed_item(datetime_out, datetime_in, item_id, person_id) VALUES ("2021-12-20 08:10:15", "2021-12-20 18:10:25", 6, 4);
 INSERT INTO borrowed_item(datetime_out, datetime_in, item_id, person_id) VALUES ("2021-12-21 08:10:15", NULL, 2, 4);
 
-INSERT INTO user(username, email, password) VALUES ('admin', 'admin@email.com', '$2b$10$lPR3pJcnep5h7qAFJ6wpaOVALfmm9nlguOURAjtYRj422D.IYPFZy');
+INSERT INTO user(username, role, email, password) VALUES ('admin', 0,'admin@email.com', '$2b$10$lPR3pJcnep5h7qAFJ6wpaOVALfmm9nlguOURAjtYRj422D.IYPFZy');
+INSERT INTO user(username, role, email, password) VALUES ('user', 1, 'user@email.com', '$2b$10$EX8ZN8QwkwGqTaQKJlcyC.kBt6T5mSjNvyC7lIpS7UUAo8Lwv/Nim');
+INSERT INTO user(username, role, email, password) VALUES ('user2', 1, 'user2@email.com', '$2b$10$EX8ZN8QwkwGqTaQKJlcyC.kBt6T5mSjNvyC7lIpS7UUAo8Lwv/Nim');

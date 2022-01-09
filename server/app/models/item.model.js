@@ -58,9 +58,11 @@ const sql = require("./db.js");
         return;
       }
   
-      const resConverted = res.map(item => ({...item, borrowed: item.borrowed === 'true'}));
-      console.log("items: ", resConverted);
-      result(null, resConverted);
+      let finalResponse = res.map(item => ({...item, borrowed: (item.borrowed === 'true' || item.status === 'inaktiv' || item.status === 'dekommisioniert')}));
+      //remove dekommisionerte items
+      finalResponse = finalResponse.filter(item => item.status !== 'dekommisioniert');
+      console.log("items: ", finalResponse);
+      result(null, finalResponse);
     });
   };
 
@@ -91,9 +93,9 @@ const sql = require("./db.js");
           return;
         }
 
-        const resConverted = res.map(item => ({...item, borrowed: item.borrowed === 'true'}));
-        console.log("Item: ", resConverted);
-        result(null, resConverted[0]);
+        let finalResponse = res.map(item => ({...item, borrowed: (item.borrowed === 'true' || item.status === 'inaktiv' || item.status === 'dekommisioniert')}));
+        console.log("Item: ", finalResponse);
+        result(null, finalResponse[0]);
       });
     };
 

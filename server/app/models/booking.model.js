@@ -107,7 +107,7 @@ const sql = require("./db.js");
     "INNER JOIN person p ON p.id = borrowed_item.person_id " +
     "INNER JOIN item i ON i.id = borrowed_item.item_id " +
     "INNER JOIN item_model im ON im.id = i.item_model_id " + 
-    "INNER JOIN item_type it ON it.id = im.item_type_id WHERE " + conditions.where, conditions.values, (err, res) => {
+    "INNER JOIN item_type it ON it.id = im.item_type_id WHERE " + conditions.where + " ORDER BY datetime_out DESC", conditions.values, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err);

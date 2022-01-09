@@ -14,7 +14,7 @@
   <div class="booking-summary-content-card ion-margin">
     <div class="booking-summary-flex-item">
       <div class="booking-summary-picture-wrapper">
-        <ion-img [src]="'assets/portrait.jpg'"></ion-img>
+        <ion-img [src]="'assets/people/'+ (this.person?.photo || 'no-image.png')"></ion-img>
       </div>
       <div class="booking-summary-item-wrapper">
         <h3>Person</h3>

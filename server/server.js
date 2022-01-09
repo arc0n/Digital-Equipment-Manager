@@ -36,6 +36,7 @@ require("./app/routes/booking.routes.js")(app);
 require("./app/routes/item_type.routes.js")(app);
 require("./app/routes/item_model.routes.js")(app);
 require("./app/routes/casuality.routes.js")(app);
+require("./app/routes/auth.routes.js")(app);
 
 // set port, listen for requests
 app.listen(3000, () => {

@@ -54,8 +54,12 @@ const sql = require("./db.js");
           const values = [], item_ids = [];
           if(res_items.length >= 1) {
             res_items.forEach(res_item => {
-              values.push([item.datetime_out, res_item.id, person_id]);
-              item_ids.push(res_item.id);
+              if(res_item.status !== 'inaktiv' || res_item.status !== 'dekommisioniert') {
+                values.push([item.datetime_out, res_item.id, person_id]);
+                item_ids.push(res_item.id);
+              } else {
+                result({result: 'ITEM_CANNOT_BE_BORROWED'});
+              }
             });
             } else {
               result(err);
@@ -103,7 +107,7 @@ const sql = require("./db.js");
     "INNER JOIN person p ON p.id = borrowed_item.person_id " +
     "INNER JOIN item i ON i.id = borrowed_item.item_id " +
     "INNER JOIN item_model im ON im.id = i.item_model_id " + 
-    "INNER JOIN item_type it ON it.id = im.item_type_id WHERE " + conditions.where, conditions.values, (err, res) => {
+    "INNER JOIN item_type it ON it.id = im.item_type_id WHERE " + conditions.where + " ORDER BY datetime_out DESC", conditions.values, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err);

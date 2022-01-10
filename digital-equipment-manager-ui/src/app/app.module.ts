@@ -13,6 +13,7 @@ import {NegAuthGuardService} from "./auth/neg-auth-guard.service";
 
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MomentModule} from "ngx-moment";
+import { QRCodeModule } from "angularx-qrcode";
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +31,7 @@ import {MomentModule} from "ngx-moment";
         'm': 59
       }
     }),
+    QRCodeModule,
   ],
   providers: [
     AuthGuardService,

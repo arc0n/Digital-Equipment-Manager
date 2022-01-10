@@ -19,6 +19,9 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
   /** @internal */
   showMobileMenu = true;
 
+  /** @internal */
+  createdCode = false;
+
   /** @internal  */
   item: Item;
 
@@ -28,7 +31,7 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
               private activeRoute: ActivatedRoute,
               private itemService: ItemResourceService,
               private toastController: ToastController,
-              private bookingService: BookingResourceService
+              private bookingService: BookingResourceService,
               ) {
   }
 
@@ -157,5 +160,9 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
     this.router.navigate(['item-history'], {
       queryParams: {itemId: this.item.dynamic_id},
     })
+  }
+
+  downloadQRCode() {
+    this.createdCode = this.createdCode === false;
   }
 }

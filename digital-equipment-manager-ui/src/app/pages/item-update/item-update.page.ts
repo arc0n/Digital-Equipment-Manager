@@ -61,10 +61,10 @@ export class ItemUpdatePage implements OnInit, OnDestroy {
         this.presentToast('Achtung - Gerät ist aktuell ausgeborgt!',
           'warning', 4000, "middle");
       }
-      this.updateItemForm.setValue(
-        {itemName: this.item.model_name,
-          itemDescription: this.item.description,
-          itemSerialnumber: this.item.serial_number
+      this.updateItemForm.setValue({
+        itemName: this.item.model_name,
+        itemDescription: this.item.description,
+        itemSerialnumber: this.item.serial_number
         });
     });
   }
@@ -90,7 +90,7 @@ export class ItemUpdatePage implements OnInit, OnDestroy {
       this.presentToast('Unvollständige Eingaben', 'danger', 2000, 'middle');
       return;
     } else {
-      this.presentToast('Eingaben: Alles oki', 'success', 2000, 'middle');
+      this.presentToast('Test für Eingaben: Alles oki', 'success', 2000, 'middle');
     }
 
   }

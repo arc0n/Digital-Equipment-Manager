@@ -90,7 +90,13 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
         handler: () => {
           this.navigateToUpdateItem();
         }
-      },/*, {
+      }, {
+          text: 'QR Code anzeigen',
+          icon: 'qr-code-outline',
+          handler: () => {
+            this.showQRCode();
+          }
+        },/*, {
         text: 'Defekte anzeigen',
         icon: 'heart',
         handler: () => {
@@ -162,7 +168,7 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
     })
   }
 
-  downloadQRCode() {
+  showQRCode() {
     this.createdCode = this.createdCode === false;
   }
 }

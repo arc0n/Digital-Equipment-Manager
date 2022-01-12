@@ -30,6 +30,7 @@ export class AuthPage implements OnInit {
       if(!!result) {
       this.router.navigate(['../']);
       } else{
+        console.log(result)
         this.presentToast("Login fehlgeschlagen", "danger" )
       }
     });

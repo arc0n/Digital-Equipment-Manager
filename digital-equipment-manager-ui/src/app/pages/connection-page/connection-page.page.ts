@@ -49,7 +49,7 @@ export class ConnectionPagePage implements OnInit, OnDestroy {
         (isVisible) => this.showMobileMenu = !isVisible)
     )
 
-    this.state.getServerConfig().pipe(take(1)).subscribe( serverUrl => {
+    this.state.getServerConfigObservable().pipe(take(1)).subscribe(serverUrl => {
       this.triggerConnectionTest(serverUrl.ip, serverUrl.port);
       this.connectionForm.patchValue({'serverIpAddr': serverUrl.ip,'serverPort': serverUrl.port}, {emitEvent: false})
     });

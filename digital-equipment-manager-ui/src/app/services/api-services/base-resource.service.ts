@@ -23,37 +23,9 @@ export abstract class BaseResourceService<T> implements OnDestroy {
   subscriptions: Subscription[] = [];
 
   protected constructor(protected http: HttpClient, protected storageSrv: StorageService, protected stateSrv: CommonStateService) {
-    this.getStoredConnectionData();
-
-    this.subscriptions.push(this.stateSrv.getServerConfig().subscribe((config) => {
-      this.setServerConfig(config.ip, config.port)
+    this.subscriptions.push(this.stateSrv.getServerConfigObservable().subscribe(({ip, port}) => {
+      this.baseUrl = `http://${ip}:${port}`;
     }))
-  }
-
-  public async setServerConfig( ip: string, port: number) {
-    const tmp = this.baseUrl;
-    this.baseUrl = `http://${ip}:${port}`;
-    console.log(this.baseUrl);
-    if(this.baseUrl !== tmp) {
-      await Promise.all([
-        this.storageSrv.set(IP_KEY, ip),
-        this.storageSrv.set(PORT_KEY, port)
-      ]);
-    }
-  }
-
-  public getStoredConnectionData() {
-    return from(Promise.all([
-      this.storageSrv?.get(IP_KEY),
-      this.storageSrv?.get(PORT_KEY)
-    ])
-  ).subscribe(([ip,port]) => {
-        if(!port || !ip) {
-          this.baseUrl = `http://nopenope:${3000}`;
-          return;
-        }
-        this.baseUrl = `http://${ip}:${port}`;
-      });
   }
 
   ngOnDestroy() {

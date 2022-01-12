@@ -20,6 +20,10 @@
         "source": "C:\\Users\\Pascal\\IdeaProjects\\Digital-Equipment-Manager\\digital-equipment-manager-ui\\android\\app\\src\\main\\res\\drawable-port-xhdpi\\splash.png"
     },
     {
+        "merged": "C:\\Users\\Pascal\\IdeaProjects\\Digital-Equipment-Manager\\digital-equipment-manager-ui\\android\\app\\build\\intermediates\\res\\merged\\debug\\xml_network_security_config.xml.flat",
+        "source": "C:\\Users\\Pascal\\IdeaProjects\\Digital-Equipment-Manager\\digital-equipment-manager-ui\\android\\app\\src\\main\\res\\xml\\network_security_config.xml"
+    },
+    {
         "merged": "C:\\Users\\Pascal\\IdeaProjects\\Digital-Equipment-Manager\\digital-equipment-manager-ui\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-land-xxxhdpi_splash.png.flat",
         "source": "C:\\Users\\Pascal\\IdeaProjects\\Digital-Equipment-Manager\\digital-equipment-manager-ui\\android\\app\\src\\main\\res\\drawable-land-xxxhdpi\\splash.png"
     },

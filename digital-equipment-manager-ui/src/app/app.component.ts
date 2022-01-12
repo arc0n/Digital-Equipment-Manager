@@ -51,13 +51,10 @@ export class AppComponent implements OnInit {
   constructor(
     private commonStateService: CommonStateService,
     private authService: AuthenticationService,
-    private router: Router,
-    private baseResSrv: BaseResourceService<any>) {
+    private router: Router) {
   }
 
   ngOnInit() {
-
-    this.baseResSrv.getStoredConnectionData();
 
     this.router.events.pipe(
       filter(event => (event instanceof ResolveEnd))

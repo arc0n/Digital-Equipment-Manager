@@ -11,10 +11,10 @@ INJECTED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equ
 	android:name
 		ADDED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:30:13-62
 manifest
-ADDED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:2:1-43:12
+ADDED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:2:1-46:12
+INJECTED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:2:1-46:12
+INJECTED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:2:1-46:12
+INJECTED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:2:1-46:12
 MERGED from [:capacitor-app] C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\node_modules\@capacitor\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:capacitor-camera] C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\node_modules\@capacitor\camera\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-15:12
 MERGED from [:capacitor-haptics] C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\node_modules\@capacitor\haptics\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-11:12
@@ -58,20 +58,20 @@ MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\User
 MERGED from [androidx.print:print:1.0.0] C:\Users\Pascal\.gradle\caches\transforms-3\1d9ee9f2a1cc89948b86adacb767832d\transformed\print-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [org.apache.cordova:framework:7.0.0] C:\Users\Pascal\.gradle\caches\transforms-3\325d6dcea8227db9293efe47df6f420d\transformed\jetified-framework-7.0.0\AndroidManifest.xml:20:1-27:12
 MERGED from [androidx.annotation:annotation-experimental:1.0.0] C:\Users\Pascal\.gradle\caches\transforms-3\f6909f64b3030f2847e81a88ec0891c9\transformed\jetified-annotation-experimental-1.0.0\AndroidManifest.xml:17:1-24:12
-INJECTED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:2:1-43:12
+INJECTED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:2:1-46:12
+INJECTED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:2:1-46:12
+INJECTED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:2:1-46:12
 	package
 		ADDED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:3:5-31
 		INJECTED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:2:1-43:12
+		ADDED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:2:1-46:12
 		INJECTED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:2:1-43:12
+		ADDED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:2:1-46:12
 		INJECTED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:2:11-69
@@ -129,6 +129,18 @@ uses-permission#android.permission.INTERNET
 ADDED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:42:5-67
 	android:name
 		ADDED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:42:22-64
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:43:6-80
+	android:name
+		ADDED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:43:23-78
+uses-permission#android.permission.CAMERA
+ADDED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:44:6-65
+	android:name
+		ADDED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:44:23-63
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:45:3-79
+	android:name
+		ADDED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:45:20-76
 uses-sdk
 INJECTED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml

@@ -1,16 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonStateService} from "./services/common-state.service";
-import {DefaultUrlSerializer, ResolveEnd, Router, UrlSerializer} from "@angular/router";
+import {DefaultUrlSerializer, ResolveEnd, Router} from "@angular/router";
 import {filter} from "rxjs/operators";
 import {AuthenticationService} from "./services/authentication.service";
 import * as _ from 'lodash'
+import {BaseResourceService} from "./services/api-services/base-resource.service";
 
 
 const MAIN_PAGE_LINKS: EquipmentRouterLink[] = [
   {title: 'Home', url: '/tabs/dashboard', icon: 'home', secondary: false, disabled: false},
   {title: 'Mitarbeiter anlegen', url: '/employee-add-page', icon: 'person-add', secondary: false, disabled: false},
   {title: 'Gegenstand anlegen', url: '/equipment-add-page', icon: 'duplicate', secondary: false, disabled: false},
-  {title: 'Geräteliste', url: '/item-list', icon: 'briefcase', secondary: false, disabled: false}
+  {title: 'Geräteliste', url: '/item-list', icon: 'briefcase', secondary: false, disabled: false},
+
 ];
 
 const EQUIPMENT_PAGE_LINKS_DEFAULT: EquipmentRouterLink[] = [
@@ -49,10 +51,14 @@ export class AppComponent implements OnInit {
   constructor(
     private commonStateService: CommonStateService,
     private authService: AuthenticationService,
-    private router: Router) {
+    private router: Router,
+    private baseResSrv: BaseResourceService<any>) {
   }
 
   ngOnInit() {
+
+    this.baseResSrv.getStoredConnectionData();
+
     this.router.events.pipe(
       filter(event => (event instanceof ResolveEnd))
     ).subscribe((resolveEndEvent: ResolveEnd) => {

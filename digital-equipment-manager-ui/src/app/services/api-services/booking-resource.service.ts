@@ -4,13 +4,15 @@ import {Booking, } from "../model";
 import {BaseResourceService, QueryParams} from "./base-resource.service";
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
+import {StorageService} from "../storage.service";
+import {CommonStateService} from "../common-state.service";
 
 @Injectable()
 export class BookingResourceService extends BaseResourceService<Booking>{
+  entityUrl = "/booking";
 
-  constructor(protected http: HttpClient) {
-    super(http);
-    this.baseUrl = this.baseUrl +"/booking";
+  constructor(protected http: HttpClient, protected storageSrv: StorageService, stateSrv: CommonStateService) {
+    super(http, storageSrv, stateSrv);
   }
 
   getAllBookings(params: QueryParams): Observable<Booking[]> {

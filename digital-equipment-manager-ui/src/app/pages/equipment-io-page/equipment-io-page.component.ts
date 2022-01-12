@@ -20,7 +20,7 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
   showMobileMenu = true;
 
   /** @internal */
-  createdCode = false;
+  showCode = false;
 
   /** @internal  */
   item: Item;
@@ -91,7 +91,7 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
           this.navigateToUpdateItem();
         }
       }, {
-          text: 'QR Code anzeigen',
+          text: !this.showCode ? 'QR Code anzeigen' : 'QR Code ausblenden',
           icon: 'qr-code-outline',
           handler: () => {
             this.showQRCode();
@@ -169,6 +169,6 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
   }
 
   showQRCode() {
-    this.createdCode = this.createdCode === false;
+    this.showCode = this.showCode === false;
   }
 }

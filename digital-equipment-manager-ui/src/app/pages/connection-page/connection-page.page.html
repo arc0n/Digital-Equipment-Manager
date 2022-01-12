@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons
+      *ngIf="this.showMobileMenu"
+      slot="start" class="back-button" (click)="this.router.navigate(['/tabs/settings'])">
+      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title>Verbindungseinstellungen</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div class="content-wrapper">
+  <form class="connection-page-form" [formGroup]="connectionForm">
+    <ion-item>
+      <ion-label>Server IP-Adresse: </ion-label>
+      <ion-input formControlName="serverIpAddr" placeholder="xxx.xxx.xxx.xxx"></ion-input>
+    </ion-item>
+    <ion-item type="number">
+      <ion-label>Server Port: </ion-label>
+      <ion-input formControlName="serverPort" placeholder="1234"></ion-input>
+    </ion-item>
+  </form>
+  <div class="connect-wrapper">
+    <ion-item button [disabled]="disableButtons ||this.testSuccessful == null" (click)="this.triggerConnectionTest(this.connectionForm.get('serverIpAddr').value,this.connectionForm.get('serverPort').value)">
+      <ion-label>
+        {{ this.testSuccessful == null ? 'teste verbindung...' : this.testSuccessful ? 'Server verbunden' : 'Keine Verbindung zum Server'}}
+      </ion-label>
+      <ion-icon [color]="this.testSuccessful === null ? 'medium' : this.testSuccessful ? 'primary' : 'danger'" slot="end"
+                [name]="this.testSuccessful === null ? 'wifi-outline' : this.testSuccessful ? 'checkmark-outline' : 'refresh-outline'"></ion-icon>
+    </ion-item>
+  </div>
+  <ion-item *ngIf="!showMobileMenu">
+    <ion-button (click)="this.router.navigate(['/'])">Zurück</ion-button>
+  </ion-item>
+</div>
+

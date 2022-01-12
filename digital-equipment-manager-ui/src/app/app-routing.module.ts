@@ -16,6 +16,10 @@ const routes: Routes = [
     canActivate: [NegAuthGuardService],
   },
   {
+    path: 'connection-page',
+    loadChildren: () => import('./pages/connection-page/connection-page.module').then(m => m.ConnectionPagePageModule),
+  },
+  {
     path: 'equipment',
     loadChildren: () => import('./pages/equipment-io-page/equipment-io-page.module').then(m => m.EquipmentIoPagePageModule),
     canActivate: [AuthGuardService]
@@ -51,7 +55,7 @@ const routes: Routes = [
   {
     path: 'item-list',
     loadChildren: () => import('./pages/item-list-page/item-list-page.module').then( m => m.ItemListPagePageModule),
-    canActivate: [AuthGuardService]
+    canActivate: [AuthGuardService],
   },
   {
     path: 'item-defect',
@@ -67,8 +71,6 @@ const routes: Routes = [
     path: 'item-history',
     loadChildren: () => import('./pages/history-page/history-page.module').then( m => m.HistoryPagePageModule)
   },
-
-
 
 ];
 

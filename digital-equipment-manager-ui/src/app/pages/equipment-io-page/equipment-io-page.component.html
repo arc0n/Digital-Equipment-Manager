@@ -38,6 +38,12 @@
                     [ngStyle]="{'background-color':
                     getStatusColor(this.item?.status, this.item?.borrowed)}"></span></div>
             <div style="padding: 1rem 1rem 0 1rem">ID: {{this.item?.dynamic_id}}</div>
+            <ion-button *ngIf="!showMobileMenu" class="max-width-100 ion-padding btn-secondary" [fill]="'outline'" color="medium" (click)="showQRCode()">
+              QR Code {{!this.showCode? 'anzeigen' : 'ausblenden'}}
+            </ion-button>
+            <div *ngIf="showCode === true" class="equipment-page-qrcode ion-margin-top ion-margin-horizontal">
+              <qrcode [qrdata]="this.item?.dynamic_id" [width]="200" [errorCorrectionLevel]="'M'"></qrcode>
+            </div>
             <ion-button *ngIf="!showMobileMenu" class="max-width-100 ion-padding btn-secondary" [fill]="'outline'" color="medium" (click)="navigateToUpdateItem()">
               Item bearbeiten
             </ion-button>

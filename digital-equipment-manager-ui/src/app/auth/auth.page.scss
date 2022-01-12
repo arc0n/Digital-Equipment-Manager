@@ -4,6 +4,7 @@ ion-card {
   align-self: center;
   margin-top: 5rem;
   max-width: 400px;
+  min-height: 320px;
 }
 
 .text {
@@ -29,6 +30,16 @@ ion-card-content {
   align-self: center;
 }
 
+.ion-icon-button{
+  margin-right: 8px;
+}
+
 .button {
   margin-top: 30px;
+}
+
+.login-flex {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
 }

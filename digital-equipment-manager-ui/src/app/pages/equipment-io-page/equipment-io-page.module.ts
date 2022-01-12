@@ -8,6 +8,7 @@ import { EquipmentIoPagePageRoutingModule } from './equipment-io-page-routing.mo
 
 import { EquipmentIoPage } from './equipment-io-page.component';
 import {SharedModule} from "../../services/shared.module";
+import {QRCodeModule} from "angularx-qrcode";
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import {SharedModule} from "../../services/shared.module";
         FormsModule,
         IonicModule,
         EquipmentIoPagePageRoutingModule,
-        SharedModule
+        SharedModule,
+        QRCodeModule
     ],
   declarations: [EquipmentIoPage]
 })

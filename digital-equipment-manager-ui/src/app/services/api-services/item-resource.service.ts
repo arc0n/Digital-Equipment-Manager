@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
-import {Observable, of} from "rxjs";
-import {Item, Person} from "../model";
+import {Observable} from "rxjs";
+import {Item} from "../model";
 import {BaseResourceService, QueryParams} from "./base-resource.service";
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
+import {StorageService} from "../storage.service";
+import {CommonStateService} from "../common-state.service";
 
 @Injectable()
 export class ItemResourceService extends BaseResourceService<Item>{
 
-  constructor(protected http: HttpClient) {
-    super(http);
-    this.baseUrl = this.baseUrl +"/item";
+  entityUrl = '/item';
+
+  constructor(protected http: HttpClient, protected storageSrv: StorageService, stateSrv: CommonStateService) {
+    super(http, storageSrv, stateSrv);
   }
 
   getItemByCode(code:string): Observable<Item | string> {

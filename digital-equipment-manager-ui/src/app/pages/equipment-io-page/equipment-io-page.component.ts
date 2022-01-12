@@ -19,6 +19,9 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
   /** @internal */
   showMobileMenu = true;
 
+  /** @internal */
+  showCode = false;
+
   /** @internal  */
   item: Item;
 
@@ -28,7 +31,7 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
               private activeRoute: ActivatedRoute,
               private itemService: ItemResourceService,
               private toastController: ToastController,
-              private bookingService: BookingResourceService
+              private bookingService: BookingResourceService,
               ) {
   }
 
@@ -87,7 +90,13 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
         handler: () => {
           this.navigateToUpdateItem();
         }
-      },/*, {
+      }, {
+          text: !this.showCode ? 'QR Code anzeigen' : 'QR Code ausblenden',
+          icon: 'qr-code-outline',
+          handler: () => {
+            this.showQRCode();
+          }
+        },/*, {
         text: 'Defekte anzeigen',
         icon: 'heart',
         handler: () => {
@@ -157,5 +166,9 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
     this.router.navigate(['item-history'], {
       queryParams: {itemId: this.item.dynamic_id},
     })
+  }
+
+  showQRCode() {
+    this.showCode = this.showCode === false;
   }
 }

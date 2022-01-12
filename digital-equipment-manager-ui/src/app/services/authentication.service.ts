@@ -1,24 +1,37 @@
-import { Injectable } from '@angular/core';
-import {BehaviorSubject, from, Observable, of} from "rxjs";
+import {Injectable, OnDestroy} from '@angular/core';
+import {BehaviorSubject, from, Observable, of, Subscription} from "rxjs";
 import {MenuController, Platform} from "@ionic/angular";
 import {StorageService} from "./storage.service";
 import {catchError, map, mergeMap} from "rxjs/operators";
 import {HttpClient} from "@angular/common/http";
 import {fromPromise} from "rxjs/internal-compatibility";
+import {CommonStateService} from "./common-state.service";
 
 @Injectable()
-export class AuthenticationService {
+export class AuthenticationService implements OnDestroy {
   authState = new BehaviorSubject(false);
-  private baseLink= "http://localhost:3000"
+  private baseLink= ""
+  private subscription: Subscription;
+
+
   constructor(
     private storage: StorageService,
     private platform: Platform,
     public menu: MenuController,
-    private http: HttpClient
+    private http: HttpClient,
+    private stateSrv: CommonStateService
   )  {
     this.platform.ready().then(() => {
       this.ifLoggedIn();
     });
+    this.subscription = stateSrv.getServerConfigObservable().subscribe(config =>{
+      this.baseLink = `http://${config.ip}:${config.port}`
+    })
+  }
+
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   private ifLoggedIn(): Promise<void> {
@@ -45,7 +58,7 @@ export class AuthenticationService {
         if(err.code === 404) {
           // do sth, no connection
         }
-        console.log("login failed", err)
+        console.log("login failed", err.code, err.message)
         return of(null)
       }),
       map((response)=>{

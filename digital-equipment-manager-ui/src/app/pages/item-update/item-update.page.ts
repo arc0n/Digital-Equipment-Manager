@@ -6,6 +6,7 @@ import {Subscription} from "rxjs";
 import {mergeMap} from "rxjs/operators";
 import {Item} from "../../services/model";
 import {ItemResourceService} from "../../services/api-services/item-resource.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-item-update',
@@ -21,14 +22,22 @@ export class ItemUpdatePage implements OnInit, OnDestroy {
   /** @internal  */
   item: Item;
 
+  /** @internal  */
+  updateItemForm = new FormGroup(
+    {
+      itemName: new FormControl('', Validators.required),
+      itemDescription: new FormControl(''),
+      itemSerialnumber: new FormControl('', Validators.required),
+    }
+  )
+
   constructor(public router: Router,
               public state: CommonStateService,
               private actionSheetController: ActionSheetController,
               private activeRoute: ActivatedRoute,
               private itemService: ItemResourceService,
               private toastController: ToastController
-  ) {
-  }
+  ) {  }
 
   ngOnInit() {
     this.subscriptions.push(
@@ -52,7 +61,11 @@ export class ItemUpdatePage implements OnInit, OnDestroy {
         this.presentToast('Achtung - Gerät ist aktuell ausgeborgt!',
           'warning', 4000, "middle");
       }
-      //console.log('item: '+this.item.borrowed);
+      this.updateItemForm.setValue({
+        itemName: this.item.model_name,
+        itemDescription: this.item.description,
+        itemSerialnumber: this.item.serial_number
+        });
     });
   }
 
@@ -73,5 +86,13 @@ export class ItemUpdatePage implements OnInit, OnDestroy {
 
   saveAndReturn() {
     // TODO - save changes to Item
+    if(this.updateItemForm.invalid) {
+      this.presentToast('Unvollständige Eingaben', 'danger', 2000, 'middle');
+      return;
+    } else {
+      this.presentToast('Test für Eingaben: Alles oki', 'success', 2000, 'middle');
+    }
+
   }
+
 }

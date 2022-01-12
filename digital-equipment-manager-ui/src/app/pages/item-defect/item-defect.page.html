@@ -19,11 +19,11 @@
       <p>Item Beschreibung: {{this.item?.description}}</p>
     </div>
     <div *ngIf="this.item?.status === 'aktiv'" class="item-defect-textarea">
-      <ion-textarea
+      <ion-textarea class="item-textarea"
         placeholder="Gib Informationen ein, warum der Gegenstand deaktiviert/dekommissioniert wird..."></ion-textarea>
     </div>
     <div *ngIf="this.item?.status === 'inaktiv'" class="item-defect-textarea">
-      <ion-textarea
+      <ion-textarea class="item-textarea"
         placeholder="Gib Informationen ein, warum der Gegenstand aktiviert wird..."></ion-textarea>
     </div>
   </div>

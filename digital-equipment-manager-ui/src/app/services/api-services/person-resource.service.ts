@@ -1,16 +1,18 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from "rxjs";
-import {Person, Item} from "../model";
+import {Observable} from "rxjs";
+import {Person} from "../model";
 import {BaseResourceService} from "./base-resource.service";
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
+import {StorageService} from "../storage.service";
+import {CommonStateService} from "../common-state.service";
 
 @Injectable()
 export class PersonResourceService extends BaseResourceService<Person> {
+  entityUrl = "/person";
 
-  constructor(protected http: HttpClient) {
-    super(http);
-    this.baseUrl = this.baseUrl + "/person";
+  constructor(protected http: HttpClient, protected storageSrv: StorageService, stateSrv: CommonStateService) {
+    super(http, storageSrv, stateSrv);
   }
 
   getPersonByName(searchString: string): Observable<Person[]> {
@@ -35,5 +37,6 @@ export class PersonResourceService extends BaseResourceService<Person> {
         return res as string
       }))
   }
+
 
 }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from "../services/authentication.service";
 import {MenuController, ToastController} from "@ionic/angular";
 import {Router} from "@angular/router";
-import {subscribeOn} from "rxjs/operators";
 
 @Component({
   selector: 'app-auth',
@@ -31,9 +30,14 @@ export class AuthPage implements OnInit {
       if(!!result) {
       this.router.navigate(['../']);
       } else{
+        console.log(result)
         this.presentToast("Login fehlgeschlagen", "danger" )
       }
     });
+  }
+
+  navigateToConnectionPage() {
+    this.router.navigate(['/connection-page'])
   }
 
   async presentToast(message: string, color: string) {

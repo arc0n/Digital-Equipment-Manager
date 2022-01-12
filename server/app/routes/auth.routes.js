@@ -46,6 +46,11 @@ app.post('/login', async (req, res) => {
         }
     });
 
+    app.get('/ping', async (req, res) => {
+       console.log('Ping received. Sending Answer...');
+       res.send(200, true);
+    });
+
 
     function validate(req) {
         const schema = {

@@ -41,7 +41,9 @@ export class QrScanComponent implements OnInit {
     await this.loading.present();
 
     this.videoNativeElement.srcObject = await navigator.mediaDevices.getUserMedia({
-      video: true,
+      video: {
+        facingMode: 'environment'
+      },
 
     });
 

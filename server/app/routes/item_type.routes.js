@@ -1,3 +1,6 @@
+const auth = require("../middleware/auth-middleware");
+
+
 /**
  * Exports app routings for CRUD operations on <item_type>.
  * @param {Function} app Express application
@@ -6,7 +9,7 @@
  module.exports = app => {
     const itemType = require("../controllers/item_type.controller.js");
 
-    app.get("/itemtype", itemType.getAll);
+    app.get("/itemtype",auth, itemType.getAll);
 
 
 };

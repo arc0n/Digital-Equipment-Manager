@@ -1,3 +1,5 @@
+const auth = require("../middleware/auth-middleware");
+
 /**
  * Exports app routings for CRUD operations on <casuality>.
  * @param {Function} app Express application
@@ -6,7 +8,7 @@
  module.exports = app => {
     const casuality = require("../controllers/casuality.controller.js");
   
-    app.get("/casuality", casuality.getAll);
-    app.post("/casuality", casuality.create);
+    app.get("/casuality",auth, casuality.getAll);
+    app.post("/casuality",auth, casuality.create);
    
 };

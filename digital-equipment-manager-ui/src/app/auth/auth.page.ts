@@ -21,13 +21,13 @@ export class AuthPage implements OnInit {
   ngOnInit() {
   }
 
-  loginUser(email: string, password: string) {
+  loginUser(email: string | number, password: string | number) {
     if(!email || !password) {
       this.presentToast("Unvollständige Eingabe", "danger" )
       return
 
     }
-    this.authService.login(email, password).subscribe((result)=>{
+    this.authService.login(email+'', password+'').subscribe((result)=>{
       if(!!result) {
       this.router.navigate(['../']);
       } else{

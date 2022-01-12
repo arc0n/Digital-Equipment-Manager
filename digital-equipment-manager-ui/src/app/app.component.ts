@@ -80,7 +80,7 @@ export class AppComponent implements OnInit {
   }
 
 
-  onSplitPaneChange(event: CustomEvent) {
+  onSplitPaneChange(event: any) {
     this.commonStateService.setSplitPaneVisible(!!event?.detail?.visible)
   }
 

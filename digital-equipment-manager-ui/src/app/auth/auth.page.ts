@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from "../services/authentication.service";
-import {MenuController} from "@ionic/angular";
+import {MenuController, ToastController} from "@ionic/angular";
 import {Router} from "@angular/router";
 import {subscribeOn} from "rxjs/operators";
 
@@ -15,14 +15,30 @@ export class AuthPage implements OnInit {
     private authService: AuthenticationService,
     private menu: MenuController,
     private router: Router,
+    private toastCtl: ToastController
   ) {  }
 
   ngOnInit() {
   }
 
-  loginUser() {
-    this.authService.login().subscribe(()=>{
+  loginUser(email: string, password: string) {
+    if(!email || !password) {
+      this.presentToast("Unvollständige Eingabe", "danger" )
+      return
+
+    }
+    this.authService.login(email, password).subscribe((result)=>{
+      if(!!result) {
       this.router.navigate(['../']);
+      } else{
+        this.presentToast("Login fehlgeschlagen", "danger" )
+      }
     });
   }
+
+  async presentToast(message: string, color: string) {
+    const p = await this.toastCtl.create({message, color, duration: 3000})
+    await p.present();
+  }
+
 }

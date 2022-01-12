@@ -5,12 +5,12 @@
   <ion-card-content>
     <p class="text">Bitte geben Sie ihre Login Daten ein um fortzufahren.</p>
     <ion-item class="input_field">
-      <ion-input color="white" clearInput="true" name="Login_Username" placeholder="Username"></ion-input>
+      <ion-input #email color="white" clearInput="true" name="Login_Username" placeholder="Username"></ion-input>
     </ion-item>
     <ion-item class="input_field">
-      <ion-input color="white" clearInput="true" type="password" name="Login_Password" placeholder="Password"></ion-input>
+      <ion-input #password color="white" clearInput="true" type="password" name="Login_Password" placeholder="Password"></ion-input>
     </ion-item>
-    <ion-button class="button" cy-data="login-button" (click)="loginUser()">
+    <ion-button class="button" cy-data="login-button" (click)="loginUser(email.value, password.value)">
       log me in
     </ion-button>
   </ion-card-content>

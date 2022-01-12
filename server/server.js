@@ -1,5 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const path = require("path")
+
 
 const app = express();
 
@@ -18,25 +20,33 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, OPTIONS");
   res.header(
       "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
+      "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
   next();
 });
 // const cors = require("cors");
 //app.use("*", cors());
 
+/*
+ put the build angular project in the dist folder to get the app served
+*/
+/*app.use(express.static(path.join(__dirname, '../', '/dist/standup-tool')));
+app.get('/!*', (req, res) => {
+  res.sendFile(path.join(__dirname));
+});*/
+
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to dem application." });
 });
 
+require("./app/routes/auth.routes.js")(app);
 require("./app/routes/item.routes.js")(app);
 require("./app/routes/person.routes.js")(app);
 require("./app/routes/booking.routes.js")(app);
 require("./app/routes/item_type.routes.js")(app);
 require("./app/routes/item_model.routes.js")(app);
 require("./app/routes/casuality.routes.js")(app);
-require("./app/routes/auth.routes.js")(app);
 
 // set port, listen for requests
 app.listen(3000, () => {

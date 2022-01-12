@@ -14,6 +14,8 @@ import {NegAuthGuardService} from "./auth/neg-auth-guard.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MomentModule} from "ngx-moment";
 import { QRCodeModule } from "angularx-qrcode";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {TokenInterceptor} from "./services/api-services/token.interceptor";
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,6 +39,11 @@ import { QRCodeModule } from "angularx-qrcode";
     AuthGuardService,
     NegAuthGuardService,
     AuthenticationService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
  ],
   bootstrap: [AppComponent],
 })

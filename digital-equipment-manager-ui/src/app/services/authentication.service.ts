@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, from, Observable} from "rxjs";
+import {BehaviorSubject, from, Observable, of} from "rxjs";
 import {MenuController, Platform} from "@ionic/angular";
 import {StorageService} from "./storage.service";
-import {mergeMap} from "rxjs/operators";
+import {catchError, map, mergeMap} from "rxjs/operators";
+import {HttpClient} from "@angular/common/http";
+import {fromPromise} from "rxjs/internal-compatibility";
 
 @Injectable()
 export class AuthenticationService {
   authState = new BehaviorSubject(false);
+  private baseLink= "http://localhost:3000"
   constructor(
     private storage: StorageService,
     private platform: Platform,
     public menu: MenuController,
+    private http: HttpClient
   )  {
     this.platform.ready().then(() => {
       this.ifLoggedIn();
@@ -18,30 +22,59 @@ export class AuthenticationService {
   }
 
   private ifLoggedIn(): Promise<void> {
-    return this.storage.get('USER_INFO').then((response) => {
+    return this.storage.get('JWT').then((response) => {
       if (response) {
         this.authState.next(true);
+      } else {
+        this.menu.enable(false, 'main-menu-id');
       }
     });
   }
+  public getJwt(): Observable<string> {
+    return fromPromise(this.storage.get('JWT'))
+  }
 
-  public login(): Observable<boolean> {
-    let response = {
-      user_id: 'admin',
-      user_password: 'admin'
-    };
-    return from(this.storage.set('USER_INFO', response).then((response) => {
-        this.authState.next(true);
-        this.menu.enable(true, 'main-menu-id');
-    })).pipe(
-      mergeMap(()=>
-      this.isAuthenticated()
-    ));
+  public login(email: string, password: string): Observable<boolean> {
+    return this.http.post<{jwt: string, refreshToken: string, email: string}>(
+      this.baseLink + '/login',  {     email,  password}
+    ).pipe(
+      catchError((err) => {
+        if(err.code === 403) {
+         // do sth, login wrong
+        }
+        if(err.code === 404) {
+          // do sth, no connection
+        }
+        console.log("login failed", err)
+        return of(null)
+      }),
+      map((response)=>{
+        if(!response) {
+          return false
+        } else {
+          this.storage.set('JWT', response.jwt)
+          this.storage.set('REFRESH_TOKEN', response.refreshToken)
+          // is logged in
+          this.authState.next(true);
+          this.menu.enable(true, 'main-menu-id');
+          return true;
+        }
+      })
+    )
   }
 
   public logout(): Observable<boolean> {
+    this.getRefreshToken().pipe(
+      mergeMap(token => {
+        return this.http.post(this.baseLink + '/logout', {refreshToken: token})
+
+      })
+    ).subscribe((res)=>{
+      // ignored
+       })
+
     return from(
-      this.storage.remove('USER_INFO').then(() => {
+      this.storage.remove('JWT').then(() => {this.storage.remove('REFRESH_TOKEN')
       this.authState.next(false);
       this.menu.enable(false,'main-menu-id');
     })).pipe(
@@ -52,5 +85,9 @@ export class AuthenticationService {
     return this.authState.asObservable();
   }
 
+  getRefreshToken(): Observable<string> {
+    return   fromPromise(this.storage.get('REFRESH_TOKEN'))
+
+  }
 }
 

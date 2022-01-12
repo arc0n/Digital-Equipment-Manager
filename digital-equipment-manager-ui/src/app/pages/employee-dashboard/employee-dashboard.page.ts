@@ -16,7 +16,7 @@ export class EmployeeDashboardPage implements OnInit, OnDestroy {
 
   triggerServerCall$ = new Subject<string>();
   private modal: HTMLIonModalElement;
-  resetControls= new Subject();
+  resetControls = new Subject<void>();
 
   constructor(private employeeService: PersonResourceService,
               private toastContrl: ToastController,

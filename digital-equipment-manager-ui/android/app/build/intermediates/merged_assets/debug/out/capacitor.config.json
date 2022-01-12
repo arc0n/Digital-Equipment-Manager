@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "digital-equipment-manager-ui",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

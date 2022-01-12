@@ -34,7 +34,8 @@ export interface Person {
   dynamic_id: string,
   street: string,
   zip: number,
-  city: string
+  city: string,
+  photo ? : string
 }
 
 export interface Booking {

@@ -1,1 +1,15 @@
+.grid {
+  display: grid;
+  grid-template-columns:
+    [type] 37%
+    [model] 17%
+    [status] 16%
+    [borrowed] 30%;
+  flex-grow: 1;
+}
+
+.margin-spacing {
+  margin: 15px;
+}
+
 

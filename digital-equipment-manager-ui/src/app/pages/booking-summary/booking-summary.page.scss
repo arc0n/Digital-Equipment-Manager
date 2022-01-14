@@ -31,25 +31,24 @@
   color: var(--ion-color-medium);
 }
 
-
-
 .booking-summary-flex-list-header{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding-left: 1rem;
-  padding-right   : 1rem;
+  padding-right: 1rem;
 }
 
-.booking-summary-list-header-item{
-  flex-grow: 1;
-  display: flex;
-  align-items: start;
+.booking-summary-grid-list-header{
+  display: grid;
+  grid-template-columns: [picture] 17% [Name] 30% [SN] auto [Option] 25%;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
-.booking-summary-list-item{
-  flex-grow: 1;
+
+.booking-summary-flex-list-items{
   display: flex;
-  align-items: start;
+  flex-grow: 1;
 }
 
 .booking-summary-list-picture-wrapper {

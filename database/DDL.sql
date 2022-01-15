@@ -117,7 +117,7 @@ INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_mode
 INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12003,"7zdqatdaohetbl9", "equipment_schlagstock.jpeg","Standard-Schlagstock Reihe S, Laenge 90 cm, Stahl", "inaktiv",1);
 INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12004,"jvi6q46zqrns5hv", "equipment_glock.jpeg","Pistole Glock, Kaliber 9mm, Schwarz", "aktiv",5);
 INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12005,"k9ioxw31r7m5h92", "equipment_glock.jpeg","Pistole Glock, Kaliber 9mm, Schwarz", "aktiv",5);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12006,"yh63pmq4jq2qa46", "equipment_spray.jpeg","Pffeferspray Teardrop Standard 500ml", "aktiv",4);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12006,"yh63pmq4jq2qa46", "equipment_spray.jpeg","Pfefferspray Teardrop Standard 500ml", "aktiv",4);
 INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12007,"grxhy5j72vfiwmw", "equipment_taser.jpeg","Taser 120 V, Reihe T, Groesse 15cm", "aktiv",2);
 INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12008,"gqh073b9yrf49oj", "equipment_taser.jpeg","Taser 120 V, Reihe T, Groesse 15cm", "aktiv",2);
 INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12009,"c7341j0vum6weq2", "equipment_taser.jpeg","Taser 120 V, Reihe T, Groesse 15cm", "aktiv",2);

@@ -27,8 +27,8 @@
             <ion-img [src]="'assets/equipment/'+ (this.item?.photo || 'no-image.png')"></ion-img>
           </div>
           <div class="equipment-page-io-vertical flex-grow">
-            <div class="ion-padding">Modell Mock</div>
-            <div class="ion-padding">{{this.item?.item_type || '-'}}</div>
+            <div class="ion-padding">Modell: {{this.item?.model_name || '-'}}</div>
+            <div class="ion-padding">Typ: {{this.item?.item_type || '-'}}</div>
             <div class="ion-padding">Serien-Nummer: {{this.item?.serial_number || '-'}}</div>
             <div class="ion-padding">Beschreibung: {{this.item?.description}}</div>
           </div>

@@ -6,6 +6,7 @@ import {QrScanComponent} from "../../components/qr-scan/qr-scan.component";
 import {ModalController, ToastController} from "@ionic/angular";
 import {Person} from "../../services/model";
 import {ActivatedRoute, Router} from "@angular/router";
+import {CommonStateService} from "../../services/common-state.service";
 
 @Component({
   selector: 'app-employee-dashboard',
@@ -13,6 +14,9 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./employee-dashboard.page.scss'],
 })
 export class EmployeeDashboardPage implements OnInit, OnDestroy {
+
+  /** @internal */
+  showMobileMenu = true;
 
   triggerServerCall$ = new Subject<string>();
   private modal: HTMLIonModalElement;
@@ -22,13 +26,20 @@ export class EmployeeDashboardPage implements OnInit, OnDestroy {
               private toastContrl: ToastController,
               private modalController: ModalController,
               private router: Router,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private state: CommonStateService) {
   }
 
   subscriptions: Subscription[] = [];
   personResults: Person[] = [];
 
   ngOnInit() {
+    this.subscriptions.push(
+      this.state.getSplitPaneVisible().subscribe(
+        (isVisible) => this.showMobileMenu = !isVisible
+      )
+    )
+
     this.subscriptions.push(
       this.triggerServerCall$.pipe(
         debounceTime(500),
@@ -103,5 +114,9 @@ export class EmployeeDashboardPage implements OnInit, OnDestroy {
 
   personSelected(person: Person) {
     this.navigateToSummaryPage(person);
+  }
+
+  goBack() {
+    window.history.back();
   }
 }

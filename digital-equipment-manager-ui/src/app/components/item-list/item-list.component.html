@@ -1,19 +1,16 @@
 <ion-list>
-  <ion-list-header>
-    <ion-label>Id</ion-label>
-    <ion-label>Model</ion-label>
+  <div class="grid margin-spacing">
     <ion-label>Item Typ</ion-label>
-    <ion-label>Status</ion-label>
-    <ion-label>Ausgeborgt</ion-label>
-    <ion-label>Beschreibung</ion-label>
-  </ion-list-header>
-
-  <ion-item *ngFor="let item of items" (click)="emitItemClick(item)" class="clickable">
-    <ion-label> {{ item.dynamic_id}}</ion-label>
-    <ion-label> {{ item.model_name }}</ion-label>
-    <ion-label> {{ item.item_type || '-' }}</ion-label>
-    <ion-label> {{ item.status || '-' }}</ion-label>
-    <ion-label> {{ !!item.borrowed ? 'Ja' : 'Nein'  }}</ion-label>
-    <ion-label> {{ item.description || '-' }}</ion-label>
+    <ion-label class="ion-text-end">Model</ion-label>
+    <ion-label class="ion-text-end">Status</ion-label>
+    <ion-label class="ion-text-end">Verfügbar</ion-label>
+  </div>
+  <ion-item *ngFor="let item of items" [ngClass]="{borrowedItem: item.borrowed}" (click)="emitItemClick(item)" class="clickable">
+    <div class="grid">
+      <ion-label> {{ item.item_type || '-' }}</ion-label>
+      <ion-label class="ion-text-end"> {{ item.model_name || '-' }}</ion-label>
+      <ion-label [ngStyle]="{'color':item.status == 'inaktiv' ? 'red' : '#4CAF50'}" class="ion-text-end"> {{ item.status || '-' }}</ion-label>
+      <ion-label [ngStyle]="{'color':item.borrowed === true ? '#FBC02D' : '#4CAF50'}" class="ion-text-end"> {{ !!item.borrowed ? 'Nein' : 'Ja'  }}</ion-label>
+    </div>
   </ion-item>
 </ion-list>

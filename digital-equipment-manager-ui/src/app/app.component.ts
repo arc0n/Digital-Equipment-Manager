@@ -4,7 +4,6 @@ import {DefaultUrlSerializer, ResolveEnd, Router} from "@angular/router";
 import {filter} from "rxjs/operators";
 import {AuthenticationService} from "./services/authentication.service";
 import * as _ from 'lodash'
-import {BaseResourceService} from "./services/api-services/base-resource.service";
 
 
 const MAIN_PAGE_LINKS: EquipmentRouterLink[] = [
@@ -17,8 +16,8 @@ const MAIN_PAGE_LINKS: EquipmentRouterLink[] = [
 
 const EQUIPMENT_PAGE_LINKS_DEFAULT: EquipmentRouterLink[] = [
   {title: 'Zurück zu Home', url: '/tabs/dashboard', icon: 'home', secondary: false,  disabled: false},
-  {title: 'Gerät', url: '/equipment', icon: 'settings', secondary: true, disabled: true}, // the id needs to be added
-  {title: 'Mitarbeitter verknüpfen', url: '/employee-dashboard', icon: 'log-out', secondary: true,  disabled: true}, // the id needs to be added
+  {title: 'Gerät', url: '/equipment', icon: 'settings', secondary: true, disabled: true},
+  {title: 'Mitarbeiter verknüpfen', url: '/employee-dashboard', icon: 'log-out', secondary: true,  disabled: true},
   {title: 'Übersicht', url: '/booking-summary', icon: 'log-out', secondary: true,  disabled: true}
 ];
 

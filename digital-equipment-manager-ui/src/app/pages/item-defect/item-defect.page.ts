@@ -56,7 +56,7 @@ export class ItemDefectPage implements OnInit, OnDestroy {
         return
       }
       this.item = item as Item;
-      if(this.item.borrowed === true) {
+      if(this.item.borrowed === true && this.item.status === 'aktiv') {
         this.presentToast('Achtung - Gerät ist aktuell ausgeborgt!',
           'warning', 4000, "middle");
       }
@@ -92,7 +92,7 @@ export class ItemDefectPage implements OnInit, OnDestroy {
     },{}).subscribe(result => {
       if(result) {
         this.presentToast(
-          (this.item.status === 'aktiv' ? 'Defekt erstellt': 'Gerät aktiviert')
+          (status === 'aktiv' ? "Gerät aktiviert" : status === 'inaktiv' ? "Defekt gemeldet" : "Gerät dekommissioniert")
           , "success", 1000, 'middle')
         this.backButtonClicked();
         this.casualityForm.reset()

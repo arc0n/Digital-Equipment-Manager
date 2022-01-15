@@ -75,10 +75,11 @@ export abstract class BaseResourceService<T> implements OnDestroy {
     return of(err.error);
   }
 
-  put(entity: T, params: QueryParams): Observable<boolean | string> {
+  put(entity: T, params: QueryParams, id?): Observable<boolean | string> {
     if (!entity) return of(null)
+    const tmpId = !!id ? '/'+id : '';
 
-    return this.http.put<{result: boolean | string}>(this.baseUrl + this.entityUrl, entity, {params: params}).pipe(
+    return this.http.put<{result: boolean | string}>(this.baseUrl + this.entityUrl + tmpId, entity, {params: params}).pipe(
       catchError(err => {
         return this.handleError(err);
       }),

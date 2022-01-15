@@ -112,26 +112,26 @@ INSERT INTO item_model (name, model_number, item_type_id) VALUES ("H-12", "12", 
 INSERT INTO item_model (name, model_number, item_type_id) VALUES ("P-117", "117", 4);
 INSERT INTO item_model (name, model_number, item_type_id) VALUES ("Glock", "G17", 5);
 
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12001,"4z8k9a6bqx7u7ad", "equipment_schlagstock.jpeg","Standard-Schlagstock Reihe S, Länge 90 cm, Stahl", "aktiv",1);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12002,"q6irq09w1aha126", "equipment_schlagstock.jpeg","Standard-Schlagstock Reihe S, Länge 90 cm, Stahl", "aktiv",1);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12003,"7zdqatdaohetbl9", "equipment_schlagstock.jpeg","Standard-Schlagstock Reihe S, Länge 90 cm, Stahl", "inaktiv",1);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12001,"4z8k9a6bqx7u7ad", "equipment_schlagstock.jpeg","Standard-Schlagstock Reihe S, Laenge 90 cm, Stahl", "aktiv",1);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12002,"q6irq09w1aha126", "equipment_schlagstock.jpeg","Standard-Schlagstock Reihe S, Laenge 90 cm, Stahl", "aktiv",1);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12003,"7zdqatdaohetbl9", "equipment_schlagstock.jpeg","Standard-Schlagstock Reihe S, Laenge 90 cm, Stahl", "inaktiv",1);
 INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12004,"jvi6q46zqrns5hv", "equipment_glock.jpeg","Pistole Glock, Kaliber 9mm, Schwarz", "aktiv",5);
 INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12005,"k9ioxw31r7m5h92", "equipment_glock.jpeg","Pistole Glock, Kaliber 9mm, Schwarz", "aktiv",5);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12006,"yh63pmq4jq2qa46", "equipment_spray.jpeg","Pffeferspray Teardrop Standard 500ml", "aktiv",4);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12007,"grxhy5j72vfiwmw", "equipment_taser.jpeg","Taser 120 V, Reihe T, Größe 15cm", "aktiv",2);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12008,"gqh073b9yrf49oj", "equipment_taser.jpeg","Taser 120 V, Reihe T, Größe 15cm", "aktiv",2);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12009,"c7341j0vum6weq2", "equipment_taser.jpeg","Taser 120 V, Reihe T, Größe 15cm", "aktiv",2);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12006,"yh63pmq4jq2qa46", "equipment_spray.jpeg","Pfefferspray Teardrop Standard 500ml", "aktiv",4);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12007,"grxhy5j72vfiwmw", "equipment_taser.jpeg","Taser 120 V, Reihe T, Groesse 15cm", "aktiv",2);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12008,"gqh073b9yrf49oj", "equipment_taser.jpeg","Taser 120 V, Reihe T, Groesse 15cm", "aktiv",2);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12009,"c7341j0vum6weq2", "equipment_taser.jpeg","Taser 120 V, Reihe T, Groesse 15cm", "aktiv",2);
 INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12010,"okt240f1tqzk1us", "equipment_spray.jpeg","Pffeferspray Teardrop Standard 500ml", "aktiv",4);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12011,"bxrnkl15s8dvkv5", "equipment_handschellen.jpeg","Handschellen Robust, Stahl, Größe M", "aktiv",3);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12012,"f9lloij3b9wmz82", "equipment_handschellen.jpeg","Handschellen Robust, Stahl, Größe M", "aktiv",3);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12013,"ifdgzecuseimxci", "equipment_schlagstock.jpeg","Standard-Schlagstock Reihe S, Länge 90 cm, Stahl", "dekommisioniert",1);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12014,"nv2kopck0vg6ave", "equipment_schlagstock.jpeg","Standard-Schlagstock Reihe S, Länge 90 cm, Stahl", "aktiv",1);
-INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12015,"k8spg6siw36act6", "equipment_schlagstock.jpeg","Standard-Schlagstock Reihe S, Länge 90 cm, Stahl", "aktiv",1);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12011,"bxrnkl15s8dvkv5", "equipment_handschellen.jpeg","Handschellen Robust, Stahl, Groesse M", "aktiv",3);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12012,"f9lloij3b9wmz82", "equipment_handschellen.jpeg","Handschellen Robust, Stahl, Groesse M", "aktiv",3);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12013,"ifdgzecuseimxci", "equipment_schlagstock.jpeg","Standard-Schlagstock Reihe S, Laenge 90 cm, Stahl", "dekommisioniert",1);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12014,"nv2kopck0vg6ave", "equipment_schlagstock.jpeg","Standard-Schlagstock Reihe S, Laenge 90 cm, Stahl", "aktiv",1);
+INSERT INTO item(serial_number,dynamic_id, photo, description, status, item_model_id) VALUES (12015,"k8spg6siw36act6", "equipment_schlagstock.jpeg","Standard-Schlagstock Reihe S, Laenge 90 cm, Stahl", "aktiv",1);
 
-INSERT INTO address(street, zip, city) VALUES ("Steiner Landstraße 45", 3500, "Stein");
-INSERT INTO address(street, zip, city) VALUES ("Steiner Landstraße 48", 3500, "Stein");
-INSERT INTO address(street, zip, city) VALUES ("Steiner Landstraße 52", 3500, "Stein");
-INSERT INTO address(street, zip, city) VALUES ("Doktor-Karl-Dorrek-Straße 87", 3500, "Stein");
+INSERT INTO address(street, zip, city) VALUES ("Steiner Landstrasse 45", 3500, "Stein");
+INSERT INTO address(street, zip, city) VALUES ("Steiner Landstrassse 48", 3500, "Stein");
+INSERT INTO address(street, zip, city) VALUES ("Steiner Landstrasse 52", 3500, "Stein");
+INSERT INTO address(street, zip, city) VALUES ("Doktor-Karl-Dorrek-Strasse 87", 3500, "Stein");
 
 INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id,photo) VALUES ("Friedrich", "Fellner", "1944-01-05", 1, "e789g50","68gngbkw875rc6x",1, "man1.jpeg");
 INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id,photo) VALUES ("Sylvia", "Stern", "1955-10-03", 0, "fdsgfd","bxe7toded6807gn", 2,"woman1.jpeg");
@@ -139,7 +139,7 @@ INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, add
 INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Sebastian", "Kogler", "1978-02-10", 1, "785287587","1f55e5pkyzatd5c",4);
 INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Alexander", "Wurst", "1972-03-15", 1, "7868787","cjz7282s5y9ro9d",1);
 INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Joachim", "Strauss", "1974-04-15", 1, "144717","yc48wg669irk369",2);
-INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Peter", "Bauer", "1969-06-18", 1, "1757886","518hf4o6lsnf27m",3);
+INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Martin", "hat ein Minus", "1969-06-18", 1, "1757886","518hf4o6lsnf27m",3);
 INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Roland", "Schmidt", "1966-08-15", 1, "7868767","m4bbclu89ef9x8r",4);
 INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Theresia", "Rosenbauer", "1977-11-05", 0, "1475758","iwgb3zkzbt1jaho",1);
 INSERT INTO person(firstname, lastname, birthdate, sex, id_card, dynamic_id, address_id) VALUES ("Maria", "Winkelbauer", "1970-01-05", 0, "248789","e4bcon7egqe0d9a",2);

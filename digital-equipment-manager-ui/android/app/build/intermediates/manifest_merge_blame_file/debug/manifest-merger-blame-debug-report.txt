@@ -55,49 +55,48 @@
 32-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:9:9-54
 33        android:supportsRtl="true"
 33-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:10:9-35
-34        android:testOnly="true"
-35        android:theme="@style/AppTheme" >
-35-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:11:9-40
-36        <activity
-36-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:15:9-27:20
-37            android:name="io.ionic.starter.MainActivity"
-37-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:17:13-57
-38            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
-38-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:16:13-129
-39            android:label="@string/title_activity_main"
-39-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:18:13-56
-40            android:launchMode="singleTask"
-40-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:20:13-44
-41            android:theme="@style/AppTheme.NoActionBarLaunch" >
-41-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:19:13-62
-42            <intent-filter>
-42-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:22:13-25:29
-43                <action android:name="android.intent.action.MAIN" />
-43-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:23:17-69
-43-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:23:25-66
-44
-45                <category android:name="android.intent.category.LAUNCHER" />
-45-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:24:17-77
-45-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:24:27-74
-46            </intent-filter>
-47        </activity>
-48
-49        <provider
-50            android:name="androidx.core.content.FileProvider"
-50-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:30:13-62
-51            android:authorities="io.ionic.equipmentmanagers.fileprovider"
-51-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:31:13-64
-52            android:exported="false"
-52-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:32:13-37
-53            android:grantUriPermissions="true" >
-53-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:33:13-47
-54            <meta-data
-54-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:34:13-36:64
-55                android:name="android.support.FILE_PROVIDER_PATHS"
-55-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:35:17-67
-56                android:resource="@xml/file_paths" />
-56-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:36:17-51
-57        </provider>
-58    </application>
-59
-60</manifest>
+34        android:theme="@style/AppTheme" >
+34-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:11:9-40
+35        <activity
+35-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:15:9-27:20
+36            android:name="io.ionic.starter.MainActivity"
+36-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:17:13-57
+37            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
+37-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:16:13-129
+38            android:label="@string/title_activity_main"
+38-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:18:13-56
+39            android:launchMode="singleTask"
+39-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:20:13-44
+40            android:theme="@style/AppTheme.NoActionBarLaunch" >
+40-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:19:13-62
+41            <intent-filter>
+41-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:22:13-25:29
+42                <action android:name="android.intent.action.MAIN" />
+42-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:23:17-69
+42-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:23:25-66
+43
+44                <category android:name="android.intent.category.LAUNCHER" />
+44-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:24:17-77
+44-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:24:27-74
+45            </intent-filter>
+46        </activity>
+47
+48        <provider
+49            android:name="androidx.core.content.FileProvider"
+49-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:30:13-62
+50            android:authorities="io.ionic.equipmentmanagers.fileprovider"
+50-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:31:13-64
+51            android:exported="false"
+51-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:32:13-37
+52            android:grantUriPermissions="true" >
+52-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:33:13-47
+53            <meta-data
+53-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:34:13-36:64
+54                android:name="android.support.FILE_PROVIDER_PATHS"
+54-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:35:17-67
+55                android:resource="@xml/file_paths" />
+55-->C:\Users\Pascal\IdeaProjects\Digital-Equipment-Manager\digital-equipment-manager-ui\android\app\src\main\AndroidManifest.xml:36:17-51
+56        </provider>
+57    </application>
+58
+59</manifest>

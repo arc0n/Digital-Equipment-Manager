@@ -33,7 +33,7 @@ export class CommonStateService {
         this.storageSrv?.get(PORT_KEY)
       ])
     ).subscribe(([ip,port]) => {
-      this.setServerConfig({ip, port});
+      this.setServerConfig({ip:ip || 'localhost', port: port || 3000});
     });
   }
 

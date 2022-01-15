@@ -39,13 +39,13 @@
         <ion-label class="ion-text-left">{{ item.model_name }}</ion-label>
         <ion-label>{{ item.serial_number }}</ion-label>
         <ion-label class="ion-text-end">
-          <ion-button (click)="deleteItemFromList(i)">
+          <ion-button (click)="deleteItemFromList(i)" color="danger" [fill]="'outline'">
             <ion-icon name="close"></ion-icon>
           </ion-button></ion-label>
       </ion-item>
     </div>
     <div class="booking-summary-add-button ion-margin ion-padding">
-      <ion-button cy-data="Equ-Add" (click)="presentModal()">Gegenstand hinzufügen</ion-button>
+      <ion-button cy-data="Equ-Add" (click)="presentModal()" [fill]="'outline'">Gegenstand hinzufügen</ion-button>
     </div>
 
 

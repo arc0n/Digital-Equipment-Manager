@@ -27,10 +27,10 @@
             <ion-img [src]="'assets/equipment/'+ (this.item?.photo || 'no-image.png')"></ion-img>
           </div>
           <div class="equipment-page-io-vertical flex-grow">
-            <div class="ion-padding">Modell: {{this.item?.model_name || '-'}}</div>
-            <div class="ion-padding">Typ: {{this.item?.item_type || '-'}}</div>
-            <div class="ion-padding">Serien-Nummer: {{this.item?.serial_number || '-'}}</div>
-            <div class="ion-padding">Beschreibung: {{this.item?.description}}</div>
+            <ion-text class="equipment-page-io-label">Modell: {{this.item?.model_name || '-'}}</ion-text>
+            <ion-text class="equipment-page-io-label">Typ: {{this.item?.item_type || '-'}}</ion-text>
+            <ion-text class="equipment-page-io-label">Serien-Nummer: {{this.item?.serial_number || '-'}}</ion-text>
+            <ion-text class="equipment-page-io-label">Beschreibung: {{this.item?.description}}</ion-text>
           </div>
           <div class="equipment-page-io-vertical equipment-page-status-wrapper"
                [ngStyle]="{'order': showMobileMenu ? 1:4}">

@@ -65,7 +65,6 @@
 }
 
 
-
 .flex-wrap {
   flex-wrap: wrap;
 }
@@ -89,10 +88,11 @@
 }
 
 
-.equipment-page-io-ordered>div:nth-child(1) {
+.equipment-page-io-ordered > div:nth-child(1) {
   order: 2;
 }
-.equipment-page-io-ordered>div:nth-child(2) {
+
+.equipment-page-io-ordered > div:nth-child(2) {
   order: 3;
 }
 
@@ -110,4 +110,8 @@
   margin-left: .2rem;
   border-radius: 50%;
   justify-self: center;
+}
+
+.equipment-page-io-label {
+  margin: 0.5rem 1rem
 }

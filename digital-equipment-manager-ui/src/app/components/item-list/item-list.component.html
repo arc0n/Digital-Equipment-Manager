@@ -3,7 +3,7 @@
     <ion-label>Item Typ</ion-label>
     <ion-label class="ion-text-end">Model</ion-label>
     <ion-label class="ion-text-end">Status</ion-label>
-    <ion-label class="ion-text-end">Verfügbar?</ion-label>
+    <ion-label class="ion-text-end">Verfügbar</ion-label>
   </div>
   <ion-item *ngFor="let item of items" [ngClass]="{borrowedItem: item.borrowed}" (click)="emitItemClick(item)" class="clickable">
     <div class="grid">

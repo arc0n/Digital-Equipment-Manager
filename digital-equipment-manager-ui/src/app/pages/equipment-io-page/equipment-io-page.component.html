@@ -32,23 +32,28 @@
             <div class="ion-padding">Serien-Nummer: {{this.item?.serial_number || '-'}}</div>
             <div class="ion-padding">Beschreibung: {{this.item?.description}}</div>
           </div>
-          <div class="equipment-page-io-vertical equipment-page-status-wrapper" [ngStyle]="{'order': showMobileMenu ? 1:4}">
-            <div style="padding: 1rem 1rem 0 1rem">Status: {{this.item?.status }}, {{+ this.item?.borrowed? 'ausgegeben' : 'verfügbar'}}
+          <div class="equipment-page-io-vertical equipment-page-status-wrapper"
+               [ngStyle]="{'order': showMobileMenu ? 1:4}">
+            <div style="padding: 1rem 1rem 0 1rem; white-space: nowrap">Status: {{this.item?.status }}
+              , {{ this.getItemStatus(this.item?.status, this.item?.borrowed)}}
               <span class="availability-dot"
                     [ngStyle]="{'background-color':
                     getStatusColor(this.item?.status, this.item?.borrowed)}"></span></div>
             <div style="padding: 1rem 1rem 0 1rem">ID: {{this.item?.dynamic_id}}</div>
-            <ion-button *ngIf="!showMobileMenu" class="max-width-100 ion-padding btn-secondary" [fill]="'outline'" color="medium" (click)="showQRCode()">
-              QR Code {{!this.showCode? 'anzeigen' : 'ausblenden'}}
+            <ion-button *ngIf="!showMobileMenu" class="max-width-100 ion-padding btn-secondary" [fill]="'outline'"
+                        color="medium" (click)="showQRCode()">
+              QR Code {{!this.showCode ? 'anzeigen' : 'ausblenden'}}
             </ion-button>
             <div *ngIf="showCode === true" class="equipment-page-qrcode ion-margin-top ion-margin-horizontal">
               <qrcode [qrdata]="this.item?.dynamic_id" [width]="200" [errorCorrectionLevel]="'M'"></qrcode>
             </div>
-            <ion-button *ngIf="!showMobileMenu" class="max-width-100 ion-padding btn-secondary" [fill]="'outline'" color="medium" (click)="navigateToUpdateItem()">
+            <ion-button *ngIf="!showMobileMenu" class="max-width-100 ion-padding btn-secondary" [fill]="'outline'"
+                        color="medium" (click)="navigateToUpdateItem()">
               Item bearbeiten
             </ion-button>
-            <ion-button *ngIf="!showMobileMenu" class="max-width-100 ion-padding btn-secondary" [fill]="'outline'" color="danger" (click)="navigateToDefect()">
-              Defekt melden
+            <ion-button *ngIf="!showMobileMenu" class="max-width-100 ion-padding btn-secondary" [fill]="'outline'"
+                        color="danger" (click)="navigateToDefect()">
+              {{this.item?.status === 'aktiv' ? 'Defekt melden' : 'Defekt bearbeiten'}}
             </ion-button>
           </div>
         </div>
@@ -65,10 +70,13 @@
           Zurück
         </ion-button>
       </div>
-        <ion-button cy-data="equ-action" class="max-width-100" color="primary"
-        (click)="navigateToBookAndReturn()">
-          {{this.item?.borrowed ? 'Rücknahme' : 'Ausgabe'}}
-        </ion-button>
+      <ion-button cy-data="equ-action" class="max-width-100" color="primary"
+                  (click)="navigateToBookAndReturn()"
+                  [disabled]=" this.item?.status !== 'aktiv'"
+
+      >
+        {{this.item?.borrowed ? 'Rücknahme' : 'Ausgabe'}}
+      </ion-button>
     </div>
 
 

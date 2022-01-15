@@ -12,52 +12,42 @@
 <ion-content>
 
   <div class="item-update-wrapper">
-
-  <div class="item-update-flex-main ion-margin ion-padding">
-    <!-- Formular -->
-    <form class="item-update-flex-item-forms-card" [formGroup]="updateItemForm">
-      <div class="item-update-flex-item-form">
-        <div class="item-update-flex-item-form-info">
-          ID:
-        </div>
-        <div class="item-update-flex-item-form-info">
-          <ion-text>{{this.item?.dynamic_id}}</ion-text>
-        </div>
-      </div>
-      <div class="item-update-flex-item-form">
-        <div class="item-update-flex-item-form-info">
+    <!-- Form -->
+    <form class="item-update-flex-main" [formGroup]="updateItemForm">
+      <div class="item-update-flex-item-form item-update-value-label">
+        <label class="item-update-flex-item-form-info">
           Type:
-        </div>
+        </label>
         <div class="item-update-flex-item-form-info">
           <ion-text>{{this.item?.item_type}}</ion-text>
         </div>
       </div>
-      <div class="item-update-flex-item-form">
-        <div class="item-update-flex-item-form-info">
+      <div class="item-update-flex-item-form item-update-value-label">
+        <label class="item-update-flex-item-form-info">
           Name:
-        </div>
-        <div class="item-update-flex-item-form-field">
-          <ion-input value="{{this.item?.model_name}}" formControlName="itemName"></ion-input>
+        </label>
+        <div class="item-update-flex-item-form-info">
+          <ion-text>{{this.item?.model_name}}</ion-text>
         </div>
       </div>
       <div class="item-update-flex-item-form">
-        <div class="item-update-flex-item-form-info">
+        <label class="item-update-flex-item-form-info">
           Beschreibung:
-        </div>
+        </label>
         <div class="item-update-flex-item-form-field">
           <ion-input value="{{this.item?.description}}" formControlName="itemDescription"></ion-input>
         </div>
       </div>
       <div class="item-update-flex-item-form">
-        <div class="item-update-flex-item-form-info">
+        <label class="item-update-flex-item-form-info">
           Seriennummer:
-        </div>
+        </label>
         <div class="item-update-flex-item-form-field">
           <ion-input value="{{this.item?.serial_number}}" formControlName="itemSerialnumber"></ion-input>
         </div>
       </div>
     </form>
-  </div>
+
   <div class="page-io-bottom-toolbar" [ngClass]="{ 'ion-justify-content-between': !showMobileMenu }">
     <div *ngIf="!showMobileMenu">
       <ion-button class="max-width-100" color="primary" [fill]="'outline'"
@@ -69,8 +59,7 @@
                 (click)="saveAndReturn()">
       Speichern
     </ion-button>
-  </div>
 
 
-  </div>
+  </div></div>
 </ion-content>

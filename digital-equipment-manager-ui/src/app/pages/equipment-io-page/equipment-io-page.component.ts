@@ -144,7 +144,7 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
 
   getStatusColor(status: string, isBorrowed: boolean) {
     if(!status) {return '#3a7be0';}
-    if(isBorrowed) {
+    if(isBorrowed && status === 'aktiv') {
       return 'yellow'
     }
     if(status === 'aktiv') {return 'var(--ion-color-success)';}
@@ -170,5 +170,14 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
 
   showQRCode() {
     this.showCode = this.showCode === false;
+  }
+
+  getItemStatus(status: "aktiv" | "inaktiv" | "dekommisioniert", borrowed: boolean) {
+    if(status !== "aktiv") return " - "
+    if(borrowed) {
+      return "ausgegeben"
+    } else {
+      return "verfügbar"
+    }
   }
 }

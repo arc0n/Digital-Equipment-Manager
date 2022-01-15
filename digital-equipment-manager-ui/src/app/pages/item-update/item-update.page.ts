@@ -25,7 +25,6 @@ export class ItemUpdatePage implements OnInit, OnDestroy {
   /** @internal  */
   updateItemForm = new FormGroup(
     {
-      itemName: new FormControl('', Validators.required),
       itemDescription: new FormControl(''),
       itemSerialnumber: new FormControl('', Validators.required),
     }
@@ -57,15 +56,20 @@ export class ItemUpdatePage implements OnInit, OnDestroy {
         return
       }
       this.item = item as Item;
-      if(this.item.borrowed === true) {
-        this.presentToast('Achtung - Gerät ist aktuell ausgeborgt!',
-          'warning', 4000, "middle");
+      if (this.item.status !== 'aktiv') {
+        this.presentToast('Achtung - Gerät ist aktuell defekt gemeldet',
+          'warning', 3000, "middle");
       }
+      else if (this.item.borrowed === true) {
+        this.presentToast('Achtung - Gerät ist aktuell ausgeborgt!',
+          'warning', 3000, "middle");
+      }
+
       this.updateItemForm.setValue({
         itemName: this.item.model_name,
         itemDescription: this.item.description,
         itemSerialnumber: this.item.serial_number
-        });
+      });
     });
   }
 
@@ -85,14 +89,34 @@ export class ItemUpdatePage implements OnInit, OnDestroy {
   }
 
   saveAndReturn() {
-    // TODO - save changes to Item
-    if(this.updateItemForm.invalid) {
+    this.updateItemForm.markAllAsTouched();
+    if (this.updateItemForm.invalid) {
       this.presentToast('Unvollständige Eingaben', 'danger', 2000, 'middle');
       return;
-    } else {
-      this.presentToast('Test für Eingaben: Alles oki', 'success', 2000, 'middle');
+    }
+    const rawValues= this.updateItemForm.getRawValue()
+
+    const item: Item = {
+      ...this.item,
+      ...{description: rawValues.itemDescription,
+      serial_number: rawValues.itemSerialnumber}
     }
 
+    this.itemService.put(item,  {}, item.dynamic_id).subscribe(result => {
+      if(result) {
+        this.updateItemForm.reset()
+        this.presentToast('Gerät bearbeitet', 'success', 2000, 'middle');
+        this.backButtonClicked();
+
+      } else {
+        this.presentToast('Bearbeiten Fehlgeschlagen', 'danger', 3000, 'middle');
+
+      }
+    })
+
+
+
   }
+
 
 }

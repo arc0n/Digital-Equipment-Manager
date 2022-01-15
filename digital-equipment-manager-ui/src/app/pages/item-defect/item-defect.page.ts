@@ -6,6 +6,8 @@ import {Subscription} from "rxjs";
 import {mergeMap} from "rxjs/operators";
 import {Item} from "../../services/model";
 import {ItemResourceService} from "../../services/api-services/item-resource.service";
+import {ItemCasualityResourceService} from "../../services/api-services/casuality.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-item-update',
@@ -20,13 +22,19 @@ export class ItemDefectPage implements OnInit, OnDestroy {
 
   /** @internal  */
   item: Item;
+  casualityForm =   new FormGroup({
+    description: new FormControl('', Validators.required)
+  })
+
+
 
   constructor(public router: Router,
               public state: CommonStateService,
               private actionSheetController: ActionSheetController,
               private activeRoute: ActivatedRoute,
               private itemService: ItemResourceService,
-              private toastController: ToastController
+              private toastController: ToastController,
+              private casualityService: ItemCasualityResourceService
   ) {
   }
 
@@ -52,7 +60,6 @@ export class ItemDefectPage implements OnInit, OnDestroy {
         this.presentToast('Achtung - Gerät ist aktuell ausgeborgt!',
           'warning', 4000, "middle");
       }
-      //console.log('item: '+this.item.borrowed);
     });
   }
 
@@ -67,15 +74,38 @@ export class ItemDefectPage implements OnInit, OnDestroy {
   }
 
   decommissionAndReturn() {
-    //TODO - decommission item
+    this.postCasuality('dekommisioniert')
   }
 
-  deactivateAndReturn() {
-    //TODO - deactivate Item
+  toggleActivateAndReturn() {
+    this.postCasuality(this.item.status === 'aktiv' ? 'inaktiv' : 'aktiv')
+  }
+
+  postCasuality(status: 'aktiv' | 'inaktiv' | 'dekommisioniert'){
+    this.casualityForm.get('description').markAllAsTouched()
+    const desc = this.casualityForm.get('description').value
+    if(!desc) {return}
+    this.casualityService.post({
+      item_id: this.item.dynamic_id,
+      status,
+      description: desc,
+    },{}).subscribe(result => {
+      if(result) {
+        this.presentToast(
+          (this.item.status === 'aktiv' ? 'Defekt erstellt': 'Gerät aktiviert')
+          , "success", 1000, 'middle')
+        this.backButtonClicked();
+        this.casualityForm.reset()
+      } else {
+        this.presentToast("Fehler beim anlegen des Defekts", "danger", 2000, 'middle')
+      }
+    })
+
   }
 
   async presentToast(message: string, color: string, duration: number, position: any) {
     const p = await this.toastController.create({message, color, duration, position})
     await p.present();
   }
+
 }

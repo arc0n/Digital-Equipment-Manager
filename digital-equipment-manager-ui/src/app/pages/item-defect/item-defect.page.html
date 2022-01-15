@@ -14,18 +14,19 @@
 
   <div class="item-defect-flex-main ion-margin ion-padding">
     <div class="item-defect-flex-item-infos">
-      <p>MOCK INFOS for tests</p>
       <p>Item Name: {{this.item?.model_name}}</p>
       <p>Item Beschreibung: {{this.item?.description}}</p>
     </div>
-    <div *ngIf="this.item?.status === 'aktiv'" class="item-defect-textarea">
-      <ion-textarea class="item-textarea"
-        placeholder="Gib Informationen ein, warum der Gegenstand deaktiviert/dekommissioniert wird..."></ion-textarea>
-    </div>
-    <div *ngIf="this.item?.status === 'inaktiv'" class="item-defect-textarea">
-      <ion-textarea class="item-textarea"
-        placeholder="Gib Informationen ein, warum der Gegenstand aktiviert wird..."></ion-textarea>
-    </div>
+    <form [formGroup]="this.casualityForm" class="item-defect-textarea">
+      <ion-item>
+        <ion-input
+                   formControlName="description"
+                   placeholder="{{this.item?.status === 'aktiv'?  'Grund für deaktivierung' :  'Grund für aktivierung'}}"
+        ></ion-input>
+      </ion-item>
+
+    </form>
+
   </div>
   <div class="page-io-bottom-toolbar" [ngClass]="{ 'ion-justify-content-between': !showMobileMenu }">
     <div *ngIf="!showMobileMenu">
@@ -35,11 +36,13 @@
       </ion-button>
     </div>
     <ion-button class="max-width-100" color="danger" [fill]="'outline'"
+                [disabled]="this.item?.status === 'dekommisioniert'"
                 (click)="decommissionAndReturn()">
       Dekommissionieren
     </ion-button>
     <ion-button class="max-width-100" [color]="this.item?.status === 'aktiv' ? 'danger' : 'success'"
-                (click)="deactivateAndReturn()">
+                [disabled]="this.item?.status === 'dekommisioniert'"
+                (click)="toggleActivateAndReturn()">
       {{this.item?.status === 'aktiv' ? 'Defekt melden' : 'aktivieren'}}
     </ion-button>
   </div>

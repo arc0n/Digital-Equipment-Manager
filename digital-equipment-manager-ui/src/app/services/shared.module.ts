@@ -17,6 +17,7 @@ import {ItemListComponent} from "../components/item-list/item-list.component";
 import {ItemTypeResourceService} from "./api-services/item-type.service";
 import {ItemModelResourceService} from "./api-services/item-model.service";
 import {AppLogoComponent} from "../components/app-logo/app-logo.component";
+import {ItemCasualityResourceService} from "./api-services/casuality.service";
 
 
 @NgModule({
@@ -54,6 +55,7 @@ export class SharedModule {
         PersonResourceService,
         ItemTypeResourceService,
         ItemModelResourceService,
+        ItemCasualityResourceService
       ]
     };
   }

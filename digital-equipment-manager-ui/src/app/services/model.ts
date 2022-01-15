@@ -3,7 +3,7 @@ export interface Item {
   serial_number: string,
   photo: string,
   description: string,
-  status: string,
+  status: 'aktiv' | 'inaktiv' | 'dekommisioniert',
   item_model_id: number,
   model_name: string,
   item_type: string,
@@ -45,4 +45,11 @@ export interface Booking {
   datetime_in?: Date,
   person?: Person,
   item?: Item
+}
+
+export interface Casuality {
+  item_id: string,
+  description: string,
+  type?: string,
+  status: string,
 }

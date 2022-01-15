@@ -71,7 +71,7 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
       header: 'Optionen für Equipment',
       buttons: [
         {
-          text: 'Defekt Melden',
+          text: this.item.status==='aktiv' ? 'Defekt melden' : 'Defekt bearbeiten',
           role: 'destructive',
           icon: 'trash',
           handler: () => {

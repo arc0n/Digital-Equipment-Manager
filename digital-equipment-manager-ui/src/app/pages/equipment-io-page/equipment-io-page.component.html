@@ -5,7 +5,8 @@
       slot="start" class="back-button" (click)="this.router.navigate(['/tabs/dashboard'])">
       <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
     </ion-buttons>
-    <ion-title>Equipment: {{this.item?.model_name}}</ion-title>
+    <ion-title>
+      Gerät: {{this.item?.model_name}}</ion-title>
     <ion-buttons slot="primary" *ngIf="this.showMobileMenu">
       <ion-button color="primary" (click)="onMenuClicked()">
         <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>

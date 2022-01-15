@@ -68,7 +68,7 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
 
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({
-      header: 'Optionen für Equipment',
+      header: 'Optionen für Gerät',
       buttons: [
         {
           text: this.item.status==='aktiv' ? 'Defekt melden' : 'Defekt bearbeiten',
@@ -85,7 +85,7 @@ export class EquipmentIoPage implements OnInit, OnDestroy {
           this.navigateToHistory();
         }
       },  {
-        text: 'Item bearbeiten',
+        text: 'Gerät bearbeiten',
         icon: 'create-outline',
         handler: () => {
           this.navigateToUpdateItem();

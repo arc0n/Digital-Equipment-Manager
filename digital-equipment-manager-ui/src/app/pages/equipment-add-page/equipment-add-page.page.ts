@@ -102,7 +102,7 @@ export class EquipmentAddPagePage implements OnInit, OnDestroy {
     } as Item;
     this.itemService.postItem(newItem).subscribe(result => {
       if(result !== 'INVALID_REQUIEST') {
-        this.presentToast('Item angelegt', 'success').then(() => {
+        this.presentToast('Gerät angelegt', 'success').then(() => {
           this.router.navigate(['/tabs/dashboard'])
         })
       } else {

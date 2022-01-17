@@ -10,9 +10,8 @@ describe('api-tests-item', () => {
 
     cy.request({
       url: 'http://localhost:3000/item/',
-      header: {
+      headers: {
         Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
-
       }
     })
       .then((response) => {
@@ -27,7 +26,7 @@ describe('api-tests-item', () => {
 
     cy.request({
       url: 'http://localhost:3000/item/4z8k9a6bqx7u7ad',
-      header: {
+      headers: {
         Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
       }
@@ -45,7 +44,7 @@ describe('api-tests-item', () => {
     cy.request({
       url: 'http://localhost:3000/item/s',
       failOnStatusCode: false,
-      header: {
+      headers: {
         Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
       }
@@ -62,7 +61,7 @@ describe('api-tests-item', () => {
     cy.request({
       url: 'http://localhost:3000/item/bullshit',
       failOnStatusCode: false,
-      header: {
+      headers: {
         Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
       }
@@ -86,6 +85,10 @@ describe('api-tests-item', () => {
         "status": "aktiv",
         "item_model_id": 1,
         "item_type_id": 1,
+      },
+      headers: {
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
       }
     })
       .then((response) => {
@@ -95,6 +98,10 @@ describe('api-tests-item', () => {
         cy.request({
           url: 'http://localhost:3000/item/' + createdId,
           method: 'GET',
+          headers: {
+            Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+          }
         })
           .then((response) => {
             expect(response).property('status').to.equal(200)
@@ -116,7 +123,7 @@ describe('api-tests-item', () => {
         "status": "aktiv",
         "item_type_id": 1,
       },
-      header: {
+      headers: {
         Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
       }
@@ -143,7 +150,7 @@ describe('api-tests-item', () => {
         "item_model_id": 1,
         "item_type_id": 1,
       },
-      header: {
+      headers: {
         Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
       }
@@ -155,7 +162,7 @@ describe('api-tests-item', () => {
         cy.request({
           url: 'http://localhost:3000/item/' + createdId,
           method: 'DELETE',
-          header: {
+          headers: {
             Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
           }
@@ -173,7 +180,7 @@ describe('api-tests-item', () => {
     cy.request({
       url: 'http://localhost:3000/item/',
       method: 'POST',
-      header: {
+      headers: {
         Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
       },
@@ -193,7 +200,7 @@ describe('api-tests-item', () => {
         cy.request({
           url: 'http://localhost:3000/item/' + itemId,
           method: 'PUT',
-          header: {
+          headers: {
             Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
           },
@@ -208,7 +215,7 @@ describe('api-tests-item', () => {
       cy.request({
         url: 'http://localhost:3000/item/' + itemId,
         method: 'GET',
-        header: {
+        headers: {
           Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
         }
@@ -224,7 +231,7 @@ describe('api-tests-item', () => {
     cy.request({
       url: 'http://localhost:3000/item/',
       method: 'POST',
-      header: {
+      headers: {
         Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
       },
@@ -243,7 +250,7 @@ describe('api-tests-item', () => {
         cy.request({
           url: 'http://localhost:3000/item/' + itemId,
           method: 'PUT',
-          header: {
+          headers: {
             Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
           },
@@ -259,7 +266,7 @@ describe('api-tests-item', () => {
       cy.request({
         url: 'http://localhost:3000/item/' + itemId,
         method: 'GET',
-        header: {
+        headers: {
           Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
         }
@@ -284,7 +291,7 @@ describe('api-tests-item', () => {
         "item_model_id": 1,
         "item_type_id": 1,
       },
-      header: {
+      headers: {
         Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
       }
@@ -299,7 +306,7 @@ describe('api-tests-item', () => {
           body: {
             "item_model_id": 2,
           },
-          header: {
+          headers: {
             Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
           }
@@ -309,7 +316,7 @@ describe('api-tests-item', () => {
             cy.request({
               url: 'http://localhost:3000/item/' + itemId,
               method: 'GET',
-              header: {
+              headers: {
                 Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
               }

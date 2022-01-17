@@ -4,11 +4,13 @@ describe('loginscreen', () => {
   beforeEach(() => {
     cy.clearLocalStorage()
     indexedDB.deleteDatabase('_ionicstorage')
-    cy.visit('http://localhost:4200/')
+    cy.visit('http://localhost:3000/')
   })
 
   it('Create Employee', () => {
-    cy.get('[cy-data="login-button"]').click()
+    cy.get('input').eq(0).type('admin@email.com')
+    cy.get('input').eq(1).type('admin')
+    cy.get('[cy-data="login-button"]').click({position: 'center'})
     cy.get('[ng-reflect-router-link="/employee-add-page"]').click()
     cy.get('[formcontrolname="personFirstname"]').type('Max')
     cy.get('[formcontrolname="personLastname"]').type('Mustermann')
@@ -25,7 +27,8 @@ describe('loginscreen', () => {
   })
 
   it.skip('Create Item', () => {
-
+    cy.get('input').eq(0).type('admin@email.com')
+    cy.get('input').eq(1).type('admin')
     cy.get('[cy-data="login-button"]').click()
     cy.get('[ng-reflect-router-link="/equipment-add-page"]').click()
     cy.get('[formcontrolname="itemType"]').click()
@@ -38,13 +41,14 @@ describe('loginscreen', () => {
 
   })
 
-  it('Gerät ausgeben', () => {
+  it.skip('Gerät ausgeben', () => {
 
     cy.intercept('**/person?name=Friedrich%20Fellner').as('apiperson')
-
-    cy.get('[cy-data="login-button"]').click()
+    cy.get('input').eq(0).type('admin@email.com')
+    cy.get('input').eq(1).type('admin')
+    cy.get('[cy-data="login-button"]').click({position: 'center'})
     cy.get('[ng-reflect-router-link="/item-list"]').click()
-    cy.contains('4z8k9a6bqx7u7ad').click()
+    cy.contains('Schlagstock').click()
     cy.contains('Status: aktiv, verfügbar')
     cy.get('[cy-data="equ-action"]').click()
     cy.get('[cy-data="QR-Code"]').type('Friedrich Fellner')
@@ -53,22 +57,23 @@ describe('loginscreen', () => {
     cy.get('[cy-data="Btn-Confirm"]').click()
     cy.get('[ng-reflect-router-link="/item-list"]').click()
     cy.wait(500)
-    cy.contains('4z8k9a6bqx7u7ad').click()
+    cy.contains('Schlagstock').click()
     cy.contains('Status: aktiv, ausgegeben')
 
   })
 
-  it('Gerät retournieren', () => {
-
+  it.skip('Gerät retournieren', () => {
+    cy.get('input').eq(0).type('admin@email.com')
+    cy.get('input').eq(1).type('admin')
     cy.get('[cy-data="login-button"]').click()
     cy.get('[ng-reflect-router-link="/item-list"]').click()
-    cy.contains('4z8k9a6bqx7u7ad').click()
+    cy.contains('Schlagstock').click()
     cy.contains('Status: aktiv, ausgegeben')
     cy.get('[cy-data="equ-action"]').click()
     cy.get('[cy-data="Btn-Confirm"]').click()
     cy.get('[ng-reflect-router-link="/item-list"]').click()
     cy.wait(500)
-    cy.contains('4z8k9a6bqx7u7ad').click()
+    cy.contains('Schlagstock').click()
     cy.contains('Status: aktiv, verfügbar')
 
   })

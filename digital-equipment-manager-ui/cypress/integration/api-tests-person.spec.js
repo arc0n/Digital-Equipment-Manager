@@ -11,7 +11,7 @@ describe('api-tests-person', () => {
 
     cy.request({
       url: 'http://localhost:3000/person/',
-      header: {
+      headers: {
         Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
       }
@@ -27,7 +27,7 @@ describe('api-tests-person', () => {
 
     cy.request( {
       url: 'http://localhost:3000/person/68gngbkw875rc6x',
-        header: {
+        headers: {
           Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
         }
@@ -44,7 +44,7 @@ describe('api-tests-person', () => {
 
     cy.request({
       url: 'http://localhost:3000/person/6',
-      header: {
+      headers: {
         Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
       },
@@ -61,7 +61,7 @@ describe('api-tests-person', () => {
 
     cy.request({
       url: 'http://localhost:3000/person/bullshit',
-      header: {
+      headers: {
         Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
       },
@@ -78,7 +78,7 @@ describe('api-tests-person', () => {
 
     cy.request({
       url:'http://localhost:3000/person/',
-      header: {
+      headers: {
         Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
       },
@@ -100,7 +100,7 @@ describe('api-tests-person', () => {
         let createdId = response.body.result.id;
         cy.request({
           url: 'http://localhost:3000/person/' + createdId,
-          header: {
+          headers: {
             Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
           },

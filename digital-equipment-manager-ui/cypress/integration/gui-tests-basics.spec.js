@@ -4,18 +4,22 @@ describe('loginscreen', () => {
   beforeEach(() => {
     cy.clearLocalStorage()
     indexedDB.deleteDatabase('_ionicstorage')
-    cy.visit('http://localhost:4200/')
+    cy.visit('http://localhost:3000/')
   })
   it('auth page should be visible', () => {
   cy.get('app-auth')
   })
   it('Login Button should navigate to Equipment Dashboard', () => {
+    cy.get('input').eq(0).type('admin@email.com')
+    cy.get('input').eq(1).type('admin')
     cy.get('[cy-data="login-button"]').click()
     cy.get('equipment-dashboard')
   })
 
   it('Equipment Dashboard GUI', () => {
-    cy.get('[cy-data="login-button"]').click()
+    cy.get('input').eq(0).type('admin@email.com')
+    cy.get('input').eq(1).type('admin')
+    cy.get('[cy-data="login-button"]').click();
     cy.get('equipment-dashboard')
     cy.contains('Bitte ID-Code unterhalb eingeben oder mittels "SCAN" button scannen. Kamera für scan benötigt.')
     cy.contains('Home')
@@ -24,7 +28,9 @@ describe('loginscreen', () => {
     cy.contains('Geräteliste')
   })
 
-  xit('Basic Navigation', () => {
+  it('Basic Navigation', () => {
+    cy.get('input').eq(0).type('admin@email.com')
+    cy.get('input').eq(1).type('admin')
     cy.get('[cy-data="login-button"]').click()
     cy.get('[ng-reflect-router-link="/employee-add-page"]').click()
     cy.contains('Postleitzahl')

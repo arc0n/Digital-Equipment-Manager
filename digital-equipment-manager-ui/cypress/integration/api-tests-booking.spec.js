@@ -11,7 +11,7 @@ describe('api-tests-booking', () => {
 
     cy.request({
       url: 'http://localhost:3000/booking/',
-      header: {
+      headers: {
         Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
       }
@@ -28,7 +28,7 @@ describe('api-tests-booking', () => {
     cy.request({
       url:'http://localhost:3000/booking/',
       method:'POST',
-      header: {
+      headers: {
         Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
       },
@@ -41,7 +41,7 @@ describe('api-tests-booking', () => {
         expect(response).property('status').to.equal(200)
         cy.request({
           url: 'http://localhost:3000/booking/',
-          header: {
+          headers: {
             Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
           }
@@ -57,7 +57,7 @@ describe('api-tests-booking', () => {
     cy.request({
       url: 'http://localhost:3000/booking/',
       method: 'PUT',
-      header: {
+      headers: {
         Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
       },
@@ -76,7 +76,7 @@ describe('api-tests-booking', () => {
       url:'http://localhost:3000/booking/',
       method:'POST',
       failOnStatusCode: false,
-      header: {
+      headers: {
         Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
       },
@@ -95,7 +95,7 @@ describe('api-tests-booking', () => {
     cy.request({
       url:'http://localhost:3000/booking/',
       method:'POST',
-      header: {
+      headers: {
         Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
       },
@@ -133,7 +133,7 @@ describe('api-tests-booking', () => {
     cy.request({
       url:'http://localhost:3000/booking/',
       method:'POST',
-      header: {
+      headers: {
         Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
       },
@@ -148,7 +148,7 @@ describe('api-tests-booking', () => {
               url:'http://localhost:3000/booking/',
               method:'POST',
               failOnStatusCode: false,
-              header: {
+              headers: {
                 Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
               },
@@ -163,6 +163,10 @@ describe('api-tests-booking', () => {
                 cy.request({
                   url: 'http://localhost:3000/booking/',
                   method: 'PUT',
+                  headers: {
+                    Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+                  },
                   body:{
                     "item_id": "yh63pmq4jq2qa46",
                   }
@@ -182,7 +186,7 @@ describe('api-tests-booking', () => {
     cy.request({
       url: 'http://localhost:3000/booking/4z8k9a6bqx7u7ad',
       failOnStatusCode: false,
-      header: {
+      headers: {
         Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
 
       },

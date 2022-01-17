@@ -8,7 +8,8 @@ Install Docker(for Windows, you will need a WSL2 Linux kernel installed)
 For building and starting docker, change to the scripts folder with `$ cd server/scripts` and execute `$ ./redeploy.sh`.
 For stopping them, you run `$ docker-compose down`.
 
-Navigate to http://localhost:3000
+Navigate to http://localhost:3000, or with your servers ip like http://192.168.0.xx:3000
+Click on "Verbindungseinstellungen" and setup the IP of your server.
 
 ## Development Workflow
 ### Run UI application in developer mode

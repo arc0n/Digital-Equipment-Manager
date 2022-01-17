@@ -7,7 +7,7 @@ describe('loginscreen', () => {
     cy.visit('http://localhost:3000/')
   })
 
-  it('Create Employee', () => {
+  it.skip('Create Employee', () => {
     cy.get('input').eq(0).type('admin@email.com')
     cy.get('input').eq(1).type('admin')
     cy.get('[cy-data="login-button"]').click({position: 'center'})

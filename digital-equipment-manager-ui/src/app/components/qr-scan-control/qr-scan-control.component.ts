@@ -1,6 +1,7 @@
 import {Component, OnInit, Input, Output, EventEmitter, OnDestroy} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {Subject, Subscription} from "rxjs";
+import {CommonStateService} from "../../services/common-state.service";
 
 @Component({
   selector: 'app-qr-control',
@@ -37,7 +38,7 @@ export class QrScanControlComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = []
 
-  constructor() { }
+  constructor(public stateService: CommonStateService) { }
 
   ngOnDestroy(): void {
         this.subscriptions.forEach(s => s.unsubscribe());
@@ -54,6 +55,7 @@ export class QrScanControlComponent implements OnInit, OnDestroy {
         this.qrInputForm.reset();
       })
     }
+
   }
 
   scanBtnClicked(event): void {

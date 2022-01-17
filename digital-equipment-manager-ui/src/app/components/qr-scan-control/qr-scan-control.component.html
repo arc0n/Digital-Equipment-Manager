@@ -20,6 +20,9 @@
 
   <div class="qr-scan-horizontal">
     <ion-button
+      class="qr-control-next-button"
+      [ngClass]="{'qr-control-next-button-small': this.stateService.getSplitPaneVisible() |async
+      }"
       *ngIf="showContinueButton"
       (click)="continueButtonPressed()">Weiter</ion-button>
   </div>

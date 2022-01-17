@@ -27,11 +27,25 @@
           <div class="equipment-page-picture-wrapper">
             <ion-img [src]="'assets/equipment/'+ (this.item?.photo || 'no-image.png')"></ion-img>
           </div>
-          <div class="equipment-page-io-vertical flex-grow">
-            <ion-text class="equipment-page-io-label">Modell: {{this.item?.model_name || '-'}}</ion-text>
-            <ion-text class="equipment-page-io-label">Typ: {{this.item?.item_type || '-'}}</ion-text>
-            <ion-text class="equipment-page-io-label">Serien-Nummer: {{this.item?.serial_number || '-'}}</ion-text>
-            <ion-text class="equipment-page-io-label">Beschreibung: {{this.item?.description}}</ion-text>
+          <div class="equipment-page-io-vertical equipment-page-io-description-wrapper flex-grow"
+              >
+
+            <div class="equipment-page-io-vertical">
+              <label class="equipment-page-io-label">Modell</label>
+              <ion-text class="equipment-page-io-text"> {{this.item?.model_name || '-'}}</ion-text>
+            </div>
+            <div class="equipment-page-io-vertical">
+              <label class="equipment-page-io-label">Typ</label>
+              <ion-text class="equipment-page-io-text">{{this.item?.item_type || '-'}}</ion-text>
+            </div>
+            <div class="equipment-page-io-vertical">
+              <label class="equipment-page-io-label">Seriennummer</label>
+              <ion-text class="equipment-page-io-text">{{this.item?.serial_number || '-'}}</ion-text>
+            </div>
+            <div class="equipment-page-io-vertical">
+              <label class="equipment-page-io-label">Beschreibung</label>
+              <ion-text class="equipment-page-io-text">{{this.item?.description}}</ion-text>
+            </div>
           </div>
           <div class="equipment-page-io-vertical equipment-page-status-wrapper"
                [ngStyle]="{'order': showMobileMenu ? 1:4}">
@@ -40,7 +54,7 @@
               <span class="availability-dot"
                     [ngStyle]="{'background-color':
                     getStatusColor(this.item?.status, this.item?.borrowed)}"></span></div>
-            <div style="padding: 1rem 1rem 0 1rem">ID: {{this.item?.dynamic_id}}</div>
+            <div style="padding: .2rem 1rem 0 1rem; font-size: 0.75rem; color: grey">ID: {{this.item?.dynamic_id}}</div>
             <ion-button *ngIf="!showMobileMenu" class="max-width-100 ion-padding btn-secondary" [fill]="'outline'"
                         color="medium" (click)="showQRCode()">
               QR Code {{!this.showCode ? 'anzeigen' : 'ausblenden'}}

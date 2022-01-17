@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component,  OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {Item, ItemModel, ItemType} from "../../services/model";
 import {ActivatedRoute, Router} from "@angular/router";

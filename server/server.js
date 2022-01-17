@@ -30,10 +30,10 @@ app.use(function (req, res, next) {
 /*
  put the build angular project in the dist folder to get the app served
 */
-/*app.use(express.static(path.join(__dirname, '../', '/dist/standup-tool')));
-app.get('/!*', (req, res) => {
-  res.sendFile(path.join(__dirname));
-});*/
+app.use(express.static(path.join(__dirname, '/dist/www')));
+  app.get('/app', (req, res) => {
+  res.sendFile(path.join(__dirname, '/dist/www'));
+});
 
 // simple route
 app.get("/", (req, res) => {

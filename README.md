@@ -1,4 +1,9 @@
 # Digital-Equipment-Manager
+## Run the Automated Tests
+To install all packages, run `$ npm i` at projectFolder/digital-equipment-manager-ui.
+Install Yarn with `$ npm i -g yarn`
+Start the automated tests with `$ yarn cy`. Tests are running on every push in Git Actions
+
 
 ### Run and build server
 You have to use linux or git bash for this section!

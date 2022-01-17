@@ -9,7 +9,13 @@ describe('api-tests-booking', () => {
 
   it('Booking List call', () => {
 
-    cy.request('http://localhost:3000/booking/')
+    cy.request({
+      url: 'http://localhost:3000/booking/',
+      header: {
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+      }
+    })
       .then((response) => {
         expect(response).property('status').to.equal(200)
         expect(response).property('body').to.not.empty
@@ -22,6 +28,10 @@ describe('api-tests-booking', () => {
     cy.request({
       url:'http://localhost:3000/booking/',
       method:'POST',
+      header: {
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+      },
       body:{
         "item_id": "c7341j0vum6weq2",
         "person_id": "68gngbkw875rc6x",
@@ -29,7 +39,13 @@ describe('api-tests-booking', () => {
     })
       .then((response) => {
         expect(response).property('status').to.equal(200)
-        cy.request('http://localhost:3000/booking/')
+        cy.request({
+          url: 'http://localhost:3000/booking/',
+          header: {
+            Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+          }
+        })
           .then((response) => {
             expect(response).property('status').to.equal(200)
             expect(response).property('body').to.not.empty
@@ -41,6 +57,10 @@ describe('api-tests-booking', () => {
     cy.request({
       url: 'http://localhost:3000/booking/',
       method: 'PUT',
+      header: {
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+      },
       body:{
         "item_id": "c7341j0vum6weq2",
       }
@@ -56,6 +76,10 @@ describe('api-tests-booking', () => {
       url:'http://localhost:3000/booking/',
       method:'POST',
       failOnStatusCode: false,
+      header: {
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+      },
       body:{
         "item_id": "c7341j0vum6weq2",
       }
@@ -71,6 +95,10 @@ describe('api-tests-booking', () => {
     cy.request({
       url:'http://localhost:3000/booking/',
       method:'POST',
+      header: {
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+      },
       failOnStatusCode: false,
       body:{
         "person_id": "68gngbkw875rc6x",
@@ -105,6 +133,10 @@ describe('api-tests-booking', () => {
     cy.request({
       url:'http://localhost:3000/booking/',
       method:'POST',
+      header: {
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+      },
       body:{
         "item_id": "yh63pmq4jq2qa46",
         "person_id": "68gngbkw875rc6x",
@@ -116,6 +148,10 @@ describe('api-tests-booking', () => {
               url:'http://localhost:3000/booking/',
               method:'POST',
               failOnStatusCode: false,
+              header: {
+                Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+              },
               body:{
                 "item_id": "yh63pmq4jq2qa46",
                 "person_id": "cjz7282s5y9ro9d",
@@ -146,6 +182,10 @@ describe('api-tests-booking', () => {
     cy.request({
       url: 'http://localhost:3000/booking/4z8k9a6bqx7u7ad',
       failOnStatusCode: false,
+      header: {
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+      },
       method: 'PUT',
     }).then((response) => {
       expect(response).property('status').to.equal(404)

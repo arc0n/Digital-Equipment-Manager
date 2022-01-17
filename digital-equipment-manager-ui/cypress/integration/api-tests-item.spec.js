@@ -8,7 +8,13 @@ describe('api-tests-item', () => {
 
   it('item response result not empty', () => {
 
-    cy.request('http://localhost:3000/item/')
+    cy.request({
+      url: 'http://localhost:3000/item/',
+      header: {
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+      }
+    })
       .then((response) => {
         expect(response).property('status').to.equal(200)
         //expect(response).property('body').to.have.property('length').and.be.gt(10)
@@ -19,7 +25,13 @@ describe('api-tests-item', () => {
 
   it('item by id response result not empty', () => {
 
-    cy.request('http://localhost:3000/item/4z8k9a6bqx7u7ad')
+    cy.request({
+      url: 'http://localhost:3000/item/4z8k9a6bqx7u7ad',
+      header: {
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+      }
+    })
       .then((response) => {
         expect(response).property('status').to.equal(200)
         cy.wrap(response.body.result.dynamic_id).should('equal', '4z8k9a6bqx7u7ad')
@@ -33,6 +45,10 @@ describe('api-tests-item', () => {
     cy.request({
       url: 'http://localhost:3000/item/s',
       failOnStatusCode: false,
+      header: {
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+      }
     })
       .then((response) => {
         expect(response).property('status').to.equal(404)
@@ -46,6 +62,10 @@ describe('api-tests-item', () => {
     cy.request({
       url: 'http://localhost:3000/item/bullshit',
       failOnStatusCode: false,
+      header: {
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+      }
     })
       .then((response) => {
         expect(response).property('status').to.equal(404)
@@ -95,6 +115,10 @@ describe('api-tests-item', () => {
         "description": "",
         "status": "aktiv",
         "item_type_id": 1,
+      },
+      header: {
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
       }
     })
       .then((response) => {
@@ -118,6 +142,10 @@ describe('api-tests-item', () => {
         "status": "aktiv",
         "item_model_id": 1,
         "item_type_id": 1,
+      },
+      header: {
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
       }
     })
       .then((response) => {
@@ -127,6 +155,10 @@ describe('api-tests-item', () => {
         cy.request({
           url: 'http://localhost:3000/item/' + createdId,
           method: 'DELETE',
+          header: {
+            Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+          }
         })
           .then((response) => {
             expect(response).property('status').to.equal(200)
@@ -141,6 +173,10 @@ describe('api-tests-item', () => {
     cy.request({
       url: 'http://localhost:3000/item/',
       method: 'POST',
+      header: {
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+      },
       body: {
         "serial_number": "12345",
         "photo": "/",
@@ -157,6 +193,10 @@ describe('api-tests-item', () => {
         cy.request({
           url: 'http://localhost:3000/item/' + itemId,
           method: 'PUT',
+          header: {
+            Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+          },
           body: {
             "serial_number": "123456",
           }
@@ -168,6 +208,10 @@ describe('api-tests-item', () => {
       cy.request({
         url: 'http://localhost:3000/item/' + itemId,
         method: 'GET',
+        header: {
+          Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+        }
       }).should((response) => {
         expect(response).property('status').to.equal(200)
         expect(response.body.result).property('serial_number').to.equal('123456');
@@ -180,6 +224,10 @@ describe('api-tests-item', () => {
     cy.request({
       url: 'http://localhost:3000/item/',
       method: 'POST',
+      header: {
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+      },
       body: {
         "serial_number": "12345",
         "photo": "/",
@@ -195,6 +243,10 @@ describe('api-tests-item', () => {
         cy.request({
           url: 'http://localhost:3000/item/' + itemId,
           method: 'PUT',
+          header: {
+            Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+          },
           body: {
             "serial_number": "123456",
             "photo": "Blank",
@@ -207,6 +259,10 @@ describe('api-tests-item', () => {
       cy.request({
         url: 'http://localhost:3000/item/' + itemId,
         method: 'GET',
+        header: {
+          Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+        }
       }).should((response) => {
         expect(response).property('status').to.equal(200)
         expect(response.body.result).property('serial_number').to.equal('123456');
@@ -227,6 +283,10 @@ describe('api-tests-item', () => {
         "status": "aktiv",
         "item_model_id": 1,
         "item_type_id": 1,
+      },
+      header: {
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
       }
     })
       .then((response) => {
@@ -238,6 +298,10 @@ describe('api-tests-item', () => {
           method: 'PUT',
           body: {
             "item_model_id": 2,
+          },
+          header: {
+            Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
           }
         })
           .then((response) => {
@@ -245,6 +309,10 @@ describe('api-tests-item', () => {
             cy.request({
               url: 'http://localhost:3000/item/' + itemId,
               method: 'GET',
+              header: {
+                Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+              }
             }).should((response) => {
               expect(response).property('status').to.equal(200)
               expect(response.body.result).property('item_model_id').to.equal(2);

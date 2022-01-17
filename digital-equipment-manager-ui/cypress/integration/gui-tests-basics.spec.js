@@ -24,7 +24,7 @@ describe('loginscreen', () => {
     cy.contains('Geräteliste')
   })
 
-  it('Basic Navigation', () => {
+  xit('Basic Navigation', () => {
     cy.get('[cy-data="login-button"]').click()
     cy.get('[ng-reflect-router-link="/employee-add-page"]').click()
     cy.contains('Postleitzahl')

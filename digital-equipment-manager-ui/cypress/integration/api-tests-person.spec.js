@@ -9,7 +9,13 @@ describe('api-tests-person', () => {
 
   it('Person List call', () => {
 
-    cy.request('http://localhost:3000/person/')
+    cy.request({
+      url: 'http://localhost:3000/person/',
+      header: {
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+      }
+    })
       .then((response) => {
         expect(response).property('status').to.equal(200)
         expect(response).property('body').to.not.empty
@@ -19,7 +25,14 @@ describe('api-tests-person', () => {
 
   it('Get Person by Id - ', () => {
 
-    cy.request('http://localhost:3000/person/68gngbkw875rc6x')
+    cy.request( {
+      url: 'http://localhost:3000/person/68gngbkw875rc6x',
+        header: {
+          Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+        }
+    },
+      )
       .then((response) => {
         expect(response).property('status').to.equal(200)
         cy.wrap(response.body.result.dynamic_id).should('equal', '68gngbkw875rc6x')
@@ -31,6 +44,10 @@ describe('api-tests-person', () => {
 
     cy.request({
       url: 'http://localhost:3000/person/6',
+      header: {
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+      },
       failOnStatusCode: false,
     })
       .then((response) => {
@@ -44,6 +61,10 @@ describe('api-tests-person', () => {
 
     cy.request({
       url: 'http://localhost:3000/person/bullshit',
+      header: {
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+      },
       failOnStatusCode: false,
     })
       .then((response) => {
@@ -57,6 +78,10 @@ describe('api-tests-person', () => {
 
     cy.request({
       url:'http://localhost:3000/person/',
+      header: {
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+      },
       method:'POST',
       body:{
         "firstname": "Testus",
@@ -75,6 +100,10 @@ describe('api-tests-person', () => {
         let createdId = response.body.result.id;
         cy.request({
           url: 'http://localhost:3000/person/' + createdId,
+          header: {
+            Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlhdCI6MTY0MjQ0OTE2NCwiZXhwIjoxNjQzMDQ5MTY0fQ.psgtoANRSA__w_I8s1GeG1szvgthobPl-46y7lr-MEg"
+
+          },
           method:'GET',
         })
           .then((response) => {
